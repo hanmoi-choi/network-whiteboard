@@ -1,16 +1,16 @@
-package client.view;
+package client.view.factory;
 import client.view.NwbJMenu;
 
 import javax.swing.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-final class NwbMenuFactory {
+public final class NwbMenuFactory {
 	/**
 	 * @wbp.factory
 	 * @wbp.parser.entryPoint
 	 */
-	static NwbJMenu createFileMenu() {
+	public static NwbJMenu createFileMenu() {
 		NwbJMenu jmFile = new NwbJMenu("File");
 
 		JMenuItem jmiNew = new JMenuItem("New");
@@ -45,7 +45,7 @@ final class NwbMenuFactory {
 		return jmFile;
 	}
 
-	static NwbJMenu createEditMenu() {
+	public static NwbJMenu createEditMenu() {
         NwbJMenu jmEdit = new NwbJMenu("Edit");
 
 		JMenuItem jmiUndo = new JMenuItem("Undo");

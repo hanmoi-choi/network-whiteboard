@@ -1,5 +1,7 @@
 package client.view;
 
+import client.view.factory.NwbMenuFactory;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
