@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="fest-assert-1.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Dropbox/java-tdd-lib/fest-assert-1.4.jar!/" />
+      <root url="jar://$USER_HOME$/Dropbox/java-tdd-lib/fest-assert-core-2.0M7.jar!/" />
+      <root url="jar://$USER_HOME$/Dropbox/java-tdd-lib/fest-util-1.2.2.jar!/" />
+      <root url="jar://$USER_HOME$/Dropbox/java-tdd-lib/junit-4.8.2.jar!/" />
+      <root url="jar://$USER_HOME$/Dropbox/java-tdd-lib/mockito-all-1.9.0.jar!/" />
+      <root url="jar://$USER_HOME$/Dropbox/java-tdd-lib/testng-6.7.jar!/" />
+      <root url="jar://$USER_HOME$/Dropbox/java-tdd-lib/testng.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Dropbox/java-tdd-lib/mockito-all-1.9.0.jar!/" />
+    </SOURCES>
+  </library>
+</component>

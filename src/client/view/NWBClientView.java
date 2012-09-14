@@ -1,33 +1,28 @@
-import java.awt.BorderLayout;
-import java.awt.Canvas;
-import java.awt.EventQueue;
+package client.view;
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JToolBar;
-
-import view.factory.MenuFactory;
+import javax.swing.*;
+import java.awt.*;
+import java.util.List;
 
 
-public class NWBClientView {
+public class NwbClientView implements NwbPaintable{
 
 	private JFrame frame;
 	private JMenuItem jmiNew;
-	private JMenu jmFile;
-	private JMenu jmEdit;
+	private NwbJMenu jmFile;
+	private NwbJMenu jmEdit;
 	private JMenuBar menuBar;
+	private JToolBar toolBar;
+    private Canvas drawingCanvas;
 
-	/**
+    /**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NWBClientView window = new NWBClientView();
+					NwbClientView window = new NwbClientView();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +34,7 @@ public class NWBClientView {
 	/**
 	 * Create the application.
 	 */
-	public NWBClientView() {
+	public NwbClientView() {
 		initialize();
 	}
 
@@ -49,6 +44,7 @@ public class NWBClientView {
 	private void initialize() {
 		initJFrame();
 		initMenubar();
+		initToolbar();
 
 		JPanel chattingPanel = new JPanel();
 		frame.getContentPane().add(chattingPanel, BorderLayout.SOUTH);
@@ -56,29 +52,23 @@ public class NWBClientView {
 		JPanel chattingDisplayPanel = new JPanel();
 		frame.getContentPane().add(chattingDisplayPanel, BorderLayout.EAST);
 
-		JToolBar toolBar = new JToolBar();
+        drawingCanvas = new Canvas();
+        drawingCanvas.setBackground(Color.WHITE);
+
+        frame.getContentPane().add(drawingCanvas, BorderLayout.CENTER);
+	}
+
+	private void initToolbar() {
+		toolBar = new JToolBar();
 		frame.getContentPane().add(toolBar, BorderLayout.NORTH);
-
-		JPanel drawingPanel = new JPanel();
-		frame.getContentPane().add(drawingPanel, BorderLayout.CENTER);
-
-		Canvas drawingCanvas = new Canvas();
-		drawingPanel.add(drawingCanvas);
-
-
-
-
-
-
-
 	}
 
 	private void initMenubar() {
 		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 
-		jmFile = MenuFactory.createFileMenu();
-		jmEdit = MenuFactory.createEditMenu();
+		jmFile = NwbMenuFactory.createFileMenu();
+		jmEdit = NwbMenuFactory.createEditMenu();
 
 		menuBar.add(jmFile);
 		menuBar.add(jmEdit);
@@ -90,4 +80,18 @@ public class NWBClientView {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+    @Override
+    public List<JMenuItem> getFileMenuItems() {
+        return jmFile.getMenuItems();
+    }
+
+    @Override
+    public List<JMenuItem> getEditMenuItems() {
+        return jmEdit.getMenuItems();
+    }
+
+    @Override
+    public Canvas getDrawingCanvs() {
+        return drawingCanvas;
+    }
 }

@@ -1,19 +1,17 @@
-package view.factory;
+package client.view;
+import client.view.NwbJMenu;
+
+import javax.swing.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
-import javax.swing.KeyStroke;
-
-public final class MenuFactory {
+final class NwbMenuFactory {
 	/**
 	 * @wbp.factory
 	 * @wbp.parser.entryPoint
 	 */
-	public static JMenu createFileMenu() {
-		JMenu jmFile = new JMenu("File");
+	static NwbJMenu createFileMenu() {
+		NwbJMenu jmFile = new NwbJMenu("File");
 
 		JMenuItem jmiNew = new JMenuItem("New");
 		jmiNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
@@ -47,8 +45,8 @@ public final class MenuFactory {
 		return jmFile;
 	}
 
-	public static JMenu createEditMenu() {
-		JMenu jmEdit = new JMenu("Edit");
+	static NwbJMenu createEditMenu() {
+        NwbJMenu jmEdit = new NwbJMenu("Edit");
 
 		JMenuItem jmiUndo = new JMenuItem("Undo");
 		jmiUndo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK));
