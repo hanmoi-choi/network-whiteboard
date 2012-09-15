@@ -75,6 +75,39 @@ public class NwbClientController {
         model.undo();
     }
 
+    @Action
+    public void doSketch(ActionEvent evt){
+
+    }
+
+    @Action
+    public void doLine(ActionEvent evt){
+
+    }
+
+    @Action
+    public void doRect(ActionEvent evt){
+
+    }
+    @Action
+    public void doRoundedRect(ActionEvent evt){
+
+    }
+    @Action
+    public void doOval(ActionEvent evt){
+
+    }
+
+    @Action
+    public void doErase(ActionEvent evt){
+
+    }
+
+    @Action
+    public void doText(ActionEvent evt){
+
+    }
+
     public void newDrawingCommand(NwbDrawingCommand command ) {
         model.pushDrawingCommand(command);
     }
