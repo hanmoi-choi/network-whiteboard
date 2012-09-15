@@ -1,7 +1,5 @@
 package client.view.drawing.strategy;
 
-import client.view.drawing.NwbDrawingInfo;
-
 import java.awt.*;
 
 /**
@@ -11,8 +9,7 @@ import java.awt.*;
  * Time: 6:06 PM
  * To change this template use File | Settings | File Templates.
  */
-public class LineStrategy implements DrawingStrategy {
-    private NwbDrawingInfo drawingInfo;
+public class NwbLineStrategy extends NwbDrawingStrategy {
 
     @Override
     public void drawShape(Graphics2D g2D) {
@@ -24,8 +21,4 @@ public class LineStrategy implements DrawingStrategy {
         }
     }
 
-    @Override
-    public void setDrawingInfo(NwbDrawingInfo info) {
-        this.drawingInfo = info;
-    }
 }

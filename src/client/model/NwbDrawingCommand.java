@@ -1,7 +1,7 @@
 package client.model;
 
 import client.view.drawing.NwbDrawingInfo;
-import client.view.drawing.strategy.DrawingStrategy;
+import client.view.drawing.strategy.NwbDrawingStrategy;
 
 import java.awt.*;
 
@@ -15,5 +15,5 @@ import java.awt.*;
 public interface NwbDrawingCommand {
     void execute(Graphics2D g);
     void setDrawingInfo(NwbDrawingInfo drawingInfo);
-    void setDrawingStrategy(DrawingStrategy strategy);
+    void setDrawingStrategy(NwbDrawingStrategy strategy);
 }

@@ -1,7 +1,7 @@
 package client.model;
 
 import client.view.drawing.NwbDrawingInfo;
-import client.view.drawing.strategy.DrawingStrategy;
+import client.view.drawing.strategy.NwbDrawingStrategy;
 
 import java.awt.*;
 
@@ -14,7 +14,7 @@ import java.awt.*;
  */
 public class NwbLineDrawingCommand implements NwbDrawingCommand{
     private NwbDrawingInfo drawingInfo;
-    private DrawingStrategy strategy;
+    private NwbDrawingStrategy strategy;
 
     @Override
     public void execute(Graphics2D g) {
@@ -28,7 +28,7 @@ public class NwbLineDrawingCommand implements NwbDrawingCommand{
     }
 
     @Override
-    public void setDrawingStrategy(DrawingStrategy strategy) {
+    public void setDrawingStrategy(NwbDrawingStrategy strategy) {
         this.strategy = strategy;
     }
 }

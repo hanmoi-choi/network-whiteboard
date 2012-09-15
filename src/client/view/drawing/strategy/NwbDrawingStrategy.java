@@ -8,16 +8,16 @@ import java.awt.*;
  * Created with IntelliJ IDEA.
  * User: hanmoi
  * Date: 15/09/12
- * Time: 6:10 PM
+ * Time: 6:04 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RectangleStrategy implements DrawingStrategy {
+public abstract class NwbDrawingStrategy {
 
-    @Override
-    public void drawShape(Graphics2D g2D) {
-    }
+    protected NwbDrawingInfo drawingInfo;
 
-    @Override
+    public abstract void drawShape(Graphics2D g2D);
+
     public void setDrawingInfo(NwbDrawingInfo info) {
+        this.drawingInfo = info;
     }
 }

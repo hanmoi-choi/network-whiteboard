@@ -61,7 +61,7 @@ public class NwbClientView {
         frame.getContentPane().add(chattingDisplayPanel, BorderLayout.EAST);
         frame.getContentPane().add(drawingCanvas, BorderLayout.CENTER);
 
-        shapeType = NwbDrawingCanvas.ShapeType.Line;
+        shapeType = NwbDrawingCanvas.ShapeType.Circle;
     }
 
     private void initJFrame() {
@@ -102,6 +102,7 @@ public class NwbClientView {
         @Override
         public void mousePressed(MouseEvent e) {
             drawingInfo.setStartPoint(e.getPoint());
+            drawingCanvas.setShapeType(shapeType);
             drawingCanvas.setDrawingInfo(drawingInfo);
             drawingCanvas.setMode(NwbDrawingCanvas.CanvasMode.Draw);
         }
