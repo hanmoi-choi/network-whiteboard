@@ -1,45 +1,48 @@
 package client.view.factory;
+
 import client.view.NwbJMenu;
 
 import javax.swing.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-public final class NwbMenuFactory {
+public final class NwbMenuFactory extends NwbActionFactory{
 	/**
 	 * @wbp.factory
 	 * @wbp.parser.entryPoint
 	 */
 	public static NwbJMenu createFileMenu() {
-		NwbJMenu jmFile = new NwbJMenu("File");
+
+        NwbJMenu jmFile = new NwbJMenu("File");
 
 		JMenuItem jmiNew = new JMenuItem("New");
-		jmiNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
+        jmiNew.setAction(actionMap.get("doNew"));
 		jmFile.add(jmiNew);
 
 		JMenuItem jmiOpen = new JMenuItem("Open");
-		jmiOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+        jmiOpen.setAction(actionMap.get("doOpen"));
 		jmFile.add(jmiOpen);
 
 		JMenu jmiOpenRecent = new JMenu("Open Recent");
+        jmiOpenRecent.setAction(actionMap.get("doOpenRecent"));
 		jmFile.add(jmiOpenRecent);
 
 		JSeparator sprFileFirst = new JSeparator();
 		jmFile.add(sprFileFirst);
 
-		JMenuItem mntmSave = new JMenuItem("Save");
-		mntmSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
-		jmFile.add(mntmSave);
+		JMenuItem jmiSave = new JMenuItem("Save");
+        jmiSave.setAction(actionMap.get("doSave"));
+		jmFile.add(jmiSave);
 
-		JMenuItem mntmSaveAs = new JMenuItem("Save As");
-		mntmSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK));
-		jmFile.add(mntmSaveAs);
+		JMenuItem jmiSaveAs = new JMenuItem("Save As");
+        jmiSaveAs.setAction(actionMap.get("doSaveAs"));
+		jmFile.add(jmiSaveAs);
 
 		JSeparator sprFileSecond = new JSeparator();
 		jmFile.add(sprFileSecond);
 
 		JMenuItem jmiQuit = new JMenuItem("Quit");
-		jmiQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
+        jmiQuit.setAction(actionMap.get("doQuit"));
 		jmFile.add(jmiQuit);
 
 		return jmFile;

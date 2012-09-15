@@ -1,5 +1,7 @@
 package client.model;
 
+import java.awt.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: hanmoi
@@ -8,4 +10,5 @@ package client.model;
  * To change this template use File | Settings | File Templates.
  */
 public interface NwbDrawingCommand {
+    void execute(Graphics2D g);
 }
