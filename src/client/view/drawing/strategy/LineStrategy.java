@@ -1,6 +1,6 @@
 package client.view.drawing.strategy;
 
-import client.view.drawing.DrawingInfo;
+import client.view.drawing.NwbDrawingInfo;
 
 import java.awt.*;
 
@@ -12,7 +12,7 @@ import java.awt.*;
  * To change this template use File | Settings | File Templates.
  */
 public class LineStrategy implements DrawingStrategy {
-    private DrawingInfo drawingInfo;
+    private NwbDrawingInfo drawingInfo;
 
     @Override
     public void drawShape(Graphics2D g2D) {
@@ -22,11 +22,10 @@ public class LineStrategy implements DrawingStrategy {
                     drawingInfo.getEndPoint().x,
                     drawingInfo.getEndPoint().y);
         }
-
     }
 
     @Override
-    public void setDrawingInfo(DrawingInfo info) {
+    public void setDrawingInfo(NwbDrawingInfo info) {
         this.drawingInfo = info;
     }
 }

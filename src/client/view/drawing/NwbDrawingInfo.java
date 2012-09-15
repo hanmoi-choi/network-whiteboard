@@ -11,13 +11,13 @@ import java.util.List;
  * Time: 6:25 PM
  * To change this template use File | Settings | File Templates.
  */
-public class DrawingInfo {
+public class NwbDrawingInfo implements Cloneable{
 
     Point startPoint;
     Point endPoint;
     List<Point> pointList;
 
-    public DrawingInfo(){
+    public NwbDrawingInfo(){
         pointList = new ArrayList<Point>();
     }
     public Point getStartPoint() {
@@ -48,5 +48,15 @@ public class DrawingInfo {
         startPoint = null;
         endPoint = null;
         pointList.clear();
+    }
+
+    public NwbDrawingInfo getClone(){
+        NwbDrawingInfo info = null;
+        try {
+            info = (NwbDrawingInfo) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return info;
     }
 }

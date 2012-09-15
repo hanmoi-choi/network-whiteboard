@@ -23,8 +23,11 @@ public class NwbClientApplication extends Application {
         NwbMenuFactory.setActionMap(controller);
 
         NwbClientView view = new NwbClientView();
+        view.setController(controller);
+        controller.setView(view);
 
         NwbClientModel model = new NwbClientModel();
+        controller.setModel(model);
         view.setApplicationContext(ctx);
         view.showView();
 

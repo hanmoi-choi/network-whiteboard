@@ -1,10 +1,12 @@
 package client.controller;
 
 import client.model.NwbClientModel;
-import client.view.NwbPaintable;
+import client.model.NwbDrawingCommand;
+import client.view.NwbClientView;
 import org.jdesktop.application.Action;
 
 import java.awt.event.ActionEvent;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -16,19 +18,21 @@ import java.util.Properties;
  */
 public class NwbClientController {
 
-    private NwbPaintable view;
+    private NwbClientView view;
     private NwbClientModel model;
     private Properties fileActionProperty;
 
     public NwbClientController(){
+
     }
 
-    public void setView(NwbPaintable view){
+    public void setView(NwbClientView view){
         this.view = view;
     }
 
     public void setModel(NwbClientModel model){
         this.model = model;
+        model.register(this);
     }
 
     @Action
@@ -61,4 +65,11 @@ public class NwbClientController {
         System.exit(0);
     }
 
+    public void newDrawingCommand(NwbDrawingCommand command ) {
+        model.pushDrawingCommand(command);
+    }
+
+    public void update(List<NwbDrawingCommand> list){
+        view.updateAllShape(list);
+    }
 }

@@ -1,7 +1,10 @@
 package client.view;
 
-import client.view.drawing.DrawingCanvas;
-import client.view.drawing.DrawingInfo;
+import client.controller.NwbClientController;
+import client.model.NwbDrawingCommand;
+import client.model.factory.NwbDrawingCommandFactory;
+import client.view.drawing.NwbDrawingCanvas;
+import client.view.drawing.NwbDrawingInfo;
 import client.view.factory.NwbMenuFactory;
 import org.jdesktop.application.ApplicationContext;
 
@@ -9,27 +12,30 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 
 public class NwbClientView {
 
-	private JFrame frame;
-	private JMenuItem jmiNew;
-	private NwbJMenu jmFile;
-	private NwbJMenu jmEdit;
-	private JMenuBar menuBar;
-	private JToolBar toolBar;
-    private DrawingCanvas drawingCanvas;
+    private JFrame frame;
+    private JMenuItem jmiNew;
+    private NwbJMenu jmFile;
+    private NwbJMenu jmEdit;
+    private JMenuBar menuBar;
+    private JToolBar toolBar;
+    private NwbDrawingCanvas drawingCanvas;
     private ApplicationContext ctx;
 
-    private DrawingInfo drawingInfo;
+    private NwbDrawingInfo drawingInfo;
+    private NwbDrawingCanvas.ShapeType shapeType;
+    private NwbClientController controller;
 
     /**
-	 * Create the application.
-	 */
-	public NwbClientView() {
-		initialize();
-	}
+     * Create the application.
+     */
+    public NwbClientView() {
+        initialize();
+    }
 
     public void setApplicationContext(ApplicationContext ctx) {
         this.ctx = ctx;
@@ -39,19 +45,24 @@ public class NwbClientView {
         frame.setVisible(true);
     }
 
-	private void initialize() {
-		initJFrame();
-		initMenubar();
-		initToolbar();
+    public void setController(NwbClientController controller){
+        this.controller = controller;
+    }
+    private void initialize() {
+        initJFrame();
+        initMenubar();
+        initToolbar();
         initDrawingCanvas();
 
-		JPanel chattingPanel = new JPanel();
-		frame.getContentPane().add(chattingPanel, BorderLayout.SOUTH);
+        JPanel chattingPanel = new JPanel();
+        frame.getContentPane().add(chattingPanel, BorderLayout.SOUTH);
 
-		JPanel chattingDisplayPanel = new JPanel();
-		frame.getContentPane().add(chattingDisplayPanel, BorderLayout.EAST);
+        JPanel chattingDisplayPanel = new JPanel();
+        frame.getContentPane().add(chattingDisplayPanel, BorderLayout.EAST);
         frame.getContentPane().add(drawingCanvas, BorderLayout.CENTER);
-	}
+
+        shapeType = NwbDrawingCanvas.ShapeType.Line;
+    }
 
     private void initJFrame() {
         frame = new JFrame();
@@ -76,20 +87,23 @@ public class NwbClientView {
     }
 
     private void initDrawingCanvas() {
-        drawingCanvas = new DrawingCanvas();
-        drawingInfo = new DrawingInfo();
+        drawingCanvas = new NwbDrawingCanvas();
+        drawingInfo = new NwbDrawingInfo();
         drawingCanvas.setBackground(Color.WHITE);
         drawingCanvas.addMouseListener(new NwbCanvasMouseAdapter());
         drawingCanvas.addMouseMotionListener(new NwbCanvasMouseAdapter());
     }
 
-    private class NwbCanvasMouseAdapter extends MouseAdapter{
+    public void updateAllShape(List<NwbDrawingCommand> list) {
+        drawingCanvas.drawAllShape(list);
+    }
 
-
+    private class NwbCanvasMouseAdapter extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent e) {
             drawingInfo.setStartPoint(e.getPoint());
             drawingCanvas.setDrawingInfo(drawingInfo);
+            drawingCanvas.setMode(NwbDrawingCanvas.CanvasMode.Draw);
         }
 
         @Override
@@ -103,8 +117,12 @@ public class NwbClientView {
         public void mouseReleased(MouseEvent e) {
             drawingInfo.setEndPoint(e.getPoint());
             drawingCanvas.setDrawingInfo(drawingInfo);
+
+            controller.newDrawingCommand(NwbDrawingCommandFactory.createDrawingFactory(shapeType, drawingInfo.getClone()));
             drawingCanvas.repaint();
             drawingInfo.clearInfo();
+            
+            drawingCanvas.setMode(NwbDrawingCanvas.CanvasMode.Halt);
         }
 
         @Override

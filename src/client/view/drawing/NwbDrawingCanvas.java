@@ -17,11 +17,11 @@ import java.util.Map;
  * Time: 5:42 PM
  * To change this template use File | Settings | File Templates.
  */
-public class DrawingCanvas extends Canvas {
+public class NwbDrawingCanvas extends Canvas {
 
-    private DrawingInfo drawingInfo;
+    private NwbDrawingInfo drawingInfo;
 
-    public enum CanvasMode {Halt, Draw, Update}
+    public enum CanvasMode {Halt, Draw}
 
     public enum ShapeType {Rectangle, Line, Circle}
 
@@ -30,7 +30,7 @@ public class DrawingCanvas extends Canvas {
     private Map<ShapeType, DrawingStrategy> strategyMap;
     private java.util.List<NwbDrawingCommand> commandList;
 
-    public DrawingCanvas() {
+    public NwbDrawingCanvas() {
         super();
 
         mode = CanvasMode.Draw;
@@ -42,8 +42,8 @@ public class DrawingCanvas extends Canvas {
         strategyMap.put(ShapeType.Circle, new CircleStrategy());
     }
 
-    public void update(java.util.List<NwbDrawingCommand> commandList) {
-        commandList = commandList;
+    public void drawAllShape(java.util.List<NwbDrawingCommand> commandList) {
+        this.commandList = commandList;
         repaint();
     }
 
@@ -55,7 +55,7 @@ public class DrawingCanvas extends Canvas {
         this.mode = mode;
     }
 
-    public void setDrawingInfo(DrawingInfo drawingInfo) {
+    public void setDrawingInfo(NwbDrawingInfo drawingInfo) {
         this.drawingInfo = drawingInfo;
     }
 
@@ -64,11 +64,14 @@ public class DrawingCanvas extends Canvas {
         super.paint(g);
         Graphics2D g2D = (Graphics2D) g;
 
-        strategyMap.get(shapeType).setDrawingInfo(drawingInfo);
-        strategyMap.get(shapeType).drawShape(g2D);
+        if(mode == CanvasMode.Draw){
+            strategyMap.get(shapeType).setDrawingInfo(drawingInfo);
+            strategyMap.get(shapeType).drawShape(g2D);
+        }
 
         if (commandList != null) {
             for (NwbDrawingCommand command : commandList) {
+                System.out.println("update");
                 command.execute(g2D);
             }
         }

@@ -1,6 +1,6 @@
 package client.view.drawing.strategy;
 
-import client.view.drawing.DrawingInfo;
+import client.view.drawing.NwbDrawingInfo;
 
 import java.awt.*;
 
@@ -18,6 +18,6 @@ public class RectangleStrategy implements DrawingStrategy {
     }
 
     @Override
-    public void setDrawingInfo(DrawingInfo info) {
+    public void setDrawingInfo(NwbDrawingInfo info) {
     }
 }

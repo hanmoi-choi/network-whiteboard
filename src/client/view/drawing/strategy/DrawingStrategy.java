@@ -1,6 +1,6 @@
 package client.view.drawing.strategy;
 
-import client.view.drawing.DrawingInfo;
+import client.view.drawing.NwbDrawingInfo;
 
 import java.awt.*;
 
@@ -13,5 +13,5 @@ import java.awt.*;
  */
 public interface DrawingStrategy {
     void drawShape(Graphics2D g2D);
-    void setDrawingInfo(DrawingInfo info);
+    void setDrawingInfo(NwbDrawingInfo info);
 }

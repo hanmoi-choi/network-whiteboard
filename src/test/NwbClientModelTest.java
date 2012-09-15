@@ -3,9 +3,7 @@ package test;
 import client.model.NwbClientModel;
 import client.model.NwbDrawingCommand;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 
-import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -30,29 +28,5 @@ public class NwbClientModelTest {
         command3 = mock(NwbDrawingCommand.class);
     }
 
-    @Test
-    public void couldPushDrawingCommand(){
-        model.pushDrawingCommand(command1);
-        model.pushDrawingCommand(command2);
-        model.pushDrawingCommand(command3);
 
-        assertThat(model.getActionCommands()).isNotEmpty()
-                                             .contains(command1, command2, command3);
-    }
-
-    @Test
-    public void shallMoveCommandAtTheTopToRedoStack_WhenUndoExecutes(){
-        model.pushDrawingCommand(command1);
-        model.pushDrawingCommand(command2);
-        model.pushDrawingCommand(command3);
-
-        model.undo();
-        assertThat(model.getActionCommands()).containsOnly(command1, command2);
-    }
-
-    @Test(dependsOnMethods = "shallMoveCommandAtTheTopToRedoStack_WhenUndoExecutes")
-    public void shallMoveCommandBackToCommandStack_WhenRedoExecutes(){
-        model.redo();
-        assertThat(model.getActionCommands()).containsOnly(command1, command2, command3);
-    }
 }
