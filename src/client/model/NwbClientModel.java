@@ -19,7 +19,7 @@ public class NwbClientModel {
     private Stack<NwbDrawingCommand> redoStack;
     private List<NwbClientController> subscribers;
 
-    public NwbClientModel(){
+    public NwbClientModel() {
         commandStack = new Stack<NwbDrawingCommand>();
         redoStack = new Stack<NwbDrawingCommand>();
         subscribers = new ArrayList<NwbClientController>();
@@ -32,17 +32,23 @@ public class NwbClientModel {
     }
 
     private void updateSubscribers() {
-        for(NwbClientController controller : subscribers){
+        for (NwbClientController controller : subscribers) {
             controller.update(ImmutableList.copyOf(commandStack));
         }
     }
 
     public void undo() {
-        redoStack.push(commandStack.pop());
+        if (!commandStack.empty()) {
+            redoStack.push(commandStack.pop());
+            updateSubscribers();
+        }
     }
 
     public void redo() {
-        commandStack.push(redoStack.pop());
+        if (!redoStack.empty()) {
+            commandStack.push(redoStack.pop());
+            updateSubscribers();
+        }
     }
 
     public void register(NwbClientController subscriber) {

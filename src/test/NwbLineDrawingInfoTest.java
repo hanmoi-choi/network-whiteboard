@@ -16,7 +16,7 @@ import static org.mockito.Mockito.mock;
  * Time: 10:34 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbLineDrawingInfo {
+public class NwbLineDrawingInfoTest {
 
     @Test
     public void shallUseLineStrategy(){

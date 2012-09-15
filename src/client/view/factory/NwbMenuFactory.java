@@ -52,10 +52,12 @@ public final class NwbMenuFactory extends NwbActionFactory{
         NwbJMenu jmEdit = new NwbJMenu("Edit");
 
 		JMenuItem jmiUndo = new JMenuItem("Undo");
+        jmiUndo.setAction(actionMap.get("doUndo"));
 		jmiUndo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK));
 		jmEdit.add(jmiUndo);
 
 		JMenuItem jmiRedo = new JMenuItem("Redo");
+        jmiRedo.setAction(actionMap.get("doRedo"));
 		jmiRedo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
 		jmEdit.add(jmiRedo);
 

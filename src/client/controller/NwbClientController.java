@@ -65,6 +65,16 @@ public class NwbClientController {
         System.exit(0);
     }
 
+    @Action
+    public void doRedo(ActionEvent evt){
+        model.redo();
+    }
+
+    @Action
+    public void doUndo(ActionEvent evt){
+        model.undo();
+    }
+
     public void newDrawingCommand(NwbDrawingCommand command ) {
         model.pushDrawingCommand(command);
     }
