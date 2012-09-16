@@ -9,7 +9,7 @@ import java.awt.*;
  * Time: 6:11 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbCircleStrategy extends NwbDrawingStrategy {
+public class NwbEraseStrategy extends NwbDrawingStrategy {
 
     @Override
     public void drawShape(Graphics2D g2D) {

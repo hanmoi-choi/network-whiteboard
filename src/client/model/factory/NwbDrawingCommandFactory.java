@@ -2,11 +2,10 @@ package client.model.factory;
 
 import client.model.NwbDrawingCommand;
 import client.model.NwbLineDrawingCommand;
-import client.view.drawing.NwbDrawingCanvas;
 import client.view.drawing.NwbDrawingInfo;
-import client.view.drawing.strategy.NwbCircleStrategy;
-import client.view.drawing.strategy.NwbLineStrategy;
-import client.view.drawing.strategy.NwbRectangleStrategy;
+import client.view.drawing.strategy.*;
+
+import static client.view.drawing.NwbDrawingCanvas.ShapeType;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,21 +16,37 @@ import client.view.drawing.strategy.NwbRectangleStrategy;
  */
 public class NwbDrawingCommandFactory {
 
-    public static NwbDrawingCommand createDrawingFactory(NwbDrawingCanvas.ShapeType type, NwbDrawingInfo info){
+    public static NwbDrawingCommand createDrawingFactory(ShapeType type, NwbDrawingInfo info){
         NwbDrawingCommand command = null;
         command = new NwbLineDrawingCommand();
         command.setDrawingInfo(info);
 
-        if(type == NwbDrawingCanvas.ShapeType.Line){
+        if(type == ShapeType.Line){
             command.setDrawingStrategy(new NwbLineStrategy());
         }
-        else if(type == NwbDrawingCanvas.ShapeType.Circle){
+        else if(type == ShapeType.Oval){
 
-            command.setDrawingStrategy(new NwbCircleStrategy());
+            command.setDrawingStrategy(new NwbOvalStrategy());
         }
-        else if(type == NwbDrawingCanvas.ShapeType.Rectangle){
+        else if(type == ShapeType.Rectangle){
 
             command.setDrawingStrategy(new NwbRectangleStrategy());
+        }
+        else if(type == ShapeType.RoundedRectangle){
+
+            command.setDrawingStrategy(new NwbRoundedRectangleStrategy());
+        }
+        else if(type == ShapeType.Sketch){
+
+            command.setDrawingStrategy(new NwbSketchStrategy());
+        }
+        else if(type == ShapeType.Erase){
+
+            command.setDrawingStrategy(new NwbEraseStrategy());
+        }
+        else if(type == ShapeType.Text){
+
+            command.setDrawingStrategy(new NwbTextStrategy());
         }
         return command;
     }

@@ -50,7 +50,16 @@ public class NwbClientView {
 	public void setController(NwbClientController controller){
 		this.controller = controller;
 	}
-	private void initialize() {
+
+    public void updateAllShape(List<NwbDrawingCommand> list) {
+        drawingCanvas.drawAllShape(list);
+    }
+
+    public void setShapeType(ShapeType type) {
+        this.shapeType = type;
+    }
+
+    private void initialize() {
 		initJFrame();
 		initMenubar();
 		initToolbar();
@@ -63,7 +72,7 @@ public class NwbClientView {
 		frame.getContentPane().add(chattingDisplayPanel, BorderLayout.EAST);
 		frame.getContentPane().add(drawingCanvas, BorderLayout.CENTER);
 
-		shapeType = NwbDrawingCanvas.ShapeType.Circle;
+		shapeType = ShapeType.Sketch;
 	}
 
 	private void initJFrame() {
@@ -96,11 +105,8 @@ public class NwbClientView {
 		drawingCanvas.addMouseMotionListener(new NwbCanvasMouseAdapter());
 	}
 
-	public void updateAllShape(List<NwbDrawingCommand> list) {
-		drawingCanvas.drawAllShape(list);
-	}
 
-	private class NwbCanvasMouseAdapter extends MouseAdapter {
+    private class NwbCanvasMouseAdapter extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			drawingInfo.setStartPoint(e.getPoint());

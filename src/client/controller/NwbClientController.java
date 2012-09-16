@@ -3,6 +3,7 @@ package client.controller;
 import client.model.NwbClientModel;
 import client.model.NwbDrawingCommand;
 import client.view.NwbClientView;
+import client.view.drawing.NwbDrawingCanvas;
 import org.jdesktop.application.Action;
 
 import java.awt.event.ActionEvent;
@@ -77,35 +78,35 @@ public class NwbClientController {
 
     @Action
     public void doSketch(ActionEvent evt){
-
+        view.setShapeType(NwbDrawingCanvas.ShapeType.Sketch);
     }
 
     @Action
     public void doLine(ActionEvent evt){
-
+        view.setShapeType(NwbDrawingCanvas.ShapeType.Line);
     }
 
     @Action
     public void doRect(ActionEvent evt){
-
+        view.setShapeType(NwbDrawingCanvas.ShapeType.Rectangle);
     }
     @Action
     public void doRoundedRect(ActionEvent evt){
-
+        view.setShapeType(NwbDrawingCanvas.ShapeType.RoundedRectangle);
     }
     @Action
     public void doOval(ActionEvent evt){
-
+        view.setShapeType(NwbDrawingCanvas.ShapeType.Oval);
     }
 
     @Action
     public void doErase(ActionEvent evt){
-
+        view.setShapeType(NwbDrawingCanvas.ShapeType.Erase);
     }
 
     @Action
     public void doText(ActionEvent evt){
-
+        view.setShapeType(NwbDrawingCanvas.ShapeType.Text);
     }
 
     public void newDrawingCommand(NwbDrawingCommand command ) {

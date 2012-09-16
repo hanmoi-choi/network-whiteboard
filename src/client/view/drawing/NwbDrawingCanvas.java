@@ -1,10 +1,7 @@
 package client.view.drawing;
 
 import client.model.NwbDrawingCommand;
-import client.view.drawing.strategy.NwbCircleStrategy;
-import client.view.drawing.strategy.NwbDrawingStrategy;
-import client.view.drawing.strategy.NwbLineStrategy;
-import client.view.drawing.strategy.NwbRectangleStrategy;
+import client.view.drawing.strategy.*;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -23,7 +20,7 @@ public class NwbDrawingCanvas extends Canvas {
 
     public enum CanvasMode {Halt, Draw}
 
-    public enum ShapeType {Rectangle, Line, Circle}
+    public enum ShapeType {Rectangle, Line, Text, Erase, Oval, RoundedRectangle, Sketch}
 
     private CanvasMode mode;
     private ShapeType shapeType;
@@ -34,12 +31,16 @@ public class NwbDrawingCanvas extends Canvas {
         super();
 
         mode = CanvasMode.Draw;
-        shapeType = ShapeType.Line;
+        shapeType = ShapeType.Sketch;
 
         strategyMap = new HashMap<ShapeType, NwbDrawingStrategy>();
         strategyMap.put(ShapeType.Line, new NwbLineStrategy());
         strategyMap.put(ShapeType.Rectangle, new NwbRectangleStrategy());
-        strategyMap.put(ShapeType.Circle, new NwbCircleStrategy());
+        strategyMap.put(ShapeType.Oval, new NwbOvalStrategy());
+        strategyMap.put(ShapeType.Text, new NwbTextStrategy());
+        strategyMap.put(ShapeType.RoundedRectangle, new NwbRoundedRectangleStrategy());
+        strategyMap.put(ShapeType.Erase, new NwbEraseStrategy());
+        strategyMap.put(ShapeType.Sketch, new NwbSketchStrategy());
     }
 
     public void drawAllShape(java.util.List<NwbDrawingCommand> commandList) {

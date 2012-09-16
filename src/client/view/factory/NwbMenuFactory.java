@@ -3,8 +3,6 @@ package client.view.factory;
 import client.view.NwbJMenu;
 
 import javax.swing.*;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 
 public final class NwbMenuFactory extends NwbActionFactory{
 	/**
@@ -53,12 +51,12 @@ public final class NwbMenuFactory extends NwbActionFactory{
 
 		JMenuItem jmiUndo = new JMenuItem("Undo");
         jmiUndo.setAction(actionMap.get("doUndo"));
-		jmiUndo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK));
+//		jmiUndo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK));
 		jmEdit.add(jmiUndo);
 
 		JMenuItem jmiRedo = new JMenuItem("Redo");
         jmiRedo.setAction(actionMap.get("doRedo"));
-		jmiRedo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
+//		jmiRedo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
 		jmEdit.add(jmiRedo);
 
 		JSeparator sprEdit = new JSeparator();
