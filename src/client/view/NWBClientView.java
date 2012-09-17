@@ -114,12 +114,14 @@ public class NwbClientView {
 
         @Override
         public void mousePressed(MouseEvent e) {
+            drawingCanvas.setMode(NwbDrawingCanvas.CanvasMode.Draw);
+
             isPressed = true;
             addDrawingInfo(e);
-            drawingCanvas.setShapeType(shapeType);
 
+            drawingCanvas.setShapeType(shapeType);
             drawingCanvas.setDrawingInfo(drawingInfo);
-            drawingCanvas.setMode(NwbDrawingCanvas.CanvasMode.Draw);
+            drawingCanvas.repaint();
         }
 
         @Override
@@ -171,11 +173,11 @@ public class NwbClientView {
 
         private void addDrawingInfoForText(MouseEvent e)
         {
-            if (isPressed) {
                 drawingInfo.setText("Test");
+            if (isPressed) {
                 drawingInfo.setStartPoint(e.getPoint());
             } else {
-                drawingInfo.setEndPoint(e.getPoint());
+                drawingInfo.setStartPoint(e.getPoint());
             }
         }
 
