@@ -1,17 +1,22 @@
 package client.view.factory;
 
-import client.view.NwbJMenu;
+import client.controller.NwbMenuActionController;
+import org.jdesktop.application.Application;
 
 import javax.swing.*;
 
-public final class NwbMenuFactory extends NwbActionFactory{
-	/**
-	 * @wbp.factory
-	 * @wbp.parser.entryPoint
-	 */
-	public static NwbJMenu createFileMenu() {
+public final class NwbMenuFactory{
+    private static ActionMap actionMap;
 
-        NwbJMenu jmFile = new NwbJMenu("File");
+    public static void setActionMap(NwbMenuActionController controller){
+        actionMap = Application.getInstance()
+                .getContext()
+                .getActionMap(NwbMenuActionController.class, controller);
+    }
+
+	public static JMenu createFileMenu() {
+
+        JMenu jmFile = new JMenu("File");
 
 		JMenuItem jmiNew = new JMenuItem("New");
         jmiNew.setAction(actionMap.get("doNew"));
@@ -46,8 +51,8 @@ public final class NwbMenuFactory extends NwbActionFactory{
 		return jmFile;
 	}
 
-	public static NwbJMenu createEditMenu() {
-        NwbJMenu jmEdit = new NwbJMenu("Edit");
+	public static JMenu createEditMenu() {
+        JMenu jmEdit = new JMenu("Edit");
 
 		JMenuItem jmiUndo = new JMenuItem("Undo");
         jmiUndo.setAction(actionMap.get("doUndo"));

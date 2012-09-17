@@ -1,13 +1,12 @@
 package client.controller;
 
 import client.model.NwbClientModel;
-import client.model.NwbDrawingCommand;
 import client.view.NwbClientView;
+import client.view.NwbJToggleButton;
 import client.view.drawing.NwbDrawingCanvas;
 import org.jdesktop.application.Action;
 
 import java.awt.event.ActionEvent;
-import java.util.List;
 import java.util.Properties;
 
 /**
@@ -17,13 +16,13 @@ import java.util.Properties;
  * Time: 9:56 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbClientController {
+public class NwbToolbarActionController {
 
     private NwbClientView view;
     private NwbClientModel model;
     private Properties fileActionProperty;
 
-    public NwbClientController(){
+    public NwbToolbarActionController(){
 
     }
 
@@ -31,89 +30,52 @@ public class NwbClientController {
         this.view = view;
     }
 
-    public void setModel(NwbClientModel model){
+    public void setModel(NwbClientModel model) {
         this.model = model;
-        model.register(this);
-    }
-
-    @Action
-    public void doNew(ActionEvent evt){
-        System.out.println("Quit");
-    }
-
-    @Action
-    public void doOpen(ActionEvent evt){
-        System.out.println("Quit");
-    }
-
-    @Action
-    public void doOpenRecent(ActionEvent evt){
-        System.out.println("Quit");
-    }
-
-    @Action
-    public void doSave(ActionEvent evt){
-        System.out.println("Quit");
-    }
-
-    @Action
-    public void doSaveAs(ActionEvent evt){
-        System.out.println("Quit");
-    }
-    @Action
-    public void doQuit(ActionEvent evt){
-        System.out.println("Quit");
-        System.exit(0);
-    }
-
-    @Action
-    public void doRedo(ActionEvent evt){
-        model.redo();
-    }
-
-    @Action
-    public void doUndo(ActionEvent evt){
-        model.undo();
     }
 
     @Action
     public void doSketch(ActionEvent evt){
+        notifyToToggleMediator(evt);
         view.setShapeType(NwbDrawingCanvas.ShapeType.Sketch);
     }
 
     @Action
     public void doLine(ActionEvent evt){
+        notifyToToggleMediator(evt);
         view.setShapeType(NwbDrawingCanvas.ShapeType.Line);
     }
 
     @Action
     public void doRect(ActionEvent evt){
+        notifyToToggleMediator(evt);
         view.setShapeType(NwbDrawingCanvas.ShapeType.Rectangle);
     }
     @Action
     public void doRoundedRect(ActionEvent evt){
+        notifyToToggleMediator(evt);
         view.setShapeType(NwbDrawingCanvas.ShapeType.RoundedRectangle);
     }
     @Action
     public void doOval(ActionEvent evt){
+        notifyToToggleMediator(evt);
         view.setShapeType(NwbDrawingCanvas.ShapeType.Oval);
     }
 
     @Action
     public void doErase(ActionEvent evt){
+        notifyToToggleMediator(evt);
         view.setShapeType(NwbDrawingCanvas.ShapeType.Erase);
     }
 
     @Action
     public void doText(ActionEvent evt){
+        notifyToToggleMediator(evt);
         view.setShapeType(NwbDrawingCanvas.ShapeType.Text);
     }
 
-    public void newDrawingCommand(NwbDrawingCommand command ) {
-        model.pushDrawingCommand(command);
-    }
-
-    public void update(List<NwbDrawingCommand> list){
-        view.updateAllShape(list);
+    private void notifyToToggleMediator(ActionEvent evt) {
+        NwbJToggleButton button = (NwbJToggleButton)evt.getSource();
+        button.notifyToToggleMediator();
     }
 }

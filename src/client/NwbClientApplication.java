@@ -1,11 +1,13 @@
 package client;
 
-import client.controller.NwbClientController;
+import client.controller.NwbDrawingCanvasController;
+import client.controller.NwbMenuActionController;
+import client.controller.NwbToolbarActionController;
 import client.model.NwbClientModel;
 import client.view.NwbClientView;
 import client.view.factory.NwbMenuFactory;
+import client.view.factory.NwbToolBarFactory;
 import org.jdesktop.application.Application;
-import org.jdesktop.application.ApplicationContext;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,21 +19,30 @@ import org.jdesktop.application.ApplicationContext;
 public class NwbClientApplication extends Application {
     @Override
     protected void startup() {
-        ApplicationContext ctx = getContext();
-        NwbClientController controller = new NwbClientController();
 
-        NwbMenuFactory.setActionMap(controller);
 
+        //Controller
+        NwbDrawingCanvasController drawingCanvasController = new NwbDrawingCanvasController();
+        NwbMenuActionController menuActionController = new NwbMenuActionController();
+        NwbToolbarActionController toolbarActionController = new NwbToolbarActionController();
+        NwbMenuFactory.setActionMap(menuActionController);
+        NwbToolBarFactory.setActionMap(toolbarActionController);
+
+        //View
         NwbClientView view = new NwbClientView();
-        view.setController(controller);
-        controller.setView(view);
+        view.setDrawingCanvasController(drawingCanvasController);
+        drawingCanvasController.setView(view);
+        menuActionController.setView(view);
+        toolbarActionController.setView(view);
 
+        //Model
         NwbClientModel model = new NwbClientModel();
-        controller.setModel(model);
-        view.setApplicationContext(ctx);
+        drawingCanvasController.setModel(model);
+        menuActionController.setModel(model);
+        toolbarActionController.setModel(model);
+
         view.showView();
 
-        System.out.println("start");
     }
 
     /**

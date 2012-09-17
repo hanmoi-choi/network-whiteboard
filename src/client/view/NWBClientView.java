@@ -1,6 +1,6 @@
 package client.view;
 
-import client.controller.NwbClientController;
+import client.controller.NwbDrawingCanvasController;
 import client.model.NwbDrawingCommand;
 import client.model.factory.NwbDrawingCommandFactory;
 import client.view.drawing.NwbDrawingCanvas;
@@ -21,8 +21,8 @@ public class NwbClientView {
 
 	private JFrame frame;
 	private JMenuItem jmiNew;
-	private NwbJMenu jmFile;
-	private NwbJMenu jmEdit;
+	private JMenu jmFile;
+	private JMenu jmEdit;
 	private JMenuBar menuBar;
 	private JToolBar toolBar;
 	private NwbDrawingCanvas drawingCanvas;
@@ -30,7 +30,7 @@ public class NwbClientView {
 
 	private NwbDrawingInfo drawingInfo;
 	private ShapeType shapeType;
-	private NwbClientController controller;
+	private NwbDrawingCanvasController controller;
 
 	/**
 	 * Create the application.
@@ -47,7 +47,7 @@ public class NwbClientView {
 		frame.setVisible(true);
 	}
 
-	public void setController(NwbClientController controller){
+	public void setDrawingCanvasController(NwbDrawingCanvasController controller){
 		this.controller = controller;
 	}
 

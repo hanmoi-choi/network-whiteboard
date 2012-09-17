@@ -1,7 +1,7 @@
 package test;
 
 import client.model.NwbDrawingCommand;
-import client.model.NwbLineDrawingCommand;
+import client.model.NwbDrawingCommandImpl;
 import client.view.drawing.NwbDrawingInfo;
 import client.view.drawing.strategy.NwbDrawingStrategy;
 import client.view.drawing.strategy.NwbLineStrategy;
@@ -20,7 +20,7 @@ public class NwbLineDrawingInfoTest {
 
     @Test
     public void shallUseLineStrategy(){
-        NwbDrawingCommand drawingCommand = new NwbLineDrawingCommand();
+        NwbDrawingCommand drawingCommand = new NwbDrawingCommandImpl();
         NwbDrawingInfo drawingInfo = mock(NwbDrawingInfo.class);
         NwbDrawingStrategy strategy = mock(NwbLineStrategy.class);
 

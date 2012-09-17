@@ -12,7 +12,7 @@ import java.awt.*;
  * Time: 10:31 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbLineDrawingCommand implements NwbDrawingCommand{
+public class NwbDrawingCommandImpl implements NwbDrawingCommand{
     private NwbDrawingInfo drawingInfo;
     private NwbDrawingStrategy strategy;
 

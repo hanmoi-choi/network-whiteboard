@@ -1,10 +1,8 @@
 package client.model;
 
-import client.controller.NwbClientController;
+import client.controller.NwbDrawingCanvasController;
 import com.google.common.collect.ImmutableList;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 /**
@@ -17,12 +15,11 @@ import java.util.Stack;
 public class NwbClientModel {
     private Stack<NwbDrawingCommand> commandStack;
     private Stack<NwbDrawingCommand> redoStack;
-    private List<NwbClientController> subscribers;
+    private NwbDrawingCanvasController subscriber;
 
     public NwbClientModel() {
         commandStack = new Stack<NwbDrawingCommand>();
         redoStack = new Stack<NwbDrawingCommand>();
-        subscribers = new ArrayList<NwbClientController>();
     }
 
     public void pushDrawingCommand(NwbDrawingCommand command) {
@@ -32,9 +29,7 @@ public class NwbClientModel {
     }
 
     private void updateSubscribers() {
-        for (NwbClientController controller : subscribers) {
-            controller.update(ImmutableList.copyOf(commandStack));
-        }
+        subscriber.update(ImmutableList.copyOf(commandStack));
     }
 
     public void undo() {
@@ -51,7 +46,7 @@ public class NwbClientModel {
         }
     }
 
-    public void register(NwbClientController subscriber) {
-        subscribers.add(subscriber);
+    public void register(NwbDrawingCanvasController subscriber) {
+        this.subscriber = subscriber;
     }
 }

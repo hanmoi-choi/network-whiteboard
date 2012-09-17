@@ -1,7 +1,7 @@
 package client.model.factory;
 
 import client.model.NwbDrawingCommand;
-import client.model.NwbLineDrawingCommand;
+import client.model.NwbDrawingCommandImpl;
 import client.view.drawing.NwbDrawingInfo;
 import client.view.drawing.strategy.*;
 
@@ -18,7 +18,7 @@ public class NwbDrawingCommandFactory {
 
     public static NwbDrawingCommand createDrawingFactory(ShapeType type, NwbDrawingInfo info){
         NwbDrawingCommand command = null;
-        command = new NwbLineDrawingCommand();
+        command = new NwbDrawingCommandImpl();
         command.setDrawingInfo(info);
 
         if(type == ShapeType.Line){
