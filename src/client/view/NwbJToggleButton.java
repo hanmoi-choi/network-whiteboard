@@ -14,18 +14,18 @@ import java.awt.event.MouseEvent;
 public class NwbJToggleButton extends JToggleButton {
 
     private ImageIcon hoverIcon;
-    private ImageIcon selectedIcon;
-    private ImageIcon unselectedIcon;
+    private ImageIcon icon;
     private NwbJToggleButtonMediator mediator;
 
     public NwbJToggleButton() {
         super();
     }
 
-    public void setMediator(NwbJToggleButtonMediator mediator){
+    public void setMediator(NwbJToggleButtonMediator mediator) {
         this.mediator = mediator;
         this.mediator.register(this);
     }
+
     public NwbJToggleButton(String title) {
         super(title);
         addMouseListener();
@@ -35,11 +35,11 @@ public class NwbJToggleButton extends JToggleButton {
         this.hoverIcon = hoverIcon;
     }
 
-    public void setIcon(ImageIcon selectedIcon) {
-        this.selectedIcon = selectedIcon;
+    public void setIcon(ImageIcon icon) {
+        this.icon = icon;
     }
 
-    public void notifyToToggleMediator(){
+    public void notifyToToggleMediator() {
         this.mediator.buttonClicked(this);
     }
 
@@ -47,14 +47,8 @@ public class NwbJToggleButton extends JToggleButton {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        NwbJToggleButton.this.setIcon(new ImageIcon("resources/images/airbrush.png"));
-                        System.out.println("entered");
-                    }
-                });
+                NwbJToggleButton button = (NwbJToggleButton) e.getSource();
+                button.setIcon(new ImageIcon("resources/images/airbrush.png"));
             }
 
             @Override
