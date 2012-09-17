@@ -76,10 +76,5 @@ public class NwbDrawingCanvas extends Canvas {
             strategyMap.get(shapeType).setDrawingInfo(drawingInfo);
             strategyMap.get(shapeType).drawShape(g2D);
         }
-
-
-
     }
-
-
 }

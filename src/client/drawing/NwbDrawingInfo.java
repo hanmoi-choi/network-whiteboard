@@ -14,9 +14,13 @@ import java.util.List;
  */
 public class NwbDrawingInfo implements Cloneable{
 
-    Point startPoint;
-    Point endPoint;
-    List<Point> pointList;
+    private Point startPoint;
+    private Point endPoint;
+    private List<Point> pointList;
+
+
+
+    private String text;
 
     public NwbDrawingInfo(){
         pointList = new ArrayList<Point>();
@@ -37,17 +41,26 @@ public class NwbDrawingInfo implements Cloneable{
         this.endPoint = endPoint;
     }
 
-    public List<Point> getPointList() {
-        return pointList;
+    public void addPointToPointList(Point point) {
+        pointList.add(point);
     }
 
-    public void setPointList(List<Point> pointList) {
-        this.pointList = pointList;
+    public List<Point> getPointList(){
+        return this.pointList;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getText() {
+        return text;
     }
 
     public void clearInfo(){
         startPoint = null;
         endPoint = null;
+        text = null;
         pointList.clear();
     }
 
@@ -66,12 +79,15 @@ public class NwbDrawingInfo implements Cloneable{
         NwbDrawingInfo info = new NwbDrawingInfo();
         info.startPoint = this.startPoint;
         info.endPoint = this.endPoint;
+        info.text = this.text;
 
-        Iterator<Point> iterator = this.getPointList().iterator();
+        Iterator<Point> iterator = this.pointList.iterator();
         while(iterator.hasNext()){
             info.pointList.add(iterator.next());
         }
 
         return info;
     }
+
+
 }

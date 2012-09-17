@@ -72,6 +72,7 @@ public class NwbToolbarActionController {
     public void doText(ActionEvent evt){
         notifyToToggleMediator(evt);
         view.setShapeType(NwbDrawingCanvas.ShapeType.Text);
+        view.ShowTextDialog();
     }
 
     private void notifyToToggleMediator(ActionEvent evt) {

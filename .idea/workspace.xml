@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8222562f-1b55-4ffb-9294-81c3e7454188" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/view/NwbTextInputDialog.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/view/NWBClientView.java" afterPath="$PROJECT_DIR$/src/client/view/NwbClientView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/controller/NwbToolbarActionController.java" afterPath="$PROJECT_DIR$/src/client/controller/NwbToolbarActionController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/drawing/NwbDrawingCanvas.java" afterPath="$PROJECT_DIR$/src/client/drawing/NwbDrawingCanvas.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/drawing/strategy/NwbEraseStrategy.java" afterPath="$PROJECT_DIR$/src/client/drawing/strategy/NwbEraseStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/drawing/NwbDrawingInfo.java" afterPath="$PROJECT_DIR$/src/client/drawing/NwbDrawingInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/drawing/strategy/NwbRectangleStrategy.java" afterPath="$PROJECT_DIR$/src/client/drawing/strategy/NwbRectangleStrategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/drawing/strategy/NwbTextStrategy.java" afterPath="$PROJECT_DIR$/src/client/drawing/strategy/NwbTextStrategy.java" />
     </list>
     <ignored path="Network-Whiteboard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,34 +74,56 @@
       <file leaf-file-name="NwbSketchStrategy.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbSketchStrategy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="9" selection-start="751" selection-end="751" vertical-scroll-proportion="0.0">
+            <state line="25" column="13" selection-start="741" selection-end="741" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NwbEraseStrategy.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbEraseStrategy.java">
+      <file leaf-file-name="NwbDrawingStrategy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbDrawingStrategy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="0" selection-start="809" selection-end="809" vertical-scroll-proportion="0.0">
+            <state line="17" column="25" selection-start="360" selection-end="360" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NwbDrawingCanvas.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/client/drawing/NwbDrawingCanvas.java">
+      <file leaf-file-name="NwbTextStrategy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbTextStrategy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="38" selection-start="2189" selection-end="2189" vertical-scroll-proportion="0.6097561">
+            <state line="23" column="1" selection-start="543" selection-end="543" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NwbLineStrategy.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbLineStrategy.java">
+      <file leaf-file-name="NwbTextInputDialog.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/view/NwbTextInputDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="0" selection-start="359" selection-end="359" vertical-scroll-proportion="0.0">
+            <state line="63" column="0" selection-start="1779" selection-end="1779" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NwbClientView.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/client/view/NwbClientView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="42" column="22" selection-start="1169" selection-end="1169" vertical-scroll-proportion="0.43636364">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NwbDrawingInfo.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/drawing/NwbDrawingInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="91" column="0" selection-start="1965" selection-end="1965" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -182,7 +210,6 @@
         <option value="$PROJECT_DIR$/src/client/controller/NwbDrawingCanvasController.java" />
         <option value="$PROJECT_DIR$/src/client/view/factory/NwbActionFactory.java" />
         <option value="$PROJECT_DIR$/src/client/NwbClientApplication.java" />
-        <option value="$PROJECT_DIR$/src/client/controller/NwbToolbarActionController.java" />
         <option value="$PROJECT_DIR$/src/client/model/NwbClientModel.java" />
         <option value="$PROJECT_DIR$/src/client/controller/NwbMenuActionController.java" />
         <option value="$PROJECT_DIR$/src/client/view/NwbJToggleButtonMediator.java" />
@@ -192,12 +219,16 @@
         <option value="$PROJECT_DIR$/src/client/view/NwbJToggleButton.java" />
         <option value="$PROJECT_DIR$/src/client/view/factory/NwbToolBarFactory.java" />
         <option value="$PROJECT_DIR$/src/client/controller/resources/NwbToolbarActionController.properties" />
-        <option value="$PROJECT_DIR$/src/client/drawing/strategy/NwbSketchStrategy.java" />
-        <option value="$PROJECT_DIR$/src/client/drawing/NwbDrawingInfo.java" />
-        <option value="$PROJECT_DIR$/src/client/view/NwbClientView.java" />
-        <option value="$PROJECT_DIR$/src/client/view/NwbClientView.java" />
-        <option value="$PROJECT_DIR$/src/client/drawing/strategy/NwbEraseStrategy.java" />
         <option value="$PROJECT_DIR$/src/client/drawing/NwbDrawingCanvas.java" />
+        <option value="$PROJECT_DIR$/src/client/drawing/strategy/NwbSketchStrategy.java" />
+        <option value="$PROJECT_DIR$/src/client/drawing/strategy/NwbEraseStrategy.java" />
+        <option value="$PROJECT_DIR$/src/client/drawing/strategy/NwbRectangleStrategy.java" />
+        <option value="$PROJECT_DIR$/src/client/controller/NwbToolbarActionController.java" />
+        <option value="$PROJECT_DIR$/src/client/view/NwbTextInputDialog.java" />
+        <option value="$PROJECT_DIR$/src/client/drawing/NwbDrawingInfo.java" />
+        <option value="$PROJECT_DIR$/src/client/drawing/strategy/NwbTextStrategy.java" />
+        <option value="$PROJECT_DIR$/src/client/view/NwbClientView.java" />
+        <option value="$PROJECT_DIR$/src/client/view/NwbClientView.java" />
       </list>
     </option>
   </component>
@@ -510,15 +541,15 @@
       <recent name="client.view" />
       <recent name="model" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="client.view" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/client/controller/resources" />
       <recent name="$PROJECT_DIR$/src/resources/images" />
       <recent name="$PROJECT_DIR$/libs" />
       <recent name="$PROJECT_DIR$/src/resources/images/cursor" />
       <recent name="$PROJECT_DIR$/src/resources/images/icon" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="client.view" />
     </key>
   </component>
   <component name="Regex">
@@ -870,8 +901,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24838188" sideWeight="0.33286119" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928804" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Log4jMonitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286119" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33090615" sideWeight="0.7322946" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26770538" sideWeight="0.9951456" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33090615" sideWeight="0.8611898" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1388102" sideWeight="0.9951456" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Regex" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286119" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1015,21 +1046,6 @@
         <state line="11" column="13" selection-start="227" selection-end="227" vertical-scroll-proportion="0.28695652" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbRectangleStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="227" selection-end="227" vertical-scroll-proportion="0.28695652" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbTextStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="42" selection-start="1057" selection-end="1057" vertical-scroll-proportion="0.725" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbRoundedRectangleStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="0" selection-start="1221" selection-end="1221" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/images/pressedsmall.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1053,11 +1069,6 @@
     <entry file="jar://$PROJECT_DIR$/libs/appframework-1.03.jar!/org/jdesktop/application/ApplicationAction.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="86" column="7" selection-start="4808" selection-end="4808" vertical-scroll-proportion="0.73383087" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/controller/NwbToolbarActionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="0" selection-start="1019" selection-end="1019" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/images/hoveredsmall.png">
@@ -1135,20 +1146,6 @@
         <state line="50" column="0" selection-start="1239" selection-end="1239" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/view/NwbClientView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="56" selection-start="4367" selection-end="4367" vertical-scroll-proportion="0.738041">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/drawing/NwbDrawingInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="20" selection-start="1733" selection-end="1733" vertical-scroll-proportion="1.1349558">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/controller/NwbDrawingCanvasController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="35" column="0" selection-start="739" selection-end="739" vertical-scroll-proportion="0.7627119">
@@ -1170,27 +1167,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbSketchStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="9" selection-start="751" selection-end="751" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbDrawingStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="25" selection-start="360" selection-end="360" vertical-scroll-proportion="0.36585367">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbEraseStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="809" selection-end="809" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbLineStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="0" selection-start="359" selection-end="359" vertical-scroll-proportion="0.0">
@@ -1200,8 +1176,82 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/drawing/NwbDrawingCanvas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="38" selection-start="2189" selection-end="2189" vertical-scroll-proportion="0.6097561">
+        <state line="71" column="0" selection-start="2126" selection-end="2126" vertical-scroll-proportion="0.66101694">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbRoundedRectangleStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="0" selection-start="1216" selection-end="1216" vertical-scroll-proportion="0.84745765">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/controller/NwbToolbarActionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="13" selection-start="1933" selection-end="1933" vertical-scroll-proportion="0.7372881">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbRectangleStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="31" selection-start="1042" selection-end="1042" vertical-scroll-proportion="0.6585366">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbEraseStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="57" selection-start="492" selection-end="492" vertical-scroll-proportion="0.46341464">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbSketchStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="13" selection-start="741" selection-end="741" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbDrawingStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="25" selection-start="360" selection-end="360" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/view/NwbTextInputDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="0" selection-start="1779" selection-end="1779" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/drawing/NwbDrawingInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="0" selection-start="1965" selection-end="1965" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbTextStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="1" selection-start="543" selection-end="543" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/view/NwbClientView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="22" selection-start="1169" selection-end="1169" vertical-scroll-proportion="0.43636364">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

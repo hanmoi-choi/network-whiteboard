@@ -22,10 +22,10 @@ public class NwbRectangleStrategy extends NwbDrawingStrategy {
                     :drawingInfo.getStartPoint().y;
             int width = Math.abs((drawingInfo.getStartPoint().x - drawingInfo.getEndPoint().x));
             int height = Math.abs((drawingInfo.getStartPoint().y - drawingInfo.getEndPoint().y));
-            g2D.drawRect(drawingInfo.getStartPoint().x,
-                    drawingInfo.getStartPoint().y,
-                    width,
-                    height);
+            g2D.drawRect(x,
+                        y,
+                        width,
+                        height);
 
         }
     }

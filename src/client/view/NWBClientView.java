@@ -19,37 +19,37 @@ import java.util.List;
 
 public class NwbClientView {
 
-	private JFrame frame;
-	private JMenuItem jmiNew;
-	private JMenu jmFile;
-	private JMenu jmEdit;
-	private JMenuBar menuBar;
-	private JToolBar toolBar;
-	private NwbDrawingCanvas drawingCanvas;
-	private ApplicationContext ctx;
+    private JFrame frame;
+    private JMenuItem jmiNew;
+    private JMenu jmFile;
+    private JMenu jmEdit;
+    private JMenuBar menuBar;
+    private JToolBar toolBar;
+    private NwbDrawingCanvas drawingCanvas;
+    private ApplicationContext ctx;
 
-	private NwbDrawingInfo drawingInfo;
-	private ShapeType shapeType;
-	private NwbDrawingCanvasController controller;
+    private NwbDrawingInfo drawingInfo;
+    private ShapeType shapeType;
+    private NwbDrawingCanvasController controller;
 
-	/**
-	 * Create the application.
-	 */
-	public NwbClientView() {
-		initialize();
-	}
+    /**
+     * Create the application.
+     */
+    public NwbClientView() {
+        initialize();
+    }
 
-	public void setApplicationContext(ApplicationContext ctx) {
-		this.ctx = ctx;
-	}
+    public void setApplicationContext(ApplicationContext ctx) {
+        this.ctx = ctx;
+    }
 
-	public void showView() {
-		frame.setVisible(true);
-	}
+    public void showView() {
+        frame.setVisible(true);
+    }
 
-	public void setDrawingCanvasController(NwbDrawingCanvasController controller){
-		this.controller = controller;
-	}
+    public void setDrawingCanvasController(NwbDrawingCanvasController controller) {
+        this.controller = controller;
+    }
 
     public void updateAllShape(List<NwbDrawingCommand> list) {
         drawingCanvas.drawAllShape(list);
@@ -60,113 +60,133 @@ public class NwbClientView {
     }
 
     private void initialize() {
-		initJFrame();
-		initMenubar();
-		initToolbar();
-		initDrawingCanvas();
+        initJFrame();
+        initMenubar();
+        initToolbar();
+        initDrawingCanvas();
 
-		JPanel chattingPanel = new JPanel();
-		frame.getContentPane().add(chattingPanel, BorderLayout.SOUTH);
+        JPanel chattingPanel = new JPanel();
+        frame.getContentPane().add(chattingPanel, BorderLayout.SOUTH);
 
-		JPanel chattingDisplayPanel = new JPanel();
-		frame.getContentPane().add(chattingDisplayPanel, BorderLayout.EAST);
-		frame.getContentPane().add(drawingCanvas, BorderLayout.CENTER);
+        JPanel chattingDisplayPanel = new JPanel();
+        frame.getContentPane().add(chattingDisplayPanel, BorderLayout.EAST);
+        frame.getContentPane().add(drawingCanvas, BorderLayout.CENTER);
 
-		shapeType = ShapeType.Sketch;
-	}
+        shapeType = ShapeType.Sketch;
+    }
 
-	private void initJFrame() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+    private void initJFrame() {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 450, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
 
-	private void initMenubar() {
-		menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
+    private void initMenubar() {
+        menuBar = new JMenuBar();
+        frame.setJMenuBar(menuBar);
 
-		jmFile = NwbMenuFactory.createFileMenu();
-		jmEdit = NwbMenuFactory.createEditMenu();
+        jmFile = NwbMenuFactory.createFileMenu();
+        jmEdit = NwbMenuFactory.createEditMenu();
 
-		menuBar.add(jmFile);
-		menuBar.add(jmEdit);
-	}
+        menuBar.add(jmFile);
+        menuBar.add(jmEdit);
+    }
 
-	private void initToolbar() {
-		toolBar = NwbToolBarFactory.getToolBar();
-		frame.getContentPane().add(toolBar, BorderLayout.NORTH);
-	}
+    private void initToolbar() {
+        toolBar = NwbToolBarFactory.getToolBar();
+        frame.getContentPane().add(toolBar, BorderLayout.NORTH);
+    }
 
-	private void initDrawingCanvas() {
-		drawingCanvas = new NwbDrawingCanvas();
-		drawingInfo = new NwbDrawingInfo();
-		drawingCanvas.setBackground(Color.WHITE);
-		drawingCanvas.addMouseListener(new NwbCanvasMouseAdapter());
-		drawingCanvas.addMouseMotionListener(new NwbCanvasMouseAdapter());
-	}
+    private void initDrawingCanvas() {
+        drawingCanvas = new NwbDrawingCanvas();
+        drawingInfo = new NwbDrawingInfo();
+        drawingCanvas.setBackground(Color.WHITE);
+        drawingCanvas.addMouseListener(new NwbCanvasMouseAdapter());
+        drawingCanvas.addMouseMotionListener(new NwbCanvasMouseAdapter());
+    }
 
+    public void ShowTextDialog() {
+
+    }
 
     private class NwbCanvasMouseAdapter extends MouseAdapter {
         private boolean isPressed = false;
-		@Override
-		public void mousePressed(MouseEvent e) {
+
+        @Override
+        public void mousePressed(MouseEvent e) {
             isPressed = true;
             addDrawingInfo(e);
             drawingCanvas.setShapeType(shapeType);
-			drawingCanvas.setDrawingInfo(drawingInfo);
-			drawingCanvas.setMode(NwbDrawingCanvas.CanvasMode.Draw);
-		}
+
+            drawingCanvas.setDrawingInfo(drawingInfo);
+            drawingCanvas.setMode(NwbDrawingCanvas.CanvasMode.Draw);
+        }
 
         @Override
-		public void mouseDragged(MouseEvent e) {
+        public void mouseDragged(MouseEvent e) {
             isPressed = false;
             addDrawingInfo(e);
-			drawingCanvas.setDrawingInfo(drawingInfo);
-			drawingCanvas.repaint();
-		}
+            drawingCanvas.setDrawingInfo(drawingInfo);
+            drawingCanvas.repaint();
+        }
 
-		@Override
-		public void mouseReleased(MouseEvent e) {
+        @Override
+        public void mouseReleased(MouseEvent e) {
             isPressed = false;
             addDrawingInfo(e);
 
-			drawingCanvas.setDrawingInfo(drawingInfo);
+            drawingCanvas.setDrawingInfo(drawingInfo);
 
-			controller.newDrawingCommand(NwbDrawingCommandFactory.createDrawingFactory(shapeType, drawingInfo.getClone()));
-			drawingCanvas.repaint();
-			drawingInfo.clearInfo();
+            haltDrawingAndUpdate();
+        }
 
-			drawingCanvas.setMode(NwbDrawingCanvas.CanvasMode.Halt);
-		}
+        private void haltDrawingAndUpdate() {
+            NwbDrawingCommand drawingCommand = NwbDrawingCommandFactory.createDrawingFactory(shapeType, drawingInfo.getClone());
 
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			super.mouseEntered(e);
-		}
+            controller.newDrawingCommand(drawingCommand);
+            drawingCanvas.repaint();
+            drawingInfo.clearInfo();
+
+            drawingCanvas.setMode(NwbDrawingCanvas.CanvasMode.Halt);
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            super.mouseEntered(e);
+        }
 
         private void addDrawingInfo(MouseEvent e) {
-            if(shapeType == ShapeType.Erase || shapeType == ShapeType.Sketch){
+            if (shapeType == ShapeType.Erase || shapeType == ShapeType.Sketch) {
                 addDrawingInfoForEraseAndSketch(e);
-            }
-            else{
+            } else if (shapeType == ShapeType.Text) {
+                addDrawingInfoForText(e);
+            } else {
                 addDrawingInfoForOthers(e);
             }
         }
 
         private void addDrawingInfoForEraseAndSketch(MouseEvent e) {
-            drawingInfo.getPointList().add(e.getPoint());
+            drawingInfo.addPointToPointList(e.getPoint());
+        }
+
+        private void addDrawingInfoForText(MouseEvent e)
+        {
+            if (isPressed) {
+                drawingInfo.setText("Test");
+                drawingInfo.setStartPoint(e.getPoint());
+            } else {
+                drawingInfo.setEndPoint(e.getPoint());
+            }
         }
 
         private void addDrawingInfoForOthers(MouseEvent e) {
-            if(isPressed){
+            if (isPressed) {
                 drawingInfo.setStartPoint(e.getPoint());
-            }
-            else{
+            } else {
                 drawingInfo.setEndPoint(e.getPoint());
             }
-
         }
-	}
+    }
 
 
 }
