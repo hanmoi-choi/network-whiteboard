@@ -1,6 +1,6 @@
-package client.view.drawing.strategy;
+package client.drawing.strategy;
 
-import client.view.drawing.NwbDrawingInfo;
+import client.drawing.NwbDrawingInfo;
 
 import java.awt.*;
 

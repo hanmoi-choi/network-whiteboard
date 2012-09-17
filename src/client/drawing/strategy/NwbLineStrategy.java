@@ -1,4 +1,4 @@
-package client.view.drawing.strategy;
+package client.drawing.strategy;
 
 import java.awt.*;
 

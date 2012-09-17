@@ -2,9 +2,9 @@ package test;
 
 import client.model.NwbDrawingCommand;
 import client.model.NwbDrawingCommandImpl;
-import client.view.drawing.NwbDrawingInfo;
-import client.view.drawing.strategy.NwbDrawingStrategy;
-import client.view.drawing.strategy.NwbLineStrategy;
+import client.drawing.NwbDrawingInfo;
+import client.drawing.strategy.NwbDrawingStrategy;
+import client.drawing.strategy.NwbLineStrategy;
 import org.testng.annotations.Test;
 
 import static org.mockito.Mockito.mock;

@@ -1,4 +1,4 @@
-package client.view.drawing.strategy;
+package client.drawing.strategy;
 
 import java.awt.*;
 
@@ -9,10 +9,7 @@ import java.awt.*;
  * Time: 6:11 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbRoundedRectangleStrategy extends NwbDrawingStrategy {
-
-    public static final int ARC_WIDTH = 15;
-    public static final int ARC_HEIGHT = 15;
+public class NwbTextStrategy extends NwbDrawingStrategy {
 
     @Override
     public void drawShape(Graphics2D g2D) {
@@ -25,12 +22,10 @@ public class NwbRoundedRectangleStrategy extends NwbDrawingStrategy {
                     :drawingInfo.getStartPoint().y;
             int width = Math.abs((drawingInfo.getStartPoint().x - drawingInfo.getEndPoint().x));
             int height = Math.abs((drawingInfo.getStartPoint().y - drawingInfo.getEndPoint().y));
-            g2D.drawRoundRect(x,
-                    y,
-                    width,
-                    height,
-                    ARC_WIDTH,
-                    ARC_HEIGHT);
+            g2D.drawOval(x,
+                         y,
+                         width,
+                         height);
 
         }
     }

@@ -1,7 +1,7 @@
 package client.model;
 
-import client.view.drawing.NwbDrawingInfo;
-import client.view.drawing.strategy.NwbDrawingStrategy;
+import client.drawing.NwbDrawingInfo;
+import client.drawing.strategy.NwbDrawingStrategy;
 
 import java.awt.*;
 

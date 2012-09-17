@@ -3,9 +3,9 @@ package client.view;
 import client.controller.NwbDrawingCanvasController;
 import client.model.NwbDrawingCommand;
 import client.model.factory.NwbDrawingCommandFactory;
-import client.view.drawing.NwbDrawingCanvas;
-import client.view.drawing.NwbDrawingCanvas.ShapeType;
-import client.view.drawing.NwbDrawingInfo;
+import client.drawing.NwbDrawingCanvas;
+import client.drawing.NwbDrawingCanvas.ShapeType;
+import client.drawing.NwbDrawingInfo;
 import client.view.factory.NwbMenuFactory;
 import client.view.factory.NwbToolBarFactory;
 import org.jdesktop.application.ApplicationContext;
@@ -107,24 +107,29 @@ public class NwbClientView {
 
 
     private class NwbCanvasMouseAdapter extends MouseAdapter {
+        private boolean isPressed = false;
 		@Override
 		public void mousePressed(MouseEvent e) {
-			drawingInfo.setStartPoint(e.getPoint());
-			drawingCanvas.setShapeType(shapeType);
+            isPressed = true;
+            addDrawingInfo(e);
+            drawingCanvas.setShapeType(shapeType);
 			drawingCanvas.setDrawingInfo(drawingInfo);
 			drawingCanvas.setMode(NwbDrawingCanvas.CanvasMode.Draw);
 		}
 
-		@Override
+        @Override
 		public void mouseDragged(MouseEvent e) {
-			drawingInfo.setEndPoint(e.getPoint());
+            isPressed = false;
+            addDrawingInfo(e);
 			drawingCanvas.setDrawingInfo(drawingInfo);
 			drawingCanvas.repaint();
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			drawingInfo.setEndPoint(e.getPoint());
+            isPressed = false;
+            addDrawingInfo(e);
+
 			drawingCanvas.setDrawingInfo(drawingInfo);
 
 			controller.newDrawingCommand(NwbDrawingCommandFactory.createDrawingFactory(shapeType, drawingInfo.getClone()));
@@ -138,6 +143,29 @@ public class NwbClientView {
 		public void mouseEntered(MouseEvent e) {
 			super.mouseEntered(e);
 		}
+
+        private void addDrawingInfo(MouseEvent e) {
+            if(shapeType == ShapeType.Erase || shapeType == ShapeType.Sketch){
+                addDrawingInfoForEraseAndSketch(e);
+            }
+            else{
+                addDrawingInfoForOthers(e);
+            }
+        }
+
+        private void addDrawingInfoForEraseAndSketch(MouseEvent e) {
+            drawingInfo.getPointList().add(e.getPoint());
+        }
+
+        private void addDrawingInfoForOthers(MouseEvent e) {
+            if(isPressed){
+                drawingInfo.setStartPoint(e.getPoint());
+            }
+            else{
+                drawingInfo.setEndPoint(e.getPoint());
+            }
+
+        }
 	}
 
 

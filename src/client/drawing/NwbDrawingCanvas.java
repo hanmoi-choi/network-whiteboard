@@ -1,7 +1,7 @@
-package client.view.drawing;
+package client.drawing;
 
 import client.model.NwbDrawingCommand;
-import client.view.drawing.strategy.*;
+import client.drawing.strategy.*;
 
 import java.awt.*;
 import java.util.HashMap;

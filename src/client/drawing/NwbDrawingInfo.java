@@ -1,7 +1,8 @@
-package client.view.drawing;
+package client.drawing;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -57,6 +58,20 @@ public class NwbDrawingInfo implements Cloneable{
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
+        return info;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        NwbDrawingInfo info = new NwbDrawingInfo();
+        info.startPoint = this.startPoint;
+        info.endPoint = this.endPoint;
+
+        Iterator<Point> iterator = this.getPointList().iterator();
+        while(iterator.hasNext()){
+            info.pointList.add(iterator.next());
+        }
+
         return info;
     }
 }

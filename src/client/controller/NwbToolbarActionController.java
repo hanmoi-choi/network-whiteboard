@@ -3,7 +3,7 @@ package client.controller;
 import client.model.NwbClientModel;
 import client.view.NwbClientView;
 import client.view.NwbJToggleButton;
-import client.view.drawing.NwbDrawingCanvas;
+import client.drawing.NwbDrawingCanvas;
 import org.jdesktop.application.Action;
 
 import java.awt.event.ActionEvent;

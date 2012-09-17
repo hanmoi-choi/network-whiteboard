@@ -1,4 +1,4 @@
-package client.view.drawing.strategy;
+package client.drawing.strategy;
 
 import java.awt.*;
 
@@ -6,10 +6,10 @@ import java.awt.*;
  * Created with IntelliJ IDEA.
  * User: hanmoi
  * Date: 15/09/12
- * Time: 6:11 PM
+ * Time: 6:10 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbEraseStrategy extends NwbDrawingStrategy {
+public class NwbRectangleStrategy extends NwbDrawingStrategy {
 
     @Override
     public void drawShape(Graphics2D g2D) {
@@ -22,10 +22,10 @@ public class NwbEraseStrategy extends NwbDrawingStrategy {
                     :drawingInfo.getStartPoint().y;
             int width = Math.abs((drawingInfo.getStartPoint().x - drawingInfo.getEndPoint().x));
             int height = Math.abs((drawingInfo.getStartPoint().y - drawingInfo.getEndPoint().y));
-            g2D.drawOval(x,
-                         y,
-                         width,
-                         height);
+            g2D.drawRect(drawingInfo.getStartPoint().x,
+                    drawingInfo.getStartPoint().y,
+                    width,
+                    height);
 
         }
     }

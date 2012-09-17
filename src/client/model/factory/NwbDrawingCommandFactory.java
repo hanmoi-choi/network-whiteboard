@@ -2,10 +2,10 @@ package client.model.factory;
 
 import client.model.NwbDrawingCommand;
 import client.model.NwbDrawingCommandImpl;
-import client.view.drawing.NwbDrawingInfo;
-import client.view.drawing.strategy.*;
+import client.drawing.NwbDrawingInfo;
+import client.drawing.strategy.*;
 
-import static client.view.drawing.NwbDrawingCanvas.ShapeType;
+import static client.drawing.NwbDrawingCanvas.ShapeType;
 
 /**
  * Created with IntelliJ IDEA.

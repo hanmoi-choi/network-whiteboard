@@ -1,4 +1,4 @@
-package client.view.drawing.strategy;
+package client.drawing.strategy;
 
 import java.awt.*;
 
@@ -9,7 +9,7 @@ import java.awt.*;
  * Time: 6:11 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbTextStrategy extends NwbDrawingStrategy {
+public class NwbOvalStrategy extends NwbDrawingStrategy {
 
     @Override
     public void drawShape(Graphics2D g2D) {

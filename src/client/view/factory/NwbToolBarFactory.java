@@ -28,8 +28,10 @@ public class NwbToolBarFactory{
         JToolBar toolBar = new JToolBar();
 
         NwbJToggleButton btnSketch = new NwbJToggleButton("");
-        btnSketch.setAction(actionMap.get("doSketch"));
+
+        btnSketch.setIcon(new ImageIcon("/Users/hanmoi/git/network-whiteboard/src/client/controller/resources/sketch.png"));
         btnSketch.setMediator(mediator);
+        btnSketch.setAction(actionMap.get("doSketch"));
         toolBar.add(btnSketch);
 
         NwbJToggleButton btnLine = new NwbJToggleButton("");
