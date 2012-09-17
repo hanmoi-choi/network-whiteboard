@@ -65,16 +65,21 @@ public class NwbDrawingCanvas extends Canvas {
         super.paint(g);
         Graphics2D g2D = (Graphics2D) g;
 
-        if(mode == CanvasMode.Draw){
-            strategyMap.get(shapeType).setDrawingInfo(drawingInfo);
-            strategyMap.get(shapeType).drawShape(g2D);
-        }
-
         if (commandList != null) {
             for (NwbDrawingCommand command : commandList) {
                 System.out.println("update");
                 command.execute(g2D);
             }
         }
+
+        if (mode == CanvasMode.Draw) {
+            strategyMap.get(shapeType).setDrawingInfo(drawingInfo);
+            strategyMap.get(shapeType).drawShape(g2D);
+        }
+
+
+
     }
+
+
 }

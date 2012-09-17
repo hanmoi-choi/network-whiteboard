@@ -15,14 +15,25 @@ public class NwbEraseStrategy extends NwbDrawingStrategy {
 
     @Override
     public void drawShape(Graphics2D g2D) {
-        if(drawingInfo != null){
-            int x = drawingInfo.getStartPoint().x - (ERASER_SIZE/2);
-            int y = drawingInfo.getStartPoint().y - (ERASER_SIZE/2);
-            g2D.fillRect(x,
-                         y,
+        switchColor(g2D);
+        if (drawingInfo != null) {
+            for (Point point : drawingInfo.getPointList()) {
+
+                int x = (int) point.getX() - (ERASER_SIZE / 2);
+                int y = (int) point.getY() - (ERASER_SIZE / 2);
+                g2D.fillRect(x,
+                        y,
                         ERASER_SIZE,
                         ERASER_SIZE);
-
+            }
         }
+        switchColor(g2D);
+    }
+
+    private void switchColor(Graphics2D g2D) {
+            Color bgColor = g2D.getBackground();
+            Color fgColor = g2D.getColor();
+            g2D.setBackground(fgColor);
+            g2D.setColor(bgColor);
     }
 }
