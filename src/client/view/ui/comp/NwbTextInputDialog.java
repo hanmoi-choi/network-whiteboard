@@ -21,7 +21,7 @@ public class NwbTextInputDialog extends JDialog {
         this.parent = parent;
 
         setTitle("Text Input");
-        setBounds(100, 100, 450, 300);
+        setBounds(100, 100, 220, 150);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);

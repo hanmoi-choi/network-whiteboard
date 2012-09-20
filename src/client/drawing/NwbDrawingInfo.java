@@ -19,11 +19,8 @@ public class NwbDrawingInfo implements Cloneable{
     private List<Point> pointList;
 
     private String text;
-    private Font font;
+    private Font font = new Font("Arial",Font.PLAIN, 12);
 
-    public void setFont(Font font) {
-        this.font = font;
-    }
 
     public NwbDrawingInfo(){
         pointList = new ArrayList<Point>();
@@ -60,10 +57,19 @@ public class NwbDrawingInfo implements Cloneable{
         return text;
     }
 
+    public void setFont(Font font) {
+        this.font = font;
+    }
+
+    public Font getFont() {
+        return this.font;
+    }
+
     public void clearInfo(){
         startPoint = null;
         endPoint = null;
         text = null;
+        font = new Font("Arial",Font.PLAIN, 12);
         pointList.clear();
     }
 
@@ -83,6 +89,7 @@ public class NwbDrawingInfo implements Cloneable{
         info.startPoint = this.startPoint;
         info.endPoint = this.endPoint;
         info.text = this.text;
+        info.font = this.font;
 
         Iterator<Point> iterator = this.pointList.iterator();
         while(iterator.hasNext()){
@@ -91,6 +98,7 @@ public class NwbDrawingInfo implements Cloneable{
 
         return info;
     }
+
 
 
 }

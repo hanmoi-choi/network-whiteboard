@@ -13,10 +13,12 @@ public class NwbTextStrategy extends NwbDrawingStrategy {
 
     @Override
     public void drawShape(Graphics2D g2D) {
-        if(drawingInfo != null && drawingInfo.getText() != null){
-            int x = drawingInfo.getStartPoint().x+ 2;
-            int y = drawingInfo.getStartPoint().y+ 7;
-
+        if(drawingInfo != null
+           && drawingInfo.getText() != null
+           && drawingInfo.getStartPoint() != null){
+            int x = drawingInfo.getStartPoint().x + 3;
+            int y = drawingInfo.getStartPoint().y - 3;
+            g2D.setFont(drawingInfo.getFont());
             g2D.drawString(drawingInfo.getText(), x, y);
         }
     }

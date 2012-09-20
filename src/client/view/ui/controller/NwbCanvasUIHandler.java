@@ -17,7 +17,7 @@ import static client.view.ui.comp.NwbCanvas.CanvasMode;
 import static client.view.ui.comp.NwbCanvas.ShapeType;
 
 public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
-    private boolean isPressed = false;
+    private boolean isMousePressed = false;
     private boolean isTextSelected = false;
 
     private NwbDrawingInfo drawingInfo;
@@ -36,6 +36,7 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
         if (shapeType == ShapeType.Text) {
             drawingInfo.setText(text);
             drawingInfo.setFont(font);
+            isTextSelected = true;
         }
     }
 
@@ -55,17 +56,10 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
     @Override
     public void mousePressed(MouseEvent e) {
         if (shapeType == ShapeType.Text) {
-            if (!isTextSelected) {
-                drawingInfo.setStartPoint(e.getPoint());
-                NwbTextInputDialog dialog = new NwbTextInputDialog(this);
-                dialog.setVisible(true);
-                isTextSelected = true;
-            } else {
-                isTextSelected = false;
-            }
+            mousePressedAtTextShape(e);
         } else {
             canvas.setMode(CanvasMode.Draw);
-            isPressed = true;
+            isMousePressed = true;
             addDrawingInfo(e);
         }
 
@@ -74,9 +68,18 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
         canvas.repaint();
     }
 
+    private void mousePressedAtTextShape(MouseEvent e) {
+        if (!isTextSelected) {
+            NwbTextInputDialog dialog = new NwbTextInputDialog(this);
+            dialog.setVisible(true);
+        } else {
+            isTextSelected = false;
+        }
+    }
+
     @Override
     public void mouseDragged(MouseEvent e) {
-        isPressed = false;
+        isMousePressed = false;
         addDrawingInfo(e);
         canvas.setDrawingInfo(drawingInfo);
         canvas.repaint();
@@ -84,7 +87,7 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        isPressed = false;
+        isMousePressed = false;
         isTextSelected = false;
 
         addDrawingInfo(e);
@@ -96,14 +99,27 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        super.mouseEntered(e);
+        if (shapeType == ShapeType.Text){
+            drawingInfo.setStartPoint(e.getPoint());
+            canvas.repaint();
+        }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if (shapeType == ShapeType.Text){
+            drawingInfo.setStartPoint(null);
+            canvas.repaint();
+        }
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        super.mouseMoved(e);
-
-        if (shapeType == ShapeType.Text) {
+        if (shapeType == ShapeType.Text && isTextSelected) {
+            drawingInfo.setStartPoint(e.getPoint());
+            canvas.setMode(CanvasMode.Draw);
+            canvas.setDrawingInfo(drawingInfo);
+            canvas.repaint();
         }
     }
 
@@ -119,12 +135,8 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
         drawingInfo.addPointToPointList(e.getPoint());
     }
 
-    private void addDrawingInfoForText(MouseEvent e) {
-        drawingInfo.setStartPoint(e.getPoint());
-    }
-
     private void addDrawingInfoForOthers(MouseEvent e) {
-        if (isPressed) {
+        if (isMousePressed) {
             drawingInfo.setStartPoint(e.getPoint());
         } else {
             drawingInfo.setEndPoint(e.getPoint());
