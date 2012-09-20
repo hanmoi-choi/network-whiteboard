@@ -2,7 +2,7 @@ package client.controller;
 
 import client.model.NwbClientModel;
 import client.model.NwbDrawingCommand;
-import client.view.NwbClientView;
+import client.view.CanvasDrawble;
 
 import java.util.List;
 import java.util.Properties;
@@ -16,7 +16,7 @@ import java.util.Properties;
  */
 public class NwbDrawingCanvasController {
 
-    private NwbClientView view;
+    private CanvasDrawble drawble;
     private NwbClientModel model;
     private Properties fileActionProperty;
 
@@ -24,8 +24,8 @@ public class NwbDrawingCanvasController {
 
     }
 
-    public void setView(NwbClientView view){
-        this.view = view;
+    public void setCanvasDrawble(CanvasDrawble drawble){
+        this.drawble = drawble;
     }
 
     public void setModel(NwbClientModel model){
@@ -38,6 +38,6 @@ public class NwbDrawingCanvasController {
     }
 
     public void update(List<NwbDrawingCommand> list){
-        view.updateAllShape(list);
+        drawble.updateAllShape(list);
     }
 }

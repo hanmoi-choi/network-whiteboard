@@ -1,4 +1,4 @@
-package client.view.factory;
+package client.view.ui.factory;
 
 import client.controller.NwbMenuActionController;
 import org.jdesktop.application.Application;

@@ -12,6 +12,7 @@
     <orderEntry type="library" name="swing-worker-1.1" level="project" />
     <orderEntry type="library" name="appframework-1.03" level="project" />
     <orderEntry type="library" name="swing-worker-1.1" level="project" />
+    <orderEntry type="library" name="jfontchooser-1.0.5" level="project" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">

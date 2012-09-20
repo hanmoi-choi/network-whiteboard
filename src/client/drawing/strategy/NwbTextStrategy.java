@@ -13,7 +13,7 @@ public class NwbTextStrategy extends NwbDrawingStrategy {
 
     @Override
     public void drawShape(Graphics2D g2D) {
-        if(drawingInfo != null){
+        if(drawingInfo != null && drawingInfo.getText() != null){
             int x = drawingInfo.getStartPoint().x+ 2;
             int y = drawingInfo.getStartPoint().y+ 7;
 

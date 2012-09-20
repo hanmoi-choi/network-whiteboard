@@ -1,7 +1,7 @@
 package client.controller;
 
 import client.model.NwbClientModel;
-import client.view.NwbClientView;
+import client.view.CanvasDrawble;
 import org.jdesktop.application.Action;
 
 import javax.swing.*;
@@ -16,14 +16,14 @@ import java.awt.event.ActionEvent;
  */
 public class NwbMenuActionController {
 
-    private NwbClientView view;
+    private CanvasDrawble drawble;
     private NwbClientModel model;
 
     public NwbMenuActionController(){
     }
 
-    public void setView(NwbClientView view){
-        this.view = view;
+    public void setCanvasDrawble(CanvasDrawble drawble){
+        this.drawble = drawble;
     }
 
     public void setModel(NwbClientModel model){
@@ -32,7 +32,6 @@ public class NwbMenuActionController {
 
     @Action
     public void doNew(ActionEvent evt){
-        System.out.println("Quit");
     }
 
     @Action

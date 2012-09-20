@@ -1,5 +1,6 @@
-package client.drawing;
+package client.view.ui.comp;
 
+import client.drawing.NwbDrawingInfo;
 import client.model.NwbDrawingCommand;
 import client.drawing.strategy.*;
 
@@ -7,14 +8,8 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created with IntelliJ IDEA.
- * User: hanmoi
- * Date: 15/09/12
- * Time: 5:42 PM
- * To change this template use File | Settings | File Templates.
- */
-public class NwbDrawingCanvas extends Canvas {
+
+public class NwbCanvas extends Canvas {
 
     private NwbDrawingInfo drawingInfo;
 
@@ -27,7 +22,7 @@ public class NwbDrawingCanvas extends Canvas {
     private Map<ShapeType, NwbDrawingStrategy> strategyMap;
     private java.util.List<NwbDrawingCommand> commandList;
 
-    public NwbDrawingCanvas() {
+    public NwbCanvas() {
         super();
 
         mode = CanvasMode.Draw;

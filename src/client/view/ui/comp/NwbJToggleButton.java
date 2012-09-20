@@ -1,4 +1,6 @@
-package client.view;
+package client.view.ui.comp;
+
+import client.view.ui.controller.NwbJToggleButtonMediator;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;

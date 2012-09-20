@@ -1,4 +1,6 @@
-package client.view;
+package client.view.ui.controller;
+
+import client.view.ui.comp.NwbJToggleButton;
 
 import java.util.ArrayList;
 import java.util.List;

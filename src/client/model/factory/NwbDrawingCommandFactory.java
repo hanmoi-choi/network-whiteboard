@@ -5,7 +5,7 @@ import client.model.NwbDrawingCommandImpl;
 import client.drawing.NwbDrawingInfo;
 import client.drawing.strategy.*;
 
-import static client.drawing.NwbDrawingCanvas.ShapeType;
+import static client.view.ui.comp.NwbCanvas.ShapeType;
 
 /**
  * Created with IntelliJ IDEA.

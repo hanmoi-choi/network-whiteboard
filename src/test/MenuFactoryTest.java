@@ -1,6 +1,6 @@
 package test;
 
-import client.view.factory.NwbMenuFactory;
+import client.view.ui.factory.NwbMenuFactory;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 

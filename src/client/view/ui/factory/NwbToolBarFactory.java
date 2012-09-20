@@ -1,8 +1,8 @@
-package client.view.factory;
+package client.view.ui.factory;
 
 import client.controller.NwbToolbarActionController;
-import client.view.NwbJToggleButton;
-import client.view.NwbJToggleButtonMediator;
+import client.view.ui.comp.NwbJToggleButton;
+import client.view.ui.controller.NwbJToggleButtonMediator;
 import org.jdesktop.application.Application;
 
 import javax.swing.*;

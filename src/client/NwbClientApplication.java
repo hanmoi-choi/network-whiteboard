@@ -4,9 +4,10 @@ import client.controller.NwbDrawingCanvasController;
 import client.controller.NwbMenuActionController;
 import client.controller.NwbToolbarActionController;
 import client.model.NwbClientModel;
-import client.view.NwbClientView;
-import client.view.factory.NwbMenuFactory;
-import client.view.factory.NwbToolBarFactory;
+import client.view.NwbClientViewFrame;
+import client.view.ui.controller.NwbCanvasUIHandler;
+import client.view.ui.factory.NwbMenuFactory;
+import client.view.ui.factory.NwbToolBarFactory;
 import org.jdesktop.application.Application;
 
 /**
@@ -19,8 +20,6 @@ import org.jdesktop.application.Application;
 public class NwbClientApplication extends Application {
     @Override
     protected void startup() {
-
-
         //Controller
         NwbDrawingCanvasController drawingCanvasController = new NwbDrawingCanvasController();
         NwbMenuActionController menuActionController = new NwbMenuActionController();
@@ -29,11 +28,11 @@ public class NwbClientApplication extends Application {
         NwbToolBarFactory.setActionMap(toolbarActionController);
 
         //View
-        NwbClientView view = new NwbClientView();
-        view.setDrawingCanvasController(drawingCanvasController);
-        drawingCanvasController.setView(view);
-        menuActionController.setView(view);
-        toolbarActionController.setView(view);
+        NwbCanvasUIHandler mouseAdapter = new NwbCanvasUIHandler(drawingCanvasController);
+        NwbClientViewFrame view = new NwbClientViewFrame(mouseAdapter);
+        drawingCanvasController.setCanvasDrawble(mouseAdapter);
+        menuActionController.setCanvasDrawble(mouseAdapter);
+        toolbarActionController.setCanvasDrawble(mouseAdapter);
 
         //Model
         NwbClientModel model = new NwbClientModel();
