@@ -2,8 +2,9 @@ package client.view;
 
 import client.view.ui.comp.NwbCanvas;
 import client.view.ui.controller.NwbCanvasUIHandler;
+import client.view.ui.factory.NwbHorToolBarFactory;
 import client.view.ui.factory.NwbMenuFactory;
-import client.view.ui.factory.NwbToolBarFactory;
+import client.view.ui.factory.NwbVerToolBarFactory;
 import org.jdesktop.application.ApplicationContext;
 
 import javax.swing.*;
@@ -17,14 +18,15 @@ public class NwbClientViewFrame {
     private JMenu jmFile;
     private JMenu jmEdit;
     private JMenuBar menuBar;
-    private JToolBar toolBar;
+    private JToolBar horToolBar;
     private NwbCanvas canvas;
     private ApplicationContext ctx;
     private NwbCanvasUIHandler uiHandler;
     private Container contentPane;
     private JSplitPane verticlaSplitPane;
     private JSplitPane upperRightSplitPane;
-    private JSplitPane upperLeftSplitPane;
+    private JSplitPane upperSplitPane;
+    private JToolBar verToolBar;
 
 
     /**
@@ -67,31 +69,26 @@ public class NwbClientViewFrame {
         frame = new JFrame();
         frame.setBounds(100, 100, 450, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setResizable(false);
         contentPane = frame.getContentPane();
 
         verticlaSplitPane = new JSplitPane();
-        upperRightSplitPane = new JSplitPane();
-        upperLeftSplitPane = new JSplitPane();
+        upperSplitPane = new JSplitPane();
 
         verticlaSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
         contentPane.add(verticlaSplitPane, BorderLayout.CENTER);
 
         JPanel messageInputPanel = new JPanel();
-        JPanel drawingOptionPanel = new JPanel();
         JPanel chattingDisplayPanel = new JPanel();
 
         verticlaSplitPane.setResizeWeight(1.0);
-        verticlaSplitPane.setLeftComponent(upperLeftSplitPane);
+        verticlaSplitPane.setLeftComponent(upperSplitPane);
         verticlaSplitPane.setRightComponent(messageInputPanel);
 
-        upperLeftSplitPane.setResizeWeight(0.01);
-        upperLeftSplitPane.setLeftComponent(drawingOptionPanel);
-        upperLeftSplitPane.setRightComponent(upperRightSplitPane);
+        upperSplitPane.setResizeWeight(0.01);
 
-        upperRightSplitPane.setResizeWeight(0.99);
-        upperRightSplitPane.setRightComponent(chattingDisplayPanel);
-
+        upperSplitPane.setRightComponent(chattingDisplayPanel);
     }
 
     private void initMenubar() {
@@ -106,18 +103,23 @@ public class NwbClientViewFrame {
     }
 
     private void initToolbar() {
-        toolBar = NwbToolBarFactory.getToolBar();
-        frame.getContentPane().add(toolBar, BorderLayout.NORTH);
+        horToolBar = NwbHorToolBarFactory.getToolBar();
+        verToolBar = NwbVerToolBarFactory.getToolBar();
+        frame.getContentPane().add(horToolBar, BorderLayout.NORTH);
+        frame.getContentPane().add(verToolBar, BorderLayout.WEST);
     }
 
     private void initDrawingCanvas() {
+
         canvas = new NwbCanvas();
         canvas.setPreferredSize(new Dimension(640, 480));
+        canvas.setBounds(0, 0, 640, 480);
         canvas.setBackground(Color.WHITE);
+        canvas.setSize(640,480);
         canvas.addMouseListener(uiHandler);
         canvas.addMouseMotionListener(uiHandler);
+        upperSplitPane.setLeftComponent(canvas);
         uiHandler.setCanvas(canvas);
-        upperRightSplitPane.setLeftComponent(canvas);
     }
 
     public JFrame getFrame() {

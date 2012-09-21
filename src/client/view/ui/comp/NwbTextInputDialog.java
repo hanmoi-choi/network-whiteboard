@@ -56,7 +56,6 @@ public class NwbTextInputDialog extends JDialog {
     }
 
     class TextInputDialogActionListener implements ActionListener{
-
         private Font font;
 
         @Override

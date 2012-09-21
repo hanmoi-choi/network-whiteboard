@@ -61,7 +61,7 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
         canvas.repaint();
         NwbDrawingCommand drawingCommand = NwbDrawingCommandFactory
                                             .createDrawingFactory(ShapeType.OpenImage,
-                                                                drawingInfo.getClone());
+                                                    drawingInfo.getClone());
         controller.newDrawingCommand(drawingCommand);
     }
 
@@ -76,6 +76,10 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
         canvas.paint(g);
 
         return canvasScreenShot;
+    }
+
+    @Override
+    public void newCanvas() {
     }
 
     public void setCanvas(NwbCanvas canvas){

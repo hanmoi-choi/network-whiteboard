@@ -16,13 +16,13 @@ import java.util.Properties;
  * Time: 9:56 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbToolbarActionController {
+public class NwbHorToolbarActionController {
 
     private CanvasDrawble drawble;
     private NwbClientModel model;
     private Properties fileActionProperty;
 
-    public NwbToolbarActionController(){
+    public NwbHorToolbarActionController(){
 
     }
 

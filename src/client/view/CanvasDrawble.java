@@ -22,4 +22,6 @@ public interface CanvasDrawble {
     void openImage(File imageFile);
 
     BufferedImage getBufferedImageOfCanvas();
+
+    void newCanvas();
 }

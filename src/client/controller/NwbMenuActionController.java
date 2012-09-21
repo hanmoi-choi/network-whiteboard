@@ -37,7 +37,13 @@ public class NwbMenuActionController {
 
     @Action
     public void doNew(ActionEvent evt){
+        model.clearStack();
+        drawble.newCanvas();
+
+//        NwbCanvasSizeDialog dialog = new NwbCanvasSizeDialog(drawble);
+//        dialog.setVisible(true);
     }
+
 
     @Action
     public void doOpen(ActionEvent evt){

@@ -1,21 +1,15 @@
 package client.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.Panel;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTextField;
-import javax.swing.JToolBar;
+import javax.swing.*;
+import java.awt.*;
 
 public class a {
 
-	private JFrame frame;
-	private JSplitPane splitPane;
+	private JFrame frmCanvasSize;
 	private JTextField textField;
+	private JTextField textField_1;
+	private JComboBox comboBox;
+	private JLabel lblPreset;
 
 	/**
 	 * Launch the application.
@@ -26,7 +20,7 @@ public class a {
 			public void run() {
 				try {
 					a window = new a();
-					window.frame.setVisible(true);
+					window.frmCanvasSize.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,38 +39,58 @@ public class a {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCanvasSize = new JFrame();
+		frmCanvasSize.setFont(null);
+		frmCanvasSize.setTitle("Canvas Size");
+		frmCanvasSize.setBounds(100, 100, 300, 200);
+		frmCanvasSize.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCanvasSize.getContentPane().setLayout(null);
 
-		JToolBar toolBar = new JToolBar();
-		frame.getContentPane().add(toolBar, BorderLayout.NORTH);
+		comboBox = new JComboBox();
+		comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"640 x 480", "800 x 600", "1024 x 768", "1280 x 1024", "Custom"}));
+		comboBox.setBounds(115, 18, 136, 27);
+		frmCanvasSize.getContentPane().add(comboBox);
 
-		splitPane = new JSplitPane();
-		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
-
-		JSplitPane splitPane_1 = new JSplitPane();
-		splitPane.setLeftComponent(splitPane_1);
-
-		JSplitPane splitPane_2 = new JSplitPane();
-		splitPane_1.setRightComponent(splitPane_2);
-
-		JScrollPane scrollPane = new JScrollPane();
-		splitPane_2.setRightComponent(scrollPane);
-
-		Panel panel_1 = new Panel();
-		splitPane_2.setLeftComponent(panel_1);
-
-		JPanel panel = new JPanel();
-		splitPane_1.setLeftComponent(panel);
-
-		JPanel panel_2 = new JPanel();
-		splitPane.setRightComponent(panel_2);
+		JLabel lblX = new JLabel("Width:");
+		lblX.setHorizontalAlignment(SwingConstants.CENTER);
+		lblX.setBounds(44, 57, 61, 28);
+		frmCanvasSize.getContentPane().add(lblX);
 
 		textField = new JTextField();
-		panel_2.add(textField);
+		textField.setBounds(115, 57, 84, 28);
+		frmCanvasSize.getContentPane().add(textField);
 		textField.setColumns(10);
-	}
 
+		JLabel lblHeight = new JLabel("Height:");
+		lblHeight.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHeight.setBounds(44, 97, 61, 28);
+		frmCanvasSize.getContentPane().add(lblHeight);
+
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(115, 97, 84, 28);
+		frmCanvasSize.getContentPane().add(textField_1);
+
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(54, 143, 84, 29);
+		frmCanvasSize.getContentPane().add(btnCancel);
+
+		JButton btnOk = new JButton("OK");
+		btnOk.setBounds(175, 143, 90, 29);
+		frmCanvasSize.getContentPane().add(btnOk);
+
+		lblPreset = new JLabel("Preset:");
+		lblPreset.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPreset.setBounds(44, 22, 61, 16);
+		frmCanvasSize.getContentPane().add(lblPreset);
+
+		JLabel lblPixels = new JLabel("Pixels");
+		lblPixels.setBounds(224, 63, 61, 16);
+		frmCanvasSize.getContentPane().add(lblPixels);
+
+		JLabel label = new JLabel("Pixels");
+		label.setBounds(224, 103, 61, 16);
+		frmCanvasSize.getContentPane().add(label);
+	}
 }

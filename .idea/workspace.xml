@@ -2,7 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8222562f-1b55-4ffb-9294-81c3e7454188" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/controller/resources/fillonly.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/controller/resources/fillstroke.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/controller/resources/strokeonly.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/controller/resources/switchcolor.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/controller/NwbVerToolbarActionController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/controller/resources/NwbHorToolbarActionController.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/view/ui/comp/NwbCanvasSizeDialog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/view/ui/factory/NwbVerToolBarFactory.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/controller/NwbToolbarActionController.java" afterPath="$PROJECT_DIR$/src/client/controller/NwbHorToolbarActionController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/controller/resources/NwbToolbarActionController.properties" afterPath="$PROJECT_DIR$/src/client/controller/resources/NwbVerToolbarActionController.properties" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/client/view/ui/factory/NwbToolBarFactory.java" afterPath="$PROJECT_DIR$/src/client/view/ui/factory/NwbHorToolBarFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/NwbClientApplication.java" afterPath="$PROJECT_DIR$/src/client/NwbClientApplication.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/controller/NwbMenuActionController.java" afterPath="$PROJECT_DIR$/src/client/controller/NwbMenuActionController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/view/CanvasDrawble.java" afterPath="$PROJECT_DIR$/src/client/view/CanvasDrawble.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/view/NwbClientViewFrame.java" afterPath="$PROJECT_DIR$/src/client/view/NwbClientViewFrame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/view/a.java" afterPath="$PROJECT_DIR$/src/client/view/a.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/view/ui/comp/NwbTextInputDialog.java" afterPath="$PROJECT_DIR$/src/client/view/ui/comp/NwbTextInputDialog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/view/ui/controller/NwbCanvasUIHandler.java" afterPath="$PROJECT_DIR$/src/client/view/ui/controller/NwbCanvasUIHandler.java" />
     </list>
     <ignored path="Network-Whiteboard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,46 +82,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="NwbCanvasUIHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/view/ui/controller/NwbCanvasUIHandler.java">
+      <file leaf-file-name="NwbVerToolBarFactory.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/client/view/ui/factory/NwbVerToolBarFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="38" selection-start="1869" selection-end="1869" vertical-scroll-proportion="0.0">
+            <state line="51" column="0" selection-start="1792" selection-end="1792" vertical-scroll-proportion="0.46784922">
+              <folding>
+                <element signature="e#1179#1188#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NwbVerToolbarActionController.properties" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/controller/resources/NwbVerToolbarActionController.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="40" selection-start="784" selection-end="784" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NwbDrawingInfo.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/drawing/NwbDrawingInfo.java">
+      <file leaf-file-name="switchcolor.png" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/controller/resources/switchcolor.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NwbTextInputDialog.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/view/ui/comp/NwbTextInputDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="134" column="5" selection-start="3025" selection-end="3025" vertical-scroll-proportion="0.0">
+            <state line="41" column="0" selection-start="1457" selection-end="1457" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NwbMenuActionController.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/client/controller/NwbMenuActionController.java">
+      <file leaf-file-name="NwbCanvasSizeDialog.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/view/ui/comp/NwbCanvasSizeDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="0" selection-start="1840" selection-end="1840" vertical-scroll-proportion="0.050104383">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ImageIO.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home/src.zip!/javax/imageio/ImageIO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1515" column="0" selection-start="54344" selection-end="54344" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NwbOpenImageStrategy.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbOpenImageStrategy.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="32" selection-start="768" selection-end="768" vertical-scroll-proportion="0.0">
+            <state line="42" column="96" selection-start="1292" selection-end="1292" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -111,30 +129,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NwbCanvas.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/view/ui/comp/NwbCanvas.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="0" selection-start="2138" selection-end="2138" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
+      <file leaf-file-name="roundedrectangle.png" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/controller/resources/roundedrectangle.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CanvasDrawble.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/view/CanvasDrawble.java">
+      <file leaf-file-name="strokeonly.png" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/controller/resources/strokeonly.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sketch.png" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/controller/resources/sketch.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NwbVerToolbarActionController.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/controller/NwbVerToolbarActionController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="0" selection-start="524" selection-end="524" vertical-scroll-proportion="0.0">
+            <state line="40" column="0" selection-start="852" selection-end="852" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NwbClientViewFrame.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/view/NwbClientViewFrame.java">
+      <file leaf-file-name="NwbHorToolbarActionController.properties" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/controller/resources/NwbHorToolbarActionController.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="114" column="56" selection-start="3327" selection-end="3327" vertical-scroll-proportion="0.0">
+            <state line="15" column="21" selection-start="410" selection-end="410" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -221,7 +249,6 @@
         <option value="$PROJECT_DIR$/src/test/MenuFactoryTest.java" />
         <option value="$PROJECT_DIR$/src/client/view/NwbJToggleButton.java" />
         <option value="$PROJECT_DIR$/src/client/view/factory/NwbToolBarFactory.java" />
-        <option value="$PROJECT_DIR$/src/client/controller/resources/NwbToolbarActionController.properties" />
         <option value="$PROJECT_DIR$/src/client/drawing/NwbDrawingCanvas.java" />
         <option value="$PROJECT_DIR$/src/client/drawing/strategy/NwbSketchStrategy.java" />
         <option value="$PROJECT_DIR$/src/client/drawing/strategy/NwbEraseStrategy.java" />
@@ -234,29 +261,36 @@
         <option value="$PROJECT_DIR$/src/client/view/ui/NwbDrawingCanvas.java" />
         <option value="$PROJECT_DIR$/src/client/view/ui/comp/NwbDrawingCanvas.java" />
         <option value="$PROJECT_DIR$/src/client/view/NwbClientView.java" />
-        <option value="$PROJECT_DIR$/src/client/controller/NwbToolbarActionController.java" />
         <option value="$PROJECT_DIR$/src/client/controller/NwbDrawingCanvasController.java" />
         <option value="$PROJECT_DIR$/src/client/view/NwbClientView.java" />
         <option value="$PROJECT_DIR$/src/client/view/ui/controller/NwbCanvasMouseAdapter.java" />
-        <option value="$PROJECT_DIR$/src/client/NwbClientApplication.java" />
-        <option value="$PROJECT_DIR$/src/client/NwbClientApplication.java" />
         <option value="$PROJECT_DIR$/src/client/drawing/strategy/NwbTextStrategy.java" />
-        <option value="$PROJECT_DIR$/src/client/view/ui/comp/NwbTextInputDialog.java" />
-        <option value="$PROJECT_DIR$/src/client/view/ui/factory/NwbToolBarFactory.java" />
         <option value="$PROJECT_DIR$/src/client/view/ui/comp/NwbJToggleButton.java" />
         <option value="$PROJECT_DIR$/src/client/drawing/strategy/NwbOpenImageStrategy.java" />
-        <option value="$PROJECT_DIR$/src/client/view/CanvasDrawble.java" />
         <option value="$PROJECT_DIR$/src/client/drawing/strategy/NwbLineStrategy.java" />
-        <option value="$PROJECT_DIR$/src/client/view/NwbClientViewFrame.java" />
         <option value="$PROJECT_DIR$/src/client/view/ui/comp/NwbDrawingPanel.java" />
         <option value="$PROJECT_DIR$/src/client/view/ui/comp/NwbCanvas.java" />
         <option value="$PROJECT_DIR$/src/client/model/NwbClientModel.java" />
         <option value="$PROJECT_DIR$/src/client/model/NwbClientModel.java" />
         <option value="$PROJECT_DIR$/src/client/model/factory/NwbDrawingCommandFactory.java" />
         <option value="$PROJECT_DIR$/src/client/model/factory/NwbDrawingCommandFactory.java" />
-        <option value="$PROJECT_DIR$/src/client/view/ui/controller/NwbCanvasUIHandler.java" />
         <option value="$PROJECT_DIR$/src/client/drawing/NwbDrawingInfo.java" />
+        <option value="$PROJECT_DIR$/src/client/view/ui/comp/NwbTextInputDialog.java" />
+        <option value="$PROJECT_DIR$/src/client/view/ui/comp/NwbCanvasSizeDialog.java" />
+        <option value="$PROJECT_DIR$/src/client/view/CanvasDrawble.java" />
+        <option value="$PROJECT_DIR$/src/client/view/ui/controller/NwbCanvasUIHandler.java" />
         <option value="$PROJECT_DIR$/src/client/controller/NwbMenuActionController.java" />
+        <option value="$PROJECT_DIR$/src/client/controller/resources/NwbToolbarActionController.properties" />
+        <option value="$PROJECT_DIR$/src/client/controller/NwbToolbarActionController.java" />
+        <option value="$PROJECT_DIR$/src/client/view/ui/factory/NwbToolBarFactory.java" />
+        <option value="$PROJECT_DIR$/src/client/controller/NwbHorToolbarActionController.java" />
+        <option value="$PROJECT_DIR$/src/client/view/ui/factory/NwbHorToolBarFactory.java" />
+        <option value="$PROJECT_DIR$/src/client/NwbClientApplication.java" />
+        <option value="$PROJECT_DIR$/src/client/NwbClientApplication.java" />
+        <option value="$PROJECT_DIR$/src/client/view/NwbClientViewFrame.java" />
+        <option value="$PROJECT_DIR$/src/client/controller/NwbVerToolbarActionController.java" />
+        <option value="$PROJECT_DIR$/src/client/controller/resources/NwbVerToolbarActionController.properties" />
+        <option value="$PROJECT_DIR$/src/client/view/ui/factory/NwbVerToolBarFactory.java" />
       </list>
     </option>
   </component>
@@ -274,7 +308,8 @@
     <option name="jreName" value="#JAVA_HOME" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
+    <option name="x" value="48" />
+    <option name="y" value="44" />
     <option name="width" value="1280" />
     <option name="height" value="774" />
   </component>
@@ -333,6 +368,250 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Network-Whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="network-whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Network-Whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="network-whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Network-Whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="network-whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Network-Whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="network-whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="factory" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Network-Whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="network-whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Network-Whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="network-whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="comp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Network-Whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="network-whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Network-Whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="network-whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Network-Whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="network-whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Network-Whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="network-whiteboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -432,14 +711,15 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="client.drawing.strategy" />
       <recent name="client.controller" />
+      <recent name="client.view.ui.factory" />
+      <recent name="client.drawing.strategy" />
       <recent name="client.view.drawing.strategy" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/client/controller/resources" />
       <recent name="$PROJECT_DIR$/libs" />
       <recent name="$PROJECT_DIR$/src/resources/images" />
-      <recent name="$PROJECT_DIR$/src/client/controller/resources" />
       <recent name="$PROJECT_DIR$/resources/images" />
       <recent name="$PROJECT_DIR$/lib" />
     </key>
@@ -787,8 +1067,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1280" height="774" extended-state="0" />
-    <editor active="false" />
+    <frame x="48" y="44" width="1280" height="774" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928804" sideWeight="0.6713881" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286119" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -807,9 +1087,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24838188" sideWeight="0.33286119" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928804" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Log4jMonitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286119" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3050162" sideWeight="0.7889518" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18689321" sideWeight="0.7889518" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21104816" sideWeight="0.91019416" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3462783" sideWeight="0.7889518" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.10113268" sideWeight="0.7889518" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21104816" sideWeight="0.91019416" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Regex" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286119" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -917,27 +1197,12 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/controller/resources/roundedrectangle.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home/src.zip!/java/security/SecureClassLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="146" column="76" selection-start="5194" selection-end="5194" vertical-scroll-proportion="0.5011765" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/images/bomb.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/images/pencil.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/images/stroke.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
@@ -957,11 +1222,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/images/knob.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/images/hoveredwell.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -977,24 +1237,9 @@
         <state line="20" column="26" selection-start="463" selection-end="463" vertical-scroll-proportion="0.3507307" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/controller/resources/sketch.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/controller/resources/NwbMenuActionController.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="111" selection-end="111" vertical-scroll-proportion="0.05934066" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/controller/resources/line.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/controller/resources/NwbToolbarActionController.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="29" selection-start="625" selection-end="625" vertical-scroll-proportion="0.58474576" />
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home/src.zip!/java/awt/event/InputEvent.java">
@@ -1030,34 +1275,6 @@
     <entry file="jar:///Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home/jre/lib/rt.jar!/sun/awt/RepaintArea.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="31" column="19" selection-start="1243" selection-end="1243" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/view/a.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="67" selection-start="1208" selection-end="1208" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/view/ui/comp/NwbJToggleButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="9" selection-start="823" selection-end="823" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/view/ui/comp/NwbTextInputDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="651" selection-end="651" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/controller/NwbToolbarActionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="30" selection-start="2084" selection-end="2084" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbDrawingStrategy.java">
@@ -1116,13 +1333,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/view/ui/factory/NwbToolBarFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="61" selection-start="2549" selection-end="2549" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/view/ui/factory/NwbMenuFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="38" column="0" selection-start="1118" selection-end="1118" vertical-scroll-proportion="0.0">
@@ -1133,34 +1343,6 @@
     <entry file="file://$PROJECT_DIR$/src/client/view/ui/controller/NwbJToggleButtonMediator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="65" selection-start="776" selection-end="776" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/NwbClientApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="28" selection-start="748" selection-end="748" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/view/NwbClientViewFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="56" selection-start="3327" selection-end="3327" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/view/CanvasDrawble.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="524" selection-end="524" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/model/NwbDrawingCommandImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="5" selection-start="587" selection-end="588" vertical-scroll-proportion="0.5217391">
           <folding />
         </state>
       </provider>
@@ -1179,13 +1361,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/controller/NwbDrawingCanvasController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="22" selection-start="950" selection-end="950" vertical-scroll-proportion="0.74600357">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/model/factory/NwbDrawingCommandFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="52" column="65" selection-start="1613" selection-end="1613" vertical-scroll-proportion="0.77627116">
@@ -1199,13 +1374,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/view/ui/controller/NwbCanvasUIHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="38" selection-start="1869" selection-end="1869" vertical-scroll-proportion="0.0">
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1235,14 +1403,211 @@
     <entry file="jar:///Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home/src.zip!/javax/imageio/ImageIO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1515" column="0" selection-start="54344" selection-end="54344" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#57777#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#16138#16146#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/controller/NwbDrawingCanvasController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="22" selection-start="950" selection-end="950" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/view/ui/controller/NwbCanvasUIHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="29" selection-start="2334" selection-end="2334" vertical-scroll-proportion="0.92484343">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/view/CanvasDrawble.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="561" selection-end="561" vertical-scroll-proportion="0.45762712">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/view/a.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="20" selection-start="1209" selection-end="1209" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/controller/NwbMenuActionController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="0" selection-start="1840" selection-end="1840" vertical-scroll-proportion="0.050104383">
+        <state line="39" column="27" selection-start="924" selection-end="924" vertical-scroll-proportion="0.58474576">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/model/NwbDrawingCommandImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="4" selection-start="586" selection-end="586" vertical-scroll-proportion="0.46341464">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/controller/NwbHorToolbarActionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="0" selection-start="1932" selection-end="1932" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/NwbClientApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="64" selection-start="1859" selection-end="1859" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/view/NwbClientViewFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="115" column="41" selection-start="3328" selection-end="3328" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/view/ui/comp/NwbJToggleButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="9" selection-start="823" selection-end="823" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/images/fillstroke.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/images/stroke.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/images/pressedwide.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/images/pressedwell.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/view/ui/factory/NwbHorToolBarFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="30" selection-start="1167" selection-end="1167" vertical-scroll-proportion="0.5983087">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/images/fillonly.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/controller/resources/fillstroke.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/images/pencil.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/images/newicon.icns">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/images/knob.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/images/arrow.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/controller/resources/NwbMenuActionController.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="111" selection-end="111" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/controller/resources/NwbHorToolbarActionController.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="21" selection-start="410" selection-end="410" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/controller/resources/sketch.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/controller/resources/strokeonly.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/controller/resources/roundedrectangle.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/controller/resources/NwbVerToolbarActionController.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="40" selection-start="784" selection-end="784" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/controller/resources/switchcolor.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/view/ui/comp/NwbTextInputDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="0" selection-start="1457" selection-end="1457" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/view/ui/comp/NwbCanvasSizeDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="96" selection-start="1292" selection-end="1292" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/controller/NwbVerToolbarActionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="0" selection-start="852" selection-end="852" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/view/ui/factory/NwbVerToolBarFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="0" selection-start="1792" selection-end="1792" vertical-scroll-proportion="0.46784922">
+          <folding>
+            <element signature="e#1179#1188#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,12 +1,11 @@
 package client.view.ui.factory;
 
-import client.controller.NwbToolbarActionController;
+import client.controller.NwbHorToolbarActionController;
 import client.view.ui.comp.NwbJToggleButton;
 import client.view.ui.controller.NwbJToggleButtonMediator;
 import org.jdesktop.application.Application;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,13 +14,13 @@ import java.awt.*;
  * Time: 2:50 AM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbToolBarFactory{
+public class NwbHorToolBarFactory {
     private static ActionMap actionMap;
 
-    public static void setActionMap(NwbToolbarActionController controller){
+    public static void setActionMap(NwbHorToolbarActionController controller){
         actionMap = Application.getInstance()
                                .getContext()
-                               .getActionMap(NwbToolbarActionController.class, controller);
+                               .getActionMap(NwbHorToolbarActionController.class, controller);
     }
 
     public static JToolBar getToolBar(){
@@ -29,10 +28,8 @@ public class NwbToolBarFactory{
         JToolBar toolBar = new JToolBar();
 
         NwbJToggleButton btnSketch = new NwbJToggleButton("");
-
-        btnSketch.setIcon(new ImageIcon("/Users/hanmoi/git/network-whiteboard/src/client/controller/resources/sketch.png"));
-        btnSketch.setMediator(mediator);
         btnSketch.setAction(actionMap.get("doSketch"));
+        btnSketch.setMediator(mediator);
         btnSketch.setSelected(true);    //default
         toolBar.add(btnSketch);
 
@@ -66,13 +63,7 @@ public class NwbToolBarFactory{
         btnText.setMediator(mediator);
         toolBar.add(btnText);
 
-        toolBar.add(new JToolBar.Separator());
-
-        NwbJToggleButton btnFgColor = new NwbJToggleButton("A");
-        btnFgColor.setBackground(Color.BLACK);
-        btnFgColor.setPreferredSize(new Dimension(30,30));
-        toolBar.add(btnFgColor);
-
+        toolBar.setFloatable(false);
         return toolBar;
     }
 }
