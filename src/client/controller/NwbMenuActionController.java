@@ -22,6 +22,7 @@ public class NwbMenuActionController {
 
     private CanvasDrawble drawble;
     private NwbClientModel model;
+    private File imageFile;
 
     public NwbMenuActionController(){
     }
@@ -40,7 +41,7 @@ public class NwbMenuActionController {
 
     @Action
     public void doOpen(ActionEvent evt){
-        File imageFile = selectImageFile();
+        File imageFile = selectImageFile(JFileChooser.OPEN_DIALOG);
         if(imageFile != null){
             model.clearStack();
             drawble.openImage(imageFile);
@@ -56,21 +57,32 @@ public class NwbMenuActionController {
 
     @Action
     public void doSave(ActionEvent evt){
-        BufferedImage bufferedImage = drawble.getBufferedImageOfCanvas();
-        try {
-            // write the image as a PNG
-            ImageIO.write(
-                    bufferedImage,
-                    "png",
-                    new File("/Users/hanmoi/Pictures/screenshot.png"));
-        } catch(Exception e) {
-            e.printStackTrace();
+        if(imageFile == null){
+            imageFile = selectImageFile(JFileChooser.SAVE_DIALOG);
+        }
+
+        saveScreen(imageFile);
+    }
+
+    private void saveScreen(File imageFile) {
+        if(imageFile != null){
+            BufferedImage bufferedImage = drawble.getBufferedImageOfCanvas();
+            try {
+                // write the image as a PNG
+                ImageIO.write(
+                        bufferedImage,
+                        "png",
+                        imageFile);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Action
     public void doSaveAs(ActionEvent evt){
-        System.out.println("Quit");
+        File imageFile = selectImageFile(JFileChooser.SAVE_DIALOG);
+        saveScreen(imageFile);
     }
     @Action
     public void doQuit(ActionEvent evt){
@@ -100,10 +112,13 @@ public class NwbMenuActionController {
 
     }
 
-    private File selectImageFile() {
+    private File selectImageFile(int dialogMode) {
+        int returnValue = -1;
+
         final JFileChooser fc = new JFileChooser();
+
         File file = null;
-        fc.addChoosableFileFilter(new FileFilter() {
+        FileFilter ff = new FileFilter() {
             @Override
             public boolean accept(File file) {
                 String filename = file.getName();
@@ -114,24 +129,18 @@ public class NwbMenuActionController {
             public String getDescription() {
                 return "*.png";
             }
-        });
+        };
+        fc.addChoosableFileFilter(ff);
+        fc.setFileFilter(ff);
 
-        fc.addChoosableFileFilter(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                String filename = file.getName();
-                return filename.endsWith(".jpg");
-            }
+        if(dialogMode == JFileChooser.OPEN_DIALOG){
+            returnValue = fc.showOpenDialog(null);
+        }
+        else if(dialogMode == JFileChooser.SAVE_DIALOG){
+           returnValue = fc.showSaveDialog(null);
+        }
 
-            @Override
-            public String getDescription() {
-                return "*.jpg";
-            }
-        });
-
-        int returnVal = fc.showOpenDialog(null);
-
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
             file = fc.getSelectedFile();
         }
 
