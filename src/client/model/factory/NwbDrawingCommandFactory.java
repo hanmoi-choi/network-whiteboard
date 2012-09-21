@@ -48,6 +48,10 @@ public class NwbDrawingCommandFactory {
 
             command.setDrawingStrategy(new NwbTextStrategy());
         }
+        else if(type == ShapeType.OpenImage){
+
+            command.setDrawingStrategy(new NwbOpenImageStrategy());
+        }
         return command;
     }
 }

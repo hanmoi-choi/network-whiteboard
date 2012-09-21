@@ -4,8 +4,12 @@ import client.model.NwbClientModel;
 import client.view.CanvasDrawble;
 import org.jdesktop.application.Action;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 /**
  * Created with IntelliJ IDEA.
@@ -36,8 +40,14 @@ public class NwbMenuActionController {
 
     @Action
     public void doOpen(ActionEvent evt){
-        System.out.println("Quit");
+        File imageFile = selectImageFile();
+        if(imageFile != null){
+            model.clearStack();
+            drawble.openImage(imageFile);
+        }
     }
+
+
 
     @Action
     public void doOpenRecent(ActionEvent evt){
@@ -46,7 +56,16 @@ public class NwbMenuActionController {
 
     @Action
     public void doSave(ActionEvent evt){
-        System.out.println("Quit");
+        BufferedImage bufferedImage = drawble.getBufferedImageOfCanvas();
+        try {
+            // write the image as a PNG
+            ImageIO.write(
+                    bufferedImage,
+                    "png",
+                    new File("/Users/hanmoi/Pictures/screenshot.png"));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Action
@@ -80,4 +99,43 @@ public class NwbMenuActionController {
         });
 
     }
+
+    private File selectImageFile() {
+        final JFileChooser fc = new JFileChooser();
+        File file = null;
+        fc.addChoosableFileFilter(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                String filename = file.getName();
+                return filename.endsWith(".png");
+            }
+
+            @Override
+            public String getDescription() {
+                return "*.png";
+            }
+        });
+
+        fc.addChoosableFileFilter(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                String filename = file.getName();
+                return filename.endsWith(".jpg");
+            }
+
+            @Override
+            public String getDescription() {
+                return "*.jpg";
+            }
+        });
+
+        int returnVal = fc.showOpenDialog(null);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            file = fc.getSelectedFile();
+        }
+
+        return file;
+    }
+
 }

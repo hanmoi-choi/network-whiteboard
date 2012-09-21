@@ -4,6 +4,8 @@ import client.model.NwbDrawingCommand;
 import client.view.ui.comp.NwbCanvas;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,4 +18,8 @@ public interface CanvasDrawble {
     void textDraw(String text, Font font);
     void setShapeType(NwbCanvas.ShapeType type);
     void updateAllShape(java.util.List<NwbDrawingCommand> list);
+
+    void openImage(File imageFile);
+
+    BufferedImage getBufferedImageOfCanvas();
 }

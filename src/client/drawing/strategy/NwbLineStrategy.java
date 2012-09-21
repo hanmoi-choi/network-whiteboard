@@ -13,7 +13,9 @@ public class NwbLineStrategy extends NwbDrawingStrategy {
 
     @Override
     public void drawShape(Graphics2D g2D) {
-        if(drawingInfo != null){
+        if(drawingInfo != null
+           && drawingInfo.getStartPoint() != null
+           && drawingInfo.getEndPoint() != null){
             g2D.drawLine(drawingInfo.getStartPoint().x,
                     drawingInfo.getStartPoint().y,
                     drawingInfo.getEndPoint().x,

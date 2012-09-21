@@ -3,6 +3,7 @@ package client.view.ui.comp;
 import client.view.ui.controller.NwbJToggleButtonMediator;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -30,7 +31,7 @@ public class NwbJToggleButton extends JToggleButton {
 
     public NwbJToggleButton(String title) {
         super(title);
-        addMouseListener();
+//        addMouseListener();
     }
 
     public void setHoverIcon(ImageIcon hoverIcon) {
@@ -50,12 +51,21 @@ public class NwbJToggleButton extends JToggleButton {
             @Override
             public void mouseEntered(MouseEvent e) {
                 NwbJToggleButton button = (NwbJToggleButton) e.getSource();
-                button.setIcon(new ImageIcon("resources/images/airbrush.png"));
+                if (!button.isSelected())
+                    button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                System.out.println("Exited");
+                NwbJToggleButton button = (NwbJToggleButton) e.getSource();
+                if (!button.isSelected())
+                    button.setBorder(BorderFactory.createEmptyBorder());
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                NwbJToggleButton button = (NwbJToggleButton) e.getSource();
+                button.setBorder(BorderFactory.createEmptyBorder());
             }
         });
     }

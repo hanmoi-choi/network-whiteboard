@@ -24,7 +24,6 @@ public class NwbClientModel {
 
     public void pushDrawingCommand(NwbDrawingCommand command) {
         commandStack.add(command);
-
         updateSubscribers();
     }
 
@@ -44,6 +43,16 @@ public class NwbClientModel {
             commandStack.push(redoStack.pop());
             updateSubscribers();
         }
+    }
+
+    public void clearStack(){
+        commandStack.clear();
+        redoStack.clear();
+        clearCanvas();
+    }
+
+    private void clearCanvas() {
+        subscriber.update(null);
     }
 
     public void register(NwbDrawingCanvasController subscriber) {

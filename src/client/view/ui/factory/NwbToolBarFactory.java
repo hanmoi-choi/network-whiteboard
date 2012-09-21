@@ -6,6 +6,7 @@ import client.view.ui.controller.NwbJToggleButtonMediator;
 import org.jdesktop.application.Application;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,6 +33,7 @@ public class NwbToolBarFactory{
         btnSketch.setIcon(new ImageIcon("/Users/hanmoi/git/network-whiteboard/src/client/controller/resources/sketch.png"));
         btnSketch.setMediator(mediator);
         btnSketch.setAction(actionMap.get("doSketch"));
+        btnSketch.setSelected(true);    //default
         toolBar.add(btnSketch);
 
         NwbJToggleButton btnLine = new NwbJToggleButton("");
@@ -63,6 +65,13 @@ public class NwbToolBarFactory{
         btnText.setAction(actionMap.get("doText"));
         btnText.setMediator(mediator);
         toolBar.add(btnText);
+
+        toolBar.add(new JToolBar.Separator());
+
+        NwbJToggleButton btnFgColor = new NwbJToggleButton("A");
+        btnFgColor.setBackground(Color.BLACK);
+        btnFgColor.setPreferredSize(new Dimension(30,30));
+        toolBar.add(btnFgColor);
 
         return toolBar;
     }

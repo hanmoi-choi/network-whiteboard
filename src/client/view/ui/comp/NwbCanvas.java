@@ -11,12 +11,14 @@ import java.util.Map;
 
 public class NwbCanvas extends Canvas {
 
-    private NwbDrawingInfo drawingInfo;
+    private Color bgColor = Color.WHITE;
+    private Color fgColor = Color.BLACK;
 
     public enum CanvasMode {Halt, Draw}
 
-    public enum ShapeType {Rectangle, Line, Text, Erase, Oval, RoundedRectangle, Sketch}
+    public enum ShapeType {Rectangle, Line, Text, Erase, Oval, RoundedRectangle, Sketch, OpenImage}
 
+    private NwbDrawingInfo drawingInfo;
     private CanvasMode mode;
     private ShapeType shapeType;
     private Map<ShapeType, NwbDrawingStrategy> strategyMap;
@@ -36,6 +38,7 @@ public class NwbCanvas extends Canvas {
         strategyMap.put(ShapeType.RoundedRectangle, new NwbRoundedRectangleStrategy());
         strategyMap.put(ShapeType.Erase, new NwbEraseStrategy());
         strategyMap.put(ShapeType.Sketch, new NwbSketchStrategy());
+        strategyMap.put(ShapeType.OpenImage, new NwbOpenImageStrategy());
     }
 
     public void drawAllShape(java.util.List<NwbDrawingCommand> commandList) {
@@ -57,12 +60,13 @@ public class NwbCanvas extends Canvas {
 
     @Override
     public void paint(Graphics g) {
-        super.paint(g);
         Graphics2D g2D = (Graphics2D) g;
+
+        g2D.setBackground(this.bgColor);
+        g2D.setColor(this.fgColor);
 
         if (commandList != null) {
             for (NwbDrawingCommand command : commandList) {
-                System.out.println("update");
                 command.execute(g2D);
             }
         }

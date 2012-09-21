@@ -21,13 +21,14 @@ public class NwbTextInputDialog extends JDialog {
         this.parent = parent;
 
         setTitle("Text Input");
-        setBounds(100, 100, 220, 150);
+        setBounds(100, 100, 220, 160);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(new BorderLayout(0, 0));
 
         textPane = new JTextPane();
+        textPane.setPreferredSize(new Dimension(220, 140));
         contentPanel.add(textPane, BorderLayout.CENTER);
 
         JPanel buttonPane = new JPanel();
@@ -51,6 +52,7 @@ public class NwbTextInputDialog extends JDialog {
         buttonPane.add(btnCancel);
 
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        this.pack();
     }
 
     class TextInputDialogActionListener implements ActionListener{

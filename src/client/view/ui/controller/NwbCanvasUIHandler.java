@@ -11,6 +11,8 @@ import client.view.ui.comp.NwbTextInputDialog;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.List;
 
 import static client.view.ui.comp.NwbCanvas.CanvasMode;
@@ -24,6 +26,7 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
     private ShapeType shapeType;
     private NwbCanvas canvas;
     private NwbDrawingCanvasController controller;
+    private BufferedImage canvasScreenShot;
 
     public NwbCanvasUIHandler(NwbDrawingCanvasController controller) {
         this.controller = controller;
@@ -47,6 +50,32 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
 
     public void updateAllShape(List<NwbDrawingCommand> list) {
         canvas.drawAllShape(list);
+    }
+
+    @Override
+    public void openImage(File imageFile) {
+        drawingInfo.setBGImage(imageFile);
+        canvas.setDrawingInfo(drawingInfo);
+        canvas.setShapeType(ShapeType.OpenImage);
+        canvas.setMode(CanvasMode.Draw);
+        canvas.repaint();
+        NwbDrawingCommand drawingCommand = NwbDrawingCommandFactory
+                                            .createDrawingFactory(ShapeType.OpenImage,
+                                                                drawingInfo.getClone());
+        controller.newDrawingCommand(drawingCommand);
+    }
+
+    @Override
+    public BufferedImage getBufferedImageOfCanvas() {
+        canvasScreenShot = new BufferedImage(
+                canvas.getWidth(),
+                canvas.getHeight(),
+                BufferedImage.TYPE_INT_ARGB);
+        Graphics g = canvasScreenShot.getGraphics();
+        g.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
+        canvas.paint(g);
+
+        return canvasScreenShot;
     }
 
     public void setCanvas(NwbCanvas canvas){
