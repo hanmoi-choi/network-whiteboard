@@ -28,9 +28,8 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
     private NwbCanvas canvas;
     private NwbDrawingCanvasController controller;
     private BufferedImage canvasScreenShot;
-    private int strokeSize;
 
-
+    private int strokeSize = 1;
     private Color bgColor = Color.WHITE;
     private Color fgColor = Color.BLACK;
 
@@ -89,6 +88,8 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
 
     @Override
     public void newCanvas() {
+        drawingInfo.clearInfo();
+        canvas.setDrawingInfo(drawingInfo);
     }
 
     @Override
@@ -117,19 +118,18 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
     @Override
     public void setStroke(int strokeSize) {
         this.strokeSize = strokeSize;
-
     }
 
     @Override
     public void setBgColor(Color newColor) {
         this.bgColor = newColor;
-
+        canvas.setBgColor(newColor);
     }
 
     @Override
     public void setFgColor(Color newColor) {
         this.fgColor = newColor;
-
+        canvas.setFgColor(newColor);
     }
 
     public void setCanvas(NwbCanvas canvas){
@@ -152,14 +152,7 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
         canvas.repaint();
     }
 
-    private void mousePressedAtTextShape(MouseEvent e) {
-        if (!isTextSelected) {
-            NwbTextInputDialog dialog = new NwbTextInputDialog(this);
-            dialog.setVisible(true);
-        } else {
-            isTextSelected = false;
-        }
-    }
+
 
     @Override
     public void mouseDragged(MouseEvent e) {
@@ -201,6 +194,7 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
     public void mouseMoved(MouseEvent e) {
         if (shapeType == ShapeType.Text && isTextSelected) {
             drawingInfo.setStartPoint(e.getPoint());
+            drawingInfo.setFgColor(fgColor);
             canvas.setMode(CanvasMode.Draw);
             canvas.setDrawingInfo(drawingInfo);
             canvas.repaint();
@@ -211,14 +205,29 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
         drawingInfo.setStrokeSize(strokeSize);
         drawingInfo.setBgColor(bgColor);
         drawingInfo.setFgColor(fgColor);
-        if (shapeType == ShapeType.Erase || shapeType == ShapeType.Sketch) {
-            addDrawingInfoForEraseAndSketch(e);
-        } else {
+
+        if (shapeType == ShapeType.Erase){
+            addDrawingInfoForErase(e);
+        }
+        else if(shapeType == ShapeType.Sketch) {
+            addDrawingInfoForSketch(e);
+        }
+        else {
             addDrawingInfoForOthers(e);
         }
     }
 
-    private void addDrawingInfoForEraseAndSketch(MouseEvent e) {
+    private void addDrawingInfoForSketch(MouseEvent e) {
+        Point startPoint = drawingInfo.getEndPoint();
+        Point endPoint = e.getPoint();
+
+        drawingInfo.addSketchPoints(startPoint, endPoint);
+
+        drawingInfo.setStartPoint(startPoint);
+        drawingInfo.setEndPoint(endPoint);
+    }
+
+    private void addDrawingInfoForErase(MouseEvent e) {
         drawingInfo.addPointToPointList(e.getPoint());
     }
 
@@ -238,5 +247,14 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
         drawingInfo.clearInfo();
 
         canvas.setMode(CanvasMode.Halt);
+    }
+
+    private void mousePressedAtTextShape(MouseEvent e) {
+        if (!isTextSelected) {
+            NwbTextInputDialog dialog = new NwbTextInputDialog(this);
+            dialog.setVisible(true);
+        } else {
+            isTextSelected = false;
+        }
     }
 }

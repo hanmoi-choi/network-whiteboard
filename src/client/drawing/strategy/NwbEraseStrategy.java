@@ -19,7 +19,7 @@ public class NwbEraseStrategy extends NwbDrawingStrategy {
 
         switchColor(g2D);
         if (drawingInfo != null) {
-            for (Point point : drawingInfo.getPointList()) {
+            for (Point point : drawingInfo.getErasorPointList()) {
 
                 int x = (int) point.getX() - (ERASER_SIZE / 2);
                 int y = (int) point.getY() - (ERASER_SIZE / 2);

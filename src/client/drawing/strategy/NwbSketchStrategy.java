@@ -1,6 +1,7 @@
 package client.drawing.strategy;
 
 import java.awt.*;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,14 +18,18 @@ public class NwbSketchStrategy extends NwbDrawingStrategy {
     public void drawShape(Graphics2D g2D) {
         beforeDrawing(g2D);
 
+
         if (drawingInfo != null) {
-            for (Point point : drawingInfo.getPointList()) {
-                int x = (int) point.getX() - (BRUSH_SIZE / 2);
-                int y = (int) point.getY() - (BRUSH_SIZE / 2);
-                g2D.fillOval(x,
-                        y,
-                        BRUSH_SIZE,
-                        BRUSH_SIZE);
+            for (Map<String, Point> map : drawingInfo.getSketchPointList()){
+                if(map.get("start") != null){
+
+                    int startx = map.get("start").x;
+                    int starty = map.get("start").y;
+                    int endx = map.get("end").x;
+                    int endy = map.get("end").y;
+
+                    g2D.drawLine(startx, starty, endx, endy);
+                }
             }
         }
 
