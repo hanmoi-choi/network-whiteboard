@@ -1,6 +1,6 @@
 package client.view.ui.comp;
 
-import client.view.ui.controller.NwbJToggleButtonMediator;
+import client.view.ui.controller.NwbUIMediator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,17 +14,18 @@ import java.awt.event.MouseEvent;
  * Time: 12:39 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbJToggleButton extends JToggleButton {
+public class NwbJToggleButton extends JToggleButton implements NwbUIMediatee {
 
     private ImageIcon hoverIcon;
     private ImageIcon icon;
-    private NwbJToggleButtonMediator mediator;
+    private NwbUIMediator mediator;
 
     public NwbJToggleButton() {
         super();
     }
 
-    public void setMediator(NwbJToggleButtonMediator mediator) {
+    @Override
+    public void setMediator(NwbUIMediator mediator) {
         this.mediator = mediator;
         this.mediator.register(this);
     }
@@ -42,7 +43,8 @@ public class NwbJToggleButton extends JToggleButton {
         this.icon = icon;
     }
 
-    public void notifyToToggleMediator() {
+    @Override
+    public void notifyToMediator() {
         this.mediator.buttonClicked(this);
     }
 

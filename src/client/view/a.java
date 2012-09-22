@@ -1,7 +1,15 @@
 package client.view;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Cursor;
+import java.awt.EventQueue;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class a {
 
@@ -42,7 +50,7 @@ public class a {
 		frmCanvasSize = new JFrame();
 		frmCanvasSize.setFont(null);
 		frmCanvasSize.setTitle("Canvas Size");
-		frmCanvasSize.setBounds(100, 100, 300, 200);
+		frmCanvasSize.setBounds(100, 100, 400, 300);
 		frmCanvasSize.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCanvasSize.getContentPane().setLayout(null);
 
@@ -82,7 +90,7 @@ public class a {
 
 		lblPreset = new JLabel("Preset:");
 		lblPreset.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPreset.setBounds(44, 22, 61, 16);
+		lblPreset.setBounds(19, 22, 61, 16);
 		frmCanvasSize.getContentPane().add(lblPreset);
 
 		JLabel lblPixels = new JLabel("Pixels");

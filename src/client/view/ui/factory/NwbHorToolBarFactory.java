@@ -3,6 +3,7 @@ package client.view.ui.factory;
 import client.controller.NwbHorToolbarActionController;
 import client.view.ui.comp.NwbJToggleButton;
 import client.view.ui.controller.NwbJToggleButtonMediator;
+import client.view.ui.controller.NwbUIMediator;
 import org.jdesktop.application.Application;
 
 import javax.swing.*;
@@ -24,7 +25,7 @@ public class NwbHorToolBarFactory {
     }
 
     public static JToolBar getToolBar(){
-        NwbJToggleButtonMediator mediator = new NwbJToggleButtonMediator();
+        NwbUIMediator mediator = new NwbJToggleButtonMediator();
         JToolBar toolBar = new JToolBar();
 
         NwbJToggleButton btnSketch = new NwbJToggleButton("");

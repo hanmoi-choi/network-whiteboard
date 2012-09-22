@@ -1,5 +1,7 @@
 package client.drawing;
 
+import client.view.ui.comp.NwbCanvas;
+
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -26,6 +28,9 @@ public class NwbDrawingInfo implements Cloneable{
     private Font font = new Font("Arial",Font.PLAIN, 12);
     private File imageFile;
     private boolean isImageStale;
+    private NwbCanvas.StrokeNFillMode fillNStroke;
+
+    private int strokeSize;
 
 
     public NwbDrawingInfo(){
@@ -140,5 +145,21 @@ public class NwbDrawingInfo implements Cloneable{
 
     public boolean isImageStale() {
         return this.isImageStale;
+    }
+
+    public void setStrokeNFillMode(NwbCanvas.StrokeNFillMode fillNStroke) {
+        this.fillNStroke = fillNStroke;
+    }
+
+    public NwbCanvas.StrokeNFillMode setStrokeNFillMode() {
+        return fillNStroke;
+    }
+
+    public void setStrokeSize(int strokeSize) {
+        this.strokeSize = strokeSize;
+    }
+
+    public int getStrokeSize() {
+        return strokeSize;
     }
 }

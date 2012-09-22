@@ -13,7 +13,11 @@ public class NwbOvalStrategy extends NwbDrawingStrategy {
 
     @Override
     public void drawShape(Graphics2D g2D) {
-        if(drawingInfo != null){
+        beforeDrawing(g2D);
+
+        if(drawingInfo != null
+            && drawingInfo.getStartPoint() != null
+            && drawingInfo.getEndPoint() != null){
             int x = (drawingInfo.getStartPoint().x > drawingInfo.getEndPoint().x)
                     ?drawingInfo.getEndPoint().x
                     :drawingInfo.getStartPoint().x;
@@ -28,5 +32,7 @@ public class NwbOvalStrategy extends NwbDrawingStrategy {
                          height);
 
         }
+
+        afterDrawing(g2D);
     }
 }

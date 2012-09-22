@@ -2,7 +2,6 @@ package client.view.ui.factory;
 
 import client.controller.NwbVerToolbarActionController;
 import client.view.ui.comp.NwbJToggleButton;
-import client.view.ui.controller.NwbJToggleButtonMediator;
 import org.jdesktop.application.Application;
 
 import javax.swing.*;
@@ -25,19 +24,22 @@ public class NwbVerToolBarFactory {
     }
 
     public static JToolBar getToolBar(){
-        NwbJToggleButtonMediator mediator = new NwbJToggleButtonMediator();
+//        NewColorMediator
 
         JToolBar toolBar = new JToolBar();
         toolBar.setOrientation(JToolBar.VERTICAL);
+//        toolBar.setLayout(null);
 
         JLabel lblStroke = new JLabel("Stroke");
-        lblStroke.setAlignmentX(JLabel.CENTER);
+        lblStroke.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
+        lblStroke.setBounds(0,0, 30,30);
         toolBar.add(lblStroke);
 
         JComboBox<Integer> cbStroke = new JComboBox<Integer>();
         cbStroke.setAction(actionMap.get("doAdjustStroke"));
         cbStroke.setModel(new DefaultComboBoxModel(
                 new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
+        cbStroke.setAlignmentX(JComboBox.RIGHT_ALIGNMENT);
         toolBar.add(cbStroke);
         toolBar.add(new JPopupMenu.Separator());
 
@@ -45,18 +47,22 @@ public class NwbVerToolBarFactory {
         strokeNFill.setLayout(new GridLayout(4,1,2,0));
 
         JLabel lblStrokeNFill = new JLabel("Stroke&Fill");
+        lblStrokeNFill.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
 
         NwbJToggleButton btnStrokeOnly = new NwbJToggleButton("");
         btnStrokeOnly.setAction(actionMap.get("doSelectStrokeOnly"));
-        btnStrokeOnly.setMediator(mediator);
+        btnStrokeOnly.setAlignmentX(JToggleButton.RIGHT_ALIGNMENT);
+
 
         NwbJToggleButton btnFillOnly = new NwbJToggleButton("");
         btnFillOnly.setAction(actionMap.get("doSelectFillOnly"));
-        btnFillOnly.setMediator(mediator);
+        btnFillOnly.setAlignmentX(JToggleButton.RIGHT_ALIGNMENT);
+
 
         NwbJToggleButton btnStrokeFill = new NwbJToggleButton("");
         btnStrokeFill.setAction(actionMap.get("doSelectStrokeFill"));
-        btnStrokeFill.setMediator(mediator);
+        btnStrokeFill.setAlignmentX(JToggleButton.RIGHT_ALIGNMENT);
+
 
         strokeNFill.add(lblStrokeNFill);
         strokeNFill.add(btnStrokeOnly);
@@ -66,12 +72,13 @@ public class NwbVerToolBarFactory {
 
         toolBar.add(new JPopupMenu.Separator());
 
-        strokeNFill.setVisible(false);
-        JButton btnBgColor = new JButton("BG Color");
-        btnBgColor.setAction(actionMap.get("doChaneBgColor"));
-        toolBar.add(btnBgColor);
+        JButton btnFgColor = new JButton("FG Color");
+        btnFgColor.setAction(actionMap.get("doChaneFgColor"));
+        btnFgColor.setAlignmentX(JButton.RIGHT_ALIGNMENT);
+        toolBar.add(btnFgColor);
 
         JTextField tfBgColor = new JTextField("");
+        tfBgColor.setColumns(5);
         tfBgColor.setBackground(Color.WHITE);
         tfBgColor.setEditable(false);
 
@@ -79,6 +86,7 @@ public class NwbVerToolBarFactory {
 
         JButton btnSwitchColor = new JButton();
         btnSwitchColor.setAction(actionMap.get("doSwitchColor"));
+        btnSwitchColor.setAlignmentX(JButton.RIGHT_ALIGNMENT);
         toolBar.add(btnSwitchColor);
 
         JTextField tfFgColor = new JTextField("");
@@ -86,9 +94,10 @@ public class NwbVerToolBarFactory {
         tfFgColor.setEditable(false);
         toolBar.add(tfFgColor);
 
-        JButton btnFgColor = new JButton("FG Color");
-        btnFgColor.setAction(actionMap.get("doChaneFgColor"));
-        toolBar.add(btnFgColor);
+        JButton btnBgColor = new JButton("BG Color");
+        btnBgColor.setAction(actionMap.get("doChaneBgColor"));
+        btnBgColor.setAlignmentX(JButton.RIGHT_ALIGNMENT);
+        toolBar.add(btnBgColor);
 
         toolBar.setFloatable(false);
         return toolBar;

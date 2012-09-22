@@ -24,4 +24,18 @@ public interface CanvasDrawble {
     BufferedImage getBufferedImageOfCanvas();
 
     void newCanvas();
+
+    Color getBgColor();
+
+    Color getFgColor();
+
+    void swithBgNFgColor();
+
+    void setStrokeNFillMode(NwbCanvas.StrokeNFillMode fillNStroke);
+
+    void setStroke(int strokeSize);
+
+    void setBgColor(Color newColor);
+
+    void setFgColor(Color newColor);
 }

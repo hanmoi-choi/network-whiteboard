@@ -15,6 +15,8 @@ public class NwbEraseStrategy extends NwbDrawingStrategy {
 
     @Override
     public void drawShape(Graphics2D g2D) {
+        beforeDrawing(g2D);
+
         switchColor(g2D);
         if (drawingInfo != null) {
             for (Point point : drawingInfo.getPointList()) {
@@ -28,6 +30,7 @@ public class NwbEraseStrategy extends NwbDrawingStrategy {
             }
         }
         switchColor(g2D);
+        afterDrawing(g2D);
     }
 
     private void switchColor(Graphics2D g2D) {

@@ -2,8 +2,11 @@ package client.controller;
 
 import client.model.NwbClientModel;
 import client.view.CanvasDrawble;
+import client.view.ui.comp.NwbCanvas;
 import org.jdesktop.application.Action;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Properties;
 
@@ -34,37 +37,41 @@ public class NwbVerToolbarActionController {
 
     @Action
     public void doAdjustStroke(ActionEvent evt){
-        System.out.println(evt);
+        JComboBox<Integer> comboBox = (JComboBox<Integer>)evt.getSource();
+        int strokeSize = comboBox.getItemAt(comboBox.getSelectedIndex()).intValue();
+        drawble.setStroke(strokeSize);
     }
 
 
     @Action
     public void doChaneBgColor(ActionEvent evt){
-        System.out.println(evt);
+        Color newColor = JColorChooser.showDialog(null, "Choose BG Color", drawble.getBgColor());
+        drawble.setBgColor(newColor);
     }
 
     @Action
     public void doChaneFgColor(ActionEvent evt){
-        System.out.println(evt);
+        Color newColor = JColorChooser.showDialog(null, "Choose FG Color", drawble.getFgColor());
+        drawble.setFgColor(newColor);
     }
 
     @Action
     public void doSelectStrokeOnly(ActionEvent evt){
-        System.out.println(evt);
+        drawble.setStrokeNFillMode(NwbCanvas.StrokeNFillMode.StrokeOnly);
     }
 
     @Action
     public void doSelectFillOnly(ActionEvent evt){
-        System.out.println(evt);
+        drawble.setStrokeNFillMode(NwbCanvas.StrokeNFillMode.FillOnly);
     }
 
     @Action
     public void doSelectStrokeFill(ActionEvent evt){
-        System.out.println(evt);
+        drawble.setStrokeNFillMode(NwbCanvas.StrokeNFillMode.FillNStroke);
     }
     @Action
     public void doSwitchColor(ActionEvent evt){
-        System.out.println(evt);
+        drawble.swithBgNFgColor();
     }
 
 }

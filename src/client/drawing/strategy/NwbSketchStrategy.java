@@ -15,6 +15,8 @@ public class NwbSketchStrategy extends NwbDrawingStrategy {
 
     @Override
     public void drawShape(Graphics2D g2D) {
+        beforeDrawing(g2D);
+
         if (drawingInfo != null) {
             for (Point point : drawingInfo.getPointList()) {
                 int x = (int) point.getX() - (BRUSH_SIZE / 2);
@@ -25,5 +27,7 @@ public class NwbSketchStrategy extends NwbDrawingStrategy {
                         BRUSH_SIZE);
             }
         }
+
+        afterDrawing(g2D);
     }
 }

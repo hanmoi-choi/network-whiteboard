@@ -17,6 +17,7 @@ import java.util.List;
 
 import static client.view.ui.comp.NwbCanvas.CanvasMode;
 import static client.view.ui.comp.NwbCanvas.ShapeType;
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode;
 
 public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
     private boolean isMousePressed = false;
@@ -27,10 +28,18 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
     private NwbCanvas canvas;
     private NwbDrawingCanvasController controller;
     private BufferedImage canvasScreenShot;
+    private int strokeSize;
+
+
+    private Color bgColor = Color.WHITE;
+    private Color fgColor = Color.BLACK;
 
     public NwbCanvasUIHandler(NwbDrawingCanvasController controller) {
         this.controller = controller;
         drawingInfo = new NwbDrawingInfo();
+        drawingInfo.setBgColor(bgColor);
+        drawingInfo.setFgColor(fgColor);
+
         this.shapeType = ShapeType.Sketch;
     }
 
@@ -82,8 +91,50 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
     public void newCanvas() {
     }
 
+    @Override
+    public Color getBgColor() {
+        return this.bgColor;
+    }
+
+    @Override
+    public Color getFgColor() {
+        return this.fgColor;
+    }
+
+    @Override
+    public void swithBgNFgColor() {
+        Color tmp = null;
+        tmp = fgColor;
+        fgColor = bgColor;
+        bgColor = tmp;
+    }
+
+    @Override
+    public void setStrokeNFillMode(StrokeNFillMode fillNStroke) {
+        drawingInfo.setStrokeNFillMode(fillNStroke);
+    }
+
+    @Override
+    public void setStroke(int strokeSize) {
+        this.strokeSize = strokeSize;
+
+    }
+
+    @Override
+    public void setBgColor(Color newColor) {
+        this.bgColor = newColor;
+
+    }
+
+    @Override
+    public void setFgColor(Color newColor) {
+        this.fgColor = newColor;
+
+    }
+
     public void setCanvas(NwbCanvas canvas){
         this.canvas = canvas;
+        canvas.setDrawingInfo(drawingInfo);
     }
 
     @Override
@@ -157,6 +208,9 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
     }
 
     private void addDrawingInfo(MouseEvent e) {
+        drawingInfo.setStrokeSize(strokeSize);
+        drawingInfo.setBgColor(bgColor);
+        drawingInfo.setFgColor(fgColor);
         if (shapeType == ShapeType.Erase || shapeType == ShapeType.Sketch) {
             addDrawingInfoForEraseAndSketch(e);
         } else {

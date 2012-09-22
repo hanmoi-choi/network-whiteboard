@@ -18,11 +18,15 @@ public class NwbOpenImageStrategy extends NwbDrawingStrategy {
     private BufferedImage bufferedImage = null;
     @Override
     public void drawShape(Graphics2D g2D) {
+        beforeDrawing(g2D);
+
         if(drawingInfo.isImageStale()){
             reloadBufferedImageFile();
         }
 
         g2D.drawImage(bufferedImage, 0, 0, 640, 480, null);
+
+        afterDrawing(g2D);
     }
 
     private void reloadBufferedImageFile() {

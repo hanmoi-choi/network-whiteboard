@@ -76,6 +76,6 @@ public class NwbHorToolbarActionController {
 
     private void notifyToToggleMediator(ActionEvent evt) {
         NwbJToggleButton button = (NwbJToggleButton)evt.getSource();
-        button.notifyToToggleMediator();
+        button.notifyToMediator();
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
  * Time: 1:29 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbJToggleButtonMediator {
+public class NwbJToggleButtonMediator implements NwbUIMediator {
 
     private List<NwbJToggleButton> buttonList;
 
@@ -20,10 +20,12 @@ public class NwbJToggleButtonMediator {
         buttonList = new ArrayList<NwbJToggleButton>();
     }
 
+    @Override
     public void register(NwbJToggleButton nwbJToggleButton) {
         this.buttonList.add(nwbJToggleButton);
     }
 
+    @Override
     public void buttonClicked(NwbJToggleButton buttonPressed){
         for(NwbJToggleButton button : buttonList){
             if(button != buttonPressed) button.setSelected(false);

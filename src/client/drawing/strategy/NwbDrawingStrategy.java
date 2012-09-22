@@ -14,8 +14,27 @@ import java.awt.*;
 public abstract class NwbDrawingStrategy {
 
     protected NwbDrawingInfo drawingInfo;
+    protected Color currentFgColor;
+    protected Color currentBgColor;
+    protected Stroke currentStroke;
 
     public abstract void drawShape(Graphics2D g2D);
+
+    protected void beforeDrawing(Graphics2D g2D){
+        currentFgColor = g2D.getColor();
+        currentBgColor = g2D.getBackground();
+        currentStroke = g2D.getStroke();
+
+        g2D.setColor(drawingInfo.getFgColor());
+        g2D.setBackground(drawingInfo.getBgColor());
+        g2D.setStroke(new BasicStroke(drawingInfo.getStrokeSize()));
+    }
+
+    protected void afterDrawing(Graphics2D g2D){
+        g2D.setColor(currentFgColor);
+        g2D.setBackground(currentBgColor);
+        g2D.setStroke(currentStroke);
+    }
 
     public void setDrawingInfo(NwbDrawingInfo info) {
         this.drawingInfo = info;

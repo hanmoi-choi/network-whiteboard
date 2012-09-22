@@ -14,9 +14,11 @@ public class NwbCanvas extends Canvas {
     private Color bgColor = Color.WHITE;
     private Color fgColor = Color.BLACK;
 
-    public enum CanvasMode {Halt, Draw}
 
+
+    public enum CanvasMode {Halt, Draw}
     public enum ShapeType {Rectangle, Line, Text, Erase, Oval, RoundedRectangle, Sketch, OpenImage}
+    public enum StrokeNFillMode {FillOnly, StrokeOnly, FillNStroke}
 
     private NwbDrawingInfo drawingInfo;
     private CanvasMode mode;
@@ -39,6 +41,14 @@ public class NwbCanvas extends Canvas {
         strategyMap.put(ShapeType.Erase, new NwbEraseStrategy());
         strategyMap.put(ShapeType.Sketch, new NwbSketchStrategy());
         strategyMap.put(ShapeType.OpenImage, new NwbOpenImageStrategy());
+    }
+
+    public void setBgColor(Color bgColor) {
+        this.bgColor = bgColor;
+    }
+
+    public void setFgColor(Color fgColor) {
+        this.fgColor = fgColor;
     }
 
     public void drawAllShape(java.util.List<NwbDrawingCommand> commandList) {
