@@ -7,6 +7,7 @@ import client.controller.NwbVerToolbarActionController;
 import client.model.NwbClientModel;
 import client.view.NwbClientViewFrame;
 import client.view.ui.controller.NwbCanvasUIHandler;
+import client.view.ui.controller.NwbUIComponentMediator;
 import client.view.ui.factory.NwbHorToolBarFactory;
 import client.view.ui.factory.NwbMenuFactory;
 import client.view.ui.factory.NwbVerToolBarFactory;
@@ -22,15 +23,20 @@ import org.jdesktop.application.Application;
 public class NwbClientApplication extends Application {
     @Override
     protected void startup() {
+        //UI Component Mediator
+        NwbUIComponentMediator mediator = new NwbUIComponentMediator();
+
         //Controller
         NwbDrawingCanvasController drawingCanvasController = new NwbDrawingCanvasController();
         NwbMenuActionController menuActionController = new NwbMenuActionController();
         NwbHorToolbarActionController horToolbarActionController = new NwbHorToolbarActionController();
         NwbVerToolbarActionController verToolbarActionController = new NwbVerToolbarActionController();
+
         NwbMenuFactory.setActionMap(menuActionController);
         NwbHorToolBarFactory.setActionMap(horToolbarActionController);
+        NwbHorToolBarFactory.setUIMediator(mediator);
         NwbVerToolBarFactory.setActionMap(verToolbarActionController);
-
+        NwbVerToolBarFactory.setUIMediator(mediator);
         //View
         NwbCanvasUIHandler mouseAdapter = new NwbCanvasUIHandler(drawingCanvasController);
         NwbClientViewFrame view = new NwbClientViewFrame(mouseAdapter);

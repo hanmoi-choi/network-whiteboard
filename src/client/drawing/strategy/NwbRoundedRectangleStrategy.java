@@ -2,6 +2,10 @@ package client.drawing.strategy;
 
 import java.awt.*;
 
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.FillOnly;
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.StrokeOnly;
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.FillNStroke;
+
 /**
  * Created with IntelliJ IDEA.
  * User: hanmoi
@@ -29,13 +33,37 @@ public class NwbRoundedRectangleStrategy extends NwbDrawingStrategy {
                     :drawingInfo.getStartPoint().y;
             int width = Math.abs((drawingInfo.getStartPoint().x - drawingInfo.getEndPoint().x));
             int height = Math.abs((drawingInfo.getStartPoint().y - drawingInfo.getEndPoint().y));
-            g2D.drawRoundRect(x,
-                    y,
-                    width,
-                    height,
-                    ARC_WIDTH,
-                    ARC_HEIGHT);
 
+            if(drawingInfo.getFillNStrokeMode() == StrokeOnly){
+                g2D.drawRoundRect(x,
+                        y,
+                        width,
+                        height,
+                        ARC_WIDTH,
+                        ARC_HEIGHT);
+            }
+            else if(drawingInfo.getFillNStrokeMode() == FillOnly){
+                g2D.fillRoundRect(x,
+                        y,
+                        width,
+                        height,
+                        ARC_WIDTH,
+                        ARC_HEIGHT);
+            }
+            else if(drawingInfo.getFillNStrokeMode() == FillNStroke){
+                g2D.fillRoundRect(x,
+                        y,
+                        width,
+                        height,
+                        ARC_WIDTH,
+                        ARC_HEIGHT);
+                g2D.drawRoundRect(x,
+                        y,
+                        width,
+                        height,
+                        ARC_WIDTH,
+                        ARC_HEIGHT);
+            }
         }
 
         afterDrawing(g2D);

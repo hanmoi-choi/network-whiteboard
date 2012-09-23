@@ -1,7 +1,9 @@
 package client.view.ui.factory;
 
 import client.controller.NwbVerToolbarActionController;
+import client.view.ui.comp.NwbColorControllButton;
 import client.view.ui.comp.NwbJToggleButton;
+import client.view.ui.controller.NwbUIComponentMediator;
 import org.jdesktop.application.Application;
 
 import javax.swing.*;
@@ -16,23 +18,26 @@ import java.awt.*;
  */
 public class NwbVerToolBarFactory {
     private static ActionMap actionMap;
+    private static NwbUIComponentMediator nwbUIComponentMediator;
 
-    public static void setActionMap(NwbVerToolbarActionController controller){
+    public static void setActionMap(NwbVerToolbarActionController controller) {
         actionMap = Application.getInstance()
-                               .getContext()
-                               .getActionMap(NwbVerToolbarActionController.class, controller);
+                .getContext()
+                .getActionMap(NwbVerToolbarActionController.class, controller);
     }
 
-    public static JToolBar getToolBar(){
-//        NewColorMediator
+    public static void setUIMediator(NwbUIComponentMediator mediator) {
+        nwbUIComponentMediator = mediator;
+    }
 
+    public static JToolBar getToolBar() {
         JToolBar toolBar = new JToolBar();
         toolBar.setOrientation(JToolBar.VERTICAL);
-//        toolBar.setLayout(null);
 
         JLabel lblStroke = new JLabel("Stroke");
         lblStroke.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
-        lblStroke.setBounds(0,0, 30,30);
+        lblStroke.setBounds(0, 0, 30, 30);
+
         toolBar.add(lblStroke);
 
         JComboBox<Integer> cbStroke = new JComboBox<Integer>();
@@ -41,41 +46,40 @@ public class NwbVerToolBarFactory {
                 new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
         cbStroke.setAlignmentX(JComboBox.RIGHT_ALIGNMENT);
         toolBar.add(cbStroke);
+
         toolBar.add(new JPopupMenu.Separator());
 
         JPanel strokeNFill = new JPanel();
-        strokeNFill.setLayout(new GridLayout(4,1,2,0));
+        strokeNFill.setLayout(new GridLayout(4, 1, 2, 0));
+        nwbUIComponentMediator.addFillNStrokPanel(strokeNFill);
 
         JLabel lblStrokeNFill = new JLabel("Stroke&Fill");
         lblStrokeNFill.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
 
-        NwbJToggleButton btnStrokeOnly = new NwbJToggleButton("");
-        btnStrokeOnly.setAction(actionMap.get("doSelectStrokeOnly"));
-        btnStrokeOnly.setAlignmentX(JToggleButton.RIGHT_ALIGNMENT);
-
-
-        NwbJToggleButton btnFillOnly = new NwbJToggleButton("");
-        btnFillOnly.setAction(actionMap.get("doSelectFillOnly"));
-        btnFillOnly.setAlignmentX(JToggleButton.RIGHT_ALIGNMENT);
-
-
-        NwbJToggleButton btnStrokeFill = new NwbJToggleButton("");
-        btnStrokeFill.setAction(actionMap.get("doSelectStrokeFill"));
-        btnStrokeFill.setAlignmentX(JToggleButton.RIGHT_ALIGNMENT);
-
-
+        NwbJToggleButton btnStrokeOnly = createToggleButton("doSelectStrokeOnly");
+        NwbJToggleButton btnFillOnly = createToggleButton("doSelectFillOnly");
+        NwbJToggleButton btnStrokeFill = createToggleButton("doSelectStrokeFill");
         strokeNFill.add(lblStrokeNFill);
         strokeNFill.add(btnStrokeOnly);
         strokeNFill.add(btnFillOnly);
         strokeNFill.add(btnStrokeFill);
+        strokeNFill.setVisible(false);
         toolBar.add(strokeNFill);
 
         toolBar.add(new JPopupMenu.Separator());
 
-        JButton btnFgColor = new JButton("FG Color");
-        btnFgColor.setAction(actionMap.get("doChaneFgColor"));
-        btnFgColor.setAlignmentX(JButton.RIGHT_ALIGNMENT);
+        NwbColorControllButton btnFgColor = createColorButton("doChaneFgColor");
         toolBar.add(btnFgColor);
+
+        JTextField tfFgColor = new JTextField("");
+        tfFgColor.setBackground(Color.BLACK);
+        tfFgColor.setEditable(false);
+
+        toolBar.add(tfFgColor);
+
+        NwbColorControllButton btnSwitchColor = createColorButton("doSwitchColor");
+
+        toolBar.add(btnSwitchColor);
 
         JTextField tfBgColor = new JTextField("");
         tfBgColor.setColumns(5);
@@ -84,22 +88,34 @@ public class NwbVerToolBarFactory {
 
         toolBar.add(tfBgColor);
 
-        JButton btnSwitchColor = new JButton();
-        btnSwitchColor.setAction(actionMap.get("doSwitchColor"));
-        btnSwitchColor.setAlignmentX(JButton.RIGHT_ALIGNMENT);
-        toolBar.add(btnSwitchColor);
+        NwbColorControllButton btnBgColor = createColorButton("doChaneBgColor");
 
-        JTextField tfFgColor = new JTextField("");
-        tfFgColor.setBackground(Color.BLACK);
-        tfFgColor.setEditable(false);
-        toolBar.add(tfFgColor);
-
-        JButton btnBgColor = new JButton("BG Color");
-        btnBgColor.setAction(actionMap.get("doChaneBgColor"));
-        btnBgColor.setAlignmentX(JButton.RIGHT_ALIGNMENT);
+        nwbUIComponentMediator.registerColorTextFiled(btnFgColor.getActionCommand(), tfFgColor);
+        nwbUIComponentMediator.registerColorTextFiled(btnBgColor.getActionCommand(), tfBgColor);
         toolBar.add(btnBgColor);
 
         toolBar.setFloatable(false);
         return toolBar;
     }
+
+
+    private static NwbJToggleButton createToggleButton(String actionCommand) {
+        NwbJToggleButton toggleButton = new NwbJToggleButton();
+        toggleButton.setAction(actionMap.get(actionCommand));
+        toggleButton.setActionCommand(actionCommand);
+        toggleButton.setMediator(nwbUIComponentMediator);
+
+        return toggleButton;
+    }
+
+    private static NwbColorControllButton createColorButton(String actionCommand) {
+        NwbColorControllButton toggleButton = new NwbColorControllButton();
+        toggleButton.setAction(actionMap.get(actionCommand));
+        toggleButton.setActionCommand(actionCommand);
+        toggleButton.setMediator(nwbUIComponentMediator);
+
+        return toggleButton;
+    }
+
+
 }

@@ -2,6 +2,10 @@ package client.drawing.strategy;
 
 import java.awt.*;
 
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.FillOnly;
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.StrokeOnly;
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.FillNStroke;
+
 /**
  * Created with IntelliJ IDEA.
  * User: hanmoi
@@ -26,10 +30,33 @@ public class NwbRectangleStrategy extends NwbDrawingStrategy {
                     :drawingInfo.getStartPoint().y;
             int width = Math.abs((drawingInfo.getStartPoint().x - drawingInfo.getEndPoint().x));
             int height = Math.abs((drawingInfo.getStartPoint().y - drawingInfo.getEndPoint().y));
-            g2D.drawRect(x,
+
+            if(drawingInfo.getFillNStrokeMode() == StrokeOnly){
+                g2D.drawRect(x,
                         y,
                         width,
                         height);
+            }
+            else if(drawingInfo.getFillNStrokeMode() == FillOnly){
+                g2D.fillRect(x,
+                        y,
+                        width,
+                        height);
+            }
+            else if(drawingInfo.getFillNStrokeMode() == FillNStroke){
+                switchColorBtwBgNFg(g2D);
+
+                g2D.fillRect(x,
+                        y,
+                        width,
+                        height);
+                switchColorBtwBgNFg(g2D);
+
+                g2D.drawRect(x,
+                        y,
+                        width,
+                        height);
+            }
 
         }
 

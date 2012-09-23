@@ -1,23 +1,24 @@
 package client.view;
 
-import java.awt.Cursor;
 import java.awt.EventQueue;
+import java.awt.Font;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 public class a {
 
 	private JFrame frmCanvasSize;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JComboBox comboBox;
-	private JLabel lblPreset;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -52,53 +53,66 @@ public class a {
 		frmCanvasSize.setTitle("Canvas Size");
 		frmCanvasSize.setBounds(100, 100, 400, 300);
 		frmCanvasSize.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JMenuBar menuBar = new JMenuBar();
+		frmCanvasSize.setJMenuBar(menuBar);
+
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+
+		JMenuItem mntmStart = new JMenuItem("Start");
+		mnFile.add(mntmStart);
+
+		JMenuItem mntmQuit = new JMenuItem("Quit");
+		mnFile.add(mntmQuit);
 		frmCanvasSize.getContentPane().setLayout(null);
 
-		comboBox = new JComboBox();
-		comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"640 x 480", "800 x 600", "1024 x 768", "1280 x 1024", "Custom"}));
-		comboBox.setBounds(115, 18, 136, 27);
-		frmCanvasSize.getContentPane().add(comboBox);
+		JLabel lblNewLabel = new JLabel("IP:");
+		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		lblNewLabel.setBounds(16, 6, 36, 32);
+		frmCanvasSize.getContentPane().add(lblNewLabel);
 
-		JLabel lblX = new JLabel("Width:");
-		lblX.setHorizontalAlignment(SwingConstants.CENTER);
-		lblX.setBounds(44, 57, 61, 28);
-		frmCanvasSize.getContentPane().add(lblX);
+		JLabel lblPort = new JLabel("Port:");
+		lblPort.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		lblPort.setBounds(16, 50, 36, 32);
+		frmCanvasSize.getContentPane().add(lblPort);
 
 		textField = new JTextField();
-		textField.setBounds(115, 57, 84, 28);
+		textField.setBounds(49, 8, 134, 28);
 		frmCanvasSize.getContentPane().add(textField);
 		textField.setColumns(10);
 
-		JLabel lblHeight = new JLabel("Height:");
-		lblHeight.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHeight.setBounds(44, 97, 61, 28);
-		frmCanvasSize.getContentPane().add(lblHeight);
-
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(115, 97, 84, 28);
+		textField_1.setBounds(49, 52, 134, 28);
 		frmCanvasSize.getContentPane().add(textField_1);
 
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(54, 143, 84, 29);
-		frmCanvasSize.getContentPane().add(btnCancel);
+		JRadioButton rdbtnReamMachine = new JRadioButton("Ream Machine");
+		buttonGroup.add(rdbtnReamMachine);
+		rdbtnReamMachine.setBounds(16, 131, 141, 23);
+		frmCanvasSize.getContentPane().add(rdbtnReamMachine);
 
-		JButton btnOk = new JButton("OK");
-		btnOk.setBounds(175, 143, 90, 29);
-		frmCanvasSize.getContentPane().add(btnOk);
+		JRadioButton rdbtnDummyMachine = new JRadioButton("Dummy Machine");
+		buttonGroup.add(rdbtnDummyMachine);
+		rdbtnDummyMachine.setBounds(16, 151, 141, 23);
+		frmCanvasSize.getContentPane().add(rdbtnDummyMachine);
 
-		lblPreset = new JLabel("Preset:");
-		lblPreset.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPreset.setBounds(19, 22, 61, 16);
-		frmCanvasSize.getContentPane().add(lblPreset);
+		JLabel lblEyeseeingMachine = new JLabel("Eye-Seeing Machine");
+		lblEyeseeingMachine.setBounds(16, 103, 134, 28);
+		frmCanvasSize.getContentPane().add(lblEyeseeingMachine);
 
-		JLabel lblPixels = new JLabel("Pixels");
-		lblPixels.setBounds(224, 63, 61, 16);
-		frmCanvasSize.getContentPane().add(lblPixels);
+		JLabel lblSmoothingStrategy = new JLabel("Smoothing Strategy");
+		lblSmoothingStrategy.setBounds(207, 103, 134, 28);
+		frmCanvasSize.getContentPane().add(lblSmoothingStrategy);
 
-		JLabel label = new JLabel("Pixels");
-		label.setBounds(224, 103, 61, 16);
-		frmCanvasSize.getContentPane().add(label);
+		JRadioButton rdbtnNone = new JRadioButton("None");
+		buttonGroup_1.add(rdbtnNone);
+		rdbtnNone.setBounds(207, 131, 141, 23);
+		frmCanvasSize.getContentPane().add(rdbtnNone);
+
+		JRadioButton rdbtnAverageValue = new JRadioButton("Average Value");
+		buttonGroup_1.add(rdbtnAverageValue);
+		rdbtnAverageValue.setBounds(207, 151, 141, 23);
+		frmCanvasSize.getContentPane().add(rdbtnAverageValue);
 	}
 }

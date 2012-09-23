@@ -44,7 +44,6 @@ public class NwbMenuActionController {
 //        dialog.setVisible(true);
     }
 
-
     @Action
     public void doOpen(ActionEvent evt){
         File imageFile = selectImageFile(JFileChooser.OPEN_DIALOG);
@@ -53,8 +52,6 @@ public class NwbMenuActionController {
             drawble.openImage(imageFile);
         }
     }
-
-
 
     @Action
     public void doOpenRecent(ActionEvent evt){
@@ -149,6 +146,8 @@ public class NwbMenuActionController {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             file = fc.getSelectedFile();
         }
+
+        if(file.getName().lastIndexOf('.') == -1) file = new File(file.getAbsolutePath()+".png");
 
         return file;
     }

@@ -17,7 +17,7 @@ public class NwbEraseStrategy extends NwbDrawingStrategy {
     public void drawShape(Graphics2D g2D) {
         beforeDrawing(g2D);
 
-        switchColor(g2D);
+        switchColorBtwBgNFg(g2D);
         if (drawingInfo != null) {
             for (Point point : drawingInfo.getErasorPointList()) {
 
@@ -29,14 +29,9 @@ public class NwbEraseStrategy extends NwbDrawingStrategy {
                         ERASER_SIZE);
             }
         }
-        switchColor(g2D);
+        switchColorBtwBgNFg(g2D);
         afterDrawing(g2D);
     }
 
-    private void switchColor(Graphics2D g2D) {
-            Color bgColor = g2D.getBackground();
-            Color fgColor = g2D.getColor();
-            g2D.setBackground(fgColor);
-            g2D.setColor(bgColor);
-    }
+
 }

@@ -18,13 +18,14 @@ import java.util.List;
 import static client.view.ui.comp.NwbCanvas.CanvasMode;
 import static client.view.ui.comp.NwbCanvas.ShapeType;
 import static client.view.ui.comp.NwbCanvas.StrokeNFillMode;
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.*;
 
 public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
     private boolean isMousePressed = false;
     private boolean isTextSelected = false;
 
     private NwbDrawingInfo drawingInfo;
-    private ShapeType shapeType;
+    private ShapeType shapeType = ShapeType.Sketch;
     private NwbCanvas canvas;
     private NwbDrawingCanvasController controller;
     private BufferedImage canvasScreenShot;
@@ -32,14 +33,13 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
     private int strokeSize = 1;
     private Color bgColor = Color.WHITE;
     private Color fgColor = Color.BLACK;
+    private StrokeNFillMode fillNStrokeMode = StrokeOnly;
 
     public NwbCanvasUIHandler(NwbDrawingCanvasController controller) {
         this.controller = controller;
         drawingInfo = new NwbDrawingInfo();
         drawingInfo.setBgColor(bgColor);
         drawingInfo.setFgColor(fgColor);
-
-        this.shapeType = ShapeType.Sketch;
     }
 
     @Override
@@ -112,7 +112,7 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
 
     @Override
     public void setStrokeNFillMode(StrokeNFillMode fillNStroke) {
-        drawingInfo.setStrokeNFillMode(fillNStroke);
+        this.fillNStrokeMode = fillNStroke;
     }
 
     @Override
@@ -205,6 +205,7 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
         drawingInfo.setStrokeSize(strokeSize);
         drawingInfo.setBgColor(bgColor);
         drawingInfo.setFgColor(fgColor);
+        drawingInfo.setStrokeNFillMode(fillNStrokeMode);
 
         if (shapeType == ShapeType.Erase){
             addDrawingInfoForErase(e);
@@ -222,7 +223,6 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
         Point endPoint = e.getPoint();
 
         drawingInfo.addSketchPoints(startPoint, endPoint);
-
         drawingInfo.setStartPoint(startPoint);
         drawingInfo.setEndPoint(endPoint);
     }

@@ -2,8 +2,7 @@ package client.view.ui.factory;
 
 import client.controller.NwbHorToolbarActionController;
 import client.view.ui.comp.NwbJToggleButton;
-import client.view.ui.controller.NwbJToggleButtonMediator;
-import client.view.ui.controller.NwbUIMediator;
+import client.view.ui.controller.NwbUIComponentMediator;
 import org.jdesktop.application.Application;
 
 import javax.swing.*;
@@ -17,6 +16,7 @@ import javax.swing.*;
  */
 public class NwbHorToolBarFactory {
     private static ActionMap actionMap;
+    private static NwbUIComponentMediator nwbUIComponentMediator;
 
     public static void setActionMap(NwbHorToolbarActionController controller){
         actionMap = Application.getInstance()
@@ -24,47 +24,46 @@ public class NwbHorToolBarFactory {
                                .getActionMap(NwbHorToolbarActionController.class, controller);
     }
 
+    public static void setUIMediator(NwbUIComponentMediator mediator){
+        nwbUIComponentMediator = mediator;
+    }
+
     public static JToolBar getToolBar(){
-        NwbUIMediator mediator = new NwbJToggleButtonMediator();
+
         JToolBar toolBar = new JToolBar();
 
-        NwbJToggleButton btnSketch = new NwbJToggleButton("");
-        btnSketch.setAction(actionMap.get("doSketch"));
-        btnSketch.setMediator(mediator);
+        NwbJToggleButton btnSketch = createToggleButton("doSketch");
         btnSketch.setSelected(true);    //default
         toolBar.add(btnSketch);
 
-        NwbJToggleButton btnLine = new NwbJToggleButton("");
-        btnLine.setAction(actionMap.get("doLine"));
-        btnLine.setMediator(mediator);
+        NwbJToggleButton btnLine = createToggleButton("doLine");
         toolBar.add(btnLine);
 
-        NwbJToggleButton btnRect = new NwbJToggleButton("");
-        btnRect.setAction(actionMap.get("doRect"));
-        btnRect.setMediator(mediator);
+        NwbJToggleButton btnRect =  createToggleButton("doRect");
         toolBar.add(btnRect);
 
-        NwbJToggleButton btnRoundedRect = new NwbJToggleButton("");
-        btnRoundedRect.setAction(actionMap.get("doRoundedRect"));
-        btnRoundedRect.setMediator(mediator);
+        NwbJToggleButton btnRoundedRect = createToggleButton("doRoundedRect");
         toolBar.add(btnRoundedRect);
 
-        NwbJToggleButton btnErase = new NwbJToggleButton("");
-        btnErase.setAction(actionMap.get("doErase"));
-        btnErase.setMediator(mediator);
+        NwbJToggleButton btnErase = createToggleButton("doErase");
         toolBar.add(btnErase);
 
-        NwbJToggleButton btnOval = new NwbJToggleButton("");
-        btnOval.setAction(actionMap.get("doOval"));
-        btnOval.setMediator(mediator);
+        NwbJToggleButton btnOval =  createToggleButton("doOval");
         toolBar.add(btnOval);
 
-        NwbJToggleButton btnText = new NwbJToggleButton("");
-        btnText.setAction(actionMap.get("doText"));
-        btnText.setMediator(mediator);
+        NwbJToggleButton btnText =  createToggleButton("doText");
         toolBar.add(btnText);
 
         toolBar.setFloatable(false);
         return toolBar;
+    }
+
+    private static NwbJToggleButton createToggleButton(String actionCommand) {
+        NwbJToggleButton toggleButton = new NwbJToggleButton();
+        toggleButton.setAction(actionMap.get(actionCommand));
+        toggleButton.setActionCommand(actionCommand);
+        toggleButton.setMediator(nwbUIComponentMediator);
+
+        return toggleButton;
     }
 }

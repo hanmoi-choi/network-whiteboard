@@ -1,11 +1,12 @@
 package client.drawing;
 
-import client.view.ui.comp.NwbCanvas;
-
 import java.awt.*;
 import java.io.File;
 import java.util.*;
 import java.util.List;
+
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode;
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,7 +30,8 @@ public class NwbDrawingInfo implements Cloneable{
     private Font font = new Font("Arial",Font.PLAIN, 12);
     private File imageFile;
     private boolean isImageStale;
-    private NwbCanvas.StrokeNFillMode fillNStroke;
+
+    private StrokeNFillMode fillNStrokeMode;
 
     private int strokeSize = 1;
 
@@ -103,6 +105,7 @@ public class NwbDrawingInfo implements Cloneable{
         bgColor = Color.WHITE;
         fgColor = Color.BLACK;
         strokeSize = 1;
+        fillNStrokeMode = StrokeOnly;
         erasorPointList.clear();
         sketchPointList.clear();
     }
@@ -114,32 +117,6 @@ public class NwbDrawingInfo implements Cloneable{
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-        return info;
-    }
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        NwbDrawingInfo info = new NwbDrawingInfo();
-        info.startPoint = this.startPoint;
-        info.endPoint = this.endPoint;
-        info.text = this.text;
-        info.font = this.font;
-        info.imageFile = this.imageFile;
-        info.bgColor = this.bgColor;
-        info.fgColor = this.fgColor;
-        info.isImageStale = true;
-        info.strokeSize = this.strokeSize;
-
-        Iterator<Point> erasorIterator = this.erasorPointList.iterator();
-        while(erasorIterator.hasNext()){
-            info.erasorPointList.add(erasorIterator.next());
-        }
-
-        Iterator<Map<String, Point>> sketchIterator = this.sketchPointList.iterator();
-        while(sketchIterator.hasNext()){
-            info.sketchPointList.add(sketchIterator.next());
-        }
-
         return info;
     }
 
@@ -156,12 +133,11 @@ public class NwbDrawingInfo implements Cloneable{
         return this.isImageStale;
     }
 
-    public void setStrokeNFillMode(NwbCanvas.StrokeNFillMode fillNStroke) {
-        this.fillNStroke = fillNStroke;
+    public void setStrokeNFillMode(StrokeNFillMode fillNStroke) {
+        this.fillNStrokeMode = fillNStroke;
     }
-
-    public NwbCanvas.StrokeNFillMode setStrokeNFillMode() {
-        return fillNStroke;
+    public StrokeNFillMode getFillNStrokeMode() {
+        return fillNStrokeMode;
     }
 
     public void setStrokeSize(int strokeSize) {
@@ -182,5 +158,32 @@ public class NwbDrawingInfo implements Cloneable{
 
     public List<Map<String, Point>> getSketchPointList(){
         return this.sketchPointList;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        NwbDrawingInfo info = new NwbDrawingInfo();
+        info.startPoint = this.startPoint;
+        info.endPoint = this.endPoint;
+        info.text = this.text;
+        info.font = this.font;
+        info.imageFile = this.imageFile;
+        info.bgColor = this.bgColor;
+        info.fgColor = this.fgColor;
+        info.isImageStale = true;
+        info.strokeSize = this.strokeSize;
+        info.fillNStrokeMode = this.fillNStrokeMode;
+
+        Iterator<Point> erasorIterator = this.erasorPointList.iterator();
+        while(erasorIterator.hasNext()){
+            info.erasorPointList.add(erasorIterator.next());
+        }
+
+        Iterator<Map<String, Point>> sketchIterator = this.sketchPointList.iterator();
+        while(sketchIterator.hasNext()){
+            info.sketchPointList.add(sketchIterator.next());
+        }
+
+        return info;
     }
 }

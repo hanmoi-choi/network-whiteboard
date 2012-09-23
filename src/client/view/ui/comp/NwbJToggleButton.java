@@ -1,6 +1,6 @@
 package client.view.ui.comp;
 
-import client.view.ui.controller.NwbUIMediator;
+import client.view.ui.controller.NwbUIComponentMediator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,38 +14,50 @@ import java.awt.event.MouseEvent;
  * Time: 12:39 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbJToggleButton extends JToggleButton implements NwbUIMediatee {
+public class NwbJToggleButton extends JToggleButton{
 
     private ImageIcon hoverIcon;
     private ImageIcon icon;
-    private NwbUIMediator mediator;
+    private NwbUIComponentMediator mediator;
 
     public NwbJToggleButton() {
         super();
     }
 
-    @Override
-    public void setMediator(NwbUIMediator mediator) {
+    public void setMediator(NwbUIComponentMediator mediator) {
         this.mediator = mediator;
-        this.mediator.register(this);
+        if(isFillModeButton()){
+            this.mediator.registerFillModeButton(this);
+        }
+        else{
+            this.mediator.registerToolbarButton(this);
+        }
+
+        this.mediator.registerToolbarButton(this);
     }
 
     public NwbJToggleButton(String title) {
         super(title);
-//        addMouseListener();
     }
 
-    public void setHoverIcon(ImageIcon hoverIcon) {
-        this.hoverIcon = hoverIcon;
-    }
-
-    public void setIcon(ImageIcon icon) {
-        this.icon = icon;
+    public void notifyToMediator() {
+        if(isFillModeButton()){
+            this.mediator.fillModeButtonClicked(this);
+        }
+        else {
+            this.mediator.toolbarButtonClicked(this);
+        }
     }
 
     @Override
-    public void notifyToMediator() {
-        this.mediator.buttonClicked(this);
+    public void updateUI() {
+        super.updateUI();
+    }
+
+    private boolean isFillModeButton() {
+        return this.getActionCommand().equals("doSelectFillOnly")
+                || this.getActionCommand().equals("doSelectStrokeOnly")
+                || this.getActionCommand().equals("doSelectStrokeFill");
     }
 
     private void addMouseListener() {
@@ -72,8 +84,5 @@ public class NwbJToggleButton extends JToggleButton implements NwbUIMediatee {
         });
     }
 
-    @Override
-    public void updateUI() {
-        super.updateUI();
-    }
+
 }

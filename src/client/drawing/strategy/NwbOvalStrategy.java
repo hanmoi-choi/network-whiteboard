@@ -1,14 +1,10 @@
 package client.drawing.strategy;
 
 import java.awt.*;
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.FillOnly;
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.StrokeOnly;
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.FillNStroke;
 
-/**
- * Created with IntelliJ IDEA.
- * User: hanmoi
- * Date: 15/09/12
- * Time: 6:11 PM
- * To change this template use File | Settings | File Templates.
- */
 public class NwbOvalStrategy extends NwbDrawingStrategy {
 
     @Override
@@ -26,11 +22,30 @@ public class NwbOvalStrategy extends NwbDrawingStrategy {
                     :drawingInfo.getStartPoint().y;
             int width = Math.abs((drawingInfo.getStartPoint().x - drawingInfo.getEndPoint().x));
             int height = Math.abs((drawingInfo.getStartPoint().y - drawingInfo.getEndPoint().y));
-            g2D.drawOval(x,
-                         y,
-                         width,
-                         height);
 
+            if(drawingInfo.getFillNStrokeMode() == StrokeOnly){
+                g2D.drawOval(x,
+                        y,
+                        width,
+                        height);
+            }
+            else if(drawingInfo.getFillNStrokeMode() == FillOnly){
+                g2D.fillOval(x,
+                        y,
+                        width,
+                        height);
+            }
+            else if(drawingInfo.getFillNStrokeMode() == FillNStroke){
+                g2D.fillOval(x,
+                        y,
+                        width,
+                        height);
+
+                g2D.drawOval(x,
+                        y,
+                        width,
+                        height);
+            }
         }
 
         afterDrawing(g2D);

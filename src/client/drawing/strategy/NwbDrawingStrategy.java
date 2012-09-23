@@ -36,6 +36,13 @@ public abstract class NwbDrawingStrategy {
         g2D.setStroke(currentStroke);
     }
 
+    protected void switchColorBtwBgNFg(Graphics2D g2D) {
+        Color bgColor = g2D.getBackground();
+        Color fgColor = g2D.getColor();
+        g2D.setBackground(fgColor);
+        g2D.setColor(bgColor);
+    }
+
     public void setDrawingInfo(NwbDrawingInfo info) {
         this.drawingInfo = info;
     }
