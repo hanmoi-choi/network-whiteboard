@@ -13,8 +13,8 @@ import java.util.Stack;
  * To change this template use File | Settings | File Templates.
  */
 public class NwbClientModel {
-    private Stack<NwbDrawingCommand> commandStack;
-    private Stack<NwbDrawingCommand> redoStack;
+    protected Stack<NwbDrawingCommand> commandStack;
+    protected Stack<NwbDrawingCommand> redoStack;
     private NwbDrawingCanvasController subscriber;
 
     public NwbClientModel() {
@@ -27,7 +27,7 @@ public class NwbClientModel {
         updateSubscribers();
     }
 
-    private void updateSubscribers() {
+    protected void updateSubscribers() {
         subscriber.update(ImmutableList.copyOf(commandStack));
     }
 
@@ -51,7 +51,7 @@ public class NwbClientModel {
         clearCanvas();
     }
 
-    private void clearCanvas() {
+    protected void clearCanvas() {
         subscriber.update(null);
     }
 

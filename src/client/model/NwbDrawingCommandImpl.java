@@ -13,7 +13,11 @@ import java.awt.*;
  * To change this template use File | Settings | File Templates.
  */
 public class NwbDrawingCommandImpl implements NwbDrawingCommand{
-    private NwbDrawingInfo drawingInfo;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7503930033507370729L;
+	private NwbDrawingInfo drawingInfo;
     private NwbDrawingStrategy strategy;
 
     @Override

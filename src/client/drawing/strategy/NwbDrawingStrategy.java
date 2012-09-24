@@ -3,6 +3,7 @@ package client.drawing.strategy;
 import client.drawing.NwbDrawingInfo;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,8 +12,12 @@ import java.awt.*;
  * Time: 6:04 PM
  * To change this template use File | Settings | File Templates.
  */
-public abstract class NwbDrawingStrategy {
+public abstract class NwbDrawingStrategy implements Serializable {
 
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7278829595202134257L;
     protected NwbDrawingInfo drawingInfo;
     protected Color currentFgColor;
     protected Color currentBgColor;
