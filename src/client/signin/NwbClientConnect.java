@@ -150,7 +150,7 @@ public class NwbClientConnect extends JFrame {
 
 	private void initTable() {
 
-		String[] columnNames = { "Room ID", "Creator", "Peers", "Canvas Size" };
+		String[] columnNames = { "Room ID", "Room Name","Creator", "Peers" };
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setColumnIdentifiers(columnNames);
 		DefaultTableCellRenderer r = new DefaultTableCellRenderer();
@@ -175,9 +175,9 @@ public class NwbClientConnect extends JFrame {
 
 		Object[] row = new Object[columnNames.length];
 		row[0] = 1001;
-		row[1] = "Jane";
-		row[2] = 3;
-		row[3] = "819*460";
+		row[1] = "Let's rock!";
+		row[2] = "Jane";
+		row[3] = "3/10";
 		tableModel.addRow(row);
 
 	}

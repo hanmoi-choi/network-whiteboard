@@ -121,8 +121,7 @@ public class NwbClientSignIn extends JFrame {
 						System.out.println(hostname);
 						NwbRemoteModelServer server = (NwbRemoteModelServer)NwbRemoteModelConnector.connectModel(hostname);
 						NwbRemoteModel newClient = new NwbRemoteModel(userStr, server);
-						//NwbRemoteModelObserver observer = new NwbRemoteModelObserverImpl(newClient);
-						//server.connect(userStr, observer);
+						
 						NwbClientConnect connectDialog = new NwbClientConnect(server);
 						connectDialog.setVisible(true);
 
