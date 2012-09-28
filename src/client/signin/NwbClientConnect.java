@@ -3,14 +3,12 @@ package client.signin;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.swing.*;
-import javax.swing.event.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+
+import server.NwbRemoteModelServer;
 
 import client.signin.setting.NwbClientCanvasSize;
 
@@ -20,13 +18,18 @@ public class NwbClientConnect extends JFrame {
 	private final JLabel tabJoin = new JLabel();
 	private final JLabel tabCreate = new JLabel();
 	private final JTable table;
-	private JTextField portField = null;
+	private JTextField nameField = null;
+	private JTextField maxField = null;
 	private JButton createButton = null;
 	private JButton joinButton = null;
 	private JComboBox canvasSize = new JComboBox(new NwbClientCanvasSize());
+	private NwbRemoteModelServer server;
 
-	public NwbClientConnect() {
+	public NwbClientConnect(NwbRemoteModelServer server) {
 		super();
+		
+		this.server = server;
+		
 		getContentPane().setFocusCycleRoot(true);
 		setTitle("Network");
 		setBounds(100, 100, 500, 375);
@@ -34,13 +37,7 @@ public class NwbClientConnect extends JFrame {
 		tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		// tabbedPane.addChangeListener(new ChangeListener() {
-		// public void stateChanged(ChangeEvent e) {
-		// int selectedIndex = tabbedPane.getSelectedIndex();
-		// String title = tabbedPane.getTitleAt(selectedIndex);
-		// System.out.println(title);
-		// }
-		// });
+
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
 		table = new JTable();
@@ -77,54 +74,70 @@ public class NwbClientConnect extends JFrame {
 	private void setupTabCreate() {
 
 		JLabel title = new JLabel("Create a new white board");
-		title.setBounds(new Rectangle(86, 50, 300, 18));
+		title.setBounds(new Rectangle(86, 40, 300, 18));
 		title.setFont(new java.awt.Font("Calibri", Font.ITALIC, 22));
-		JLabel port = new JLabel("Port  Number");
-		port.setBounds(new Rectangle(86, 120, 80, 18));
+		JLabel name = new JLabel("Room Name");
+		name.setBounds(new Rectangle(86, 100, 80, 18));
+		JLabel roomSize = new JLabel("Room Size");
+		roomSize.setBounds(new Rectangle(86, 140, 80, 18));
 		JLabel size = new JLabel("Canvas Size");
-		size.setBounds(new Rectangle(86, 160, 80, 18));
-		canvasSize.setBounds(168, 157, 120, 25);
+		size.setBounds(new Rectangle(86, 180, 80, 18));
+		canvasSize.setBounds(168, 177, 120, 25);
 		canvasSize.setSelectedIndex(1);
 
 		tabCreate.add(title);
-		tabCreate.add(port);
+		tabCreate.add(name);
+		tabCreate.add(roomSize);
 		tabCreate.add(getCreateButton());
-		tabCreate.add(getPortField());
+		tabCreate.add(getNameField());
+		tabCreate.add(getMaxField());
 		tabCreate.add(size);
 		tabCreate.add(canvasSize);
 
 		tabbedPane.addTab("Create", tabCreate);
 	}
 
-	private JTextField getPortField() {
-		if (portField == null) {
-			portField = new JTextField();
-			portField.setBounds(new Rectangle(168, 117, 150, 25));
+	private JTextField getNameField() {
+		if (nameField == null) {
+			nameField = new JTextField();
+			nameField.setBounds(new Rectangle(168, 97, 120, 25));
 		}
-		return portField;
+		return nameField;
 	}
-
+	private JTextField getMaxField() {
+		if (maxField == null) {
+			maxField = new JTextField();
+			maxField.setBounds(new Rectangle(168, 137, 120, 25));
+		}
+		return maxField;
+	}
 	private JButton getCreateButton() {
 		if (createButton == null) {
 			createButton = new JButton("Create");
 			createButton.setBounds(new Rectangle(250, 260, 100, 25));
 			createButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if (portField.getText().equals("")) {
+					if (nameField.getText().equals("")) {
 						JOptionPane.showMessageDialog(NwbClientConnect.this,
-								"Port number cannot be null.",
-								"No port number", JOptionPane.ERROR_MESSAGE);
+								"Room name cannot be null.",
+								"No room name", JOptionPane.ERROR_MESSAGE);
 						return;
 					} else {
 						try {
-							int portNum = Integer.parseInt(portField.getText());
+							if (maxField.getText().equals("")||Integer.parseInt(maxField.getText())<1||Integer.parseInt(maxField.getText())>10) {
+								JOptionPane.showMessageDialog(NwbClientConnect.this,
+										"Room size shoule be an integer between 1 and 10.",
+										"invalid room size", JOptionPane.ERROR_MESSAGE);
+								return;
+							} 
+							
+							//server.createRoom(roominfo);
 							//
 						} catch (NumberFormatException e1) {
 							JOptionPane.showMessageDialog(
 									NwbClientConnect.this,
-									"Port number is invalid",
-									"Invalid port number",
-									JOptionPane.ERROR_MESSAGE);
+									"Room size shoule be an integer between 1 and 10.",
+									"invalid room size", JOptionPane.ERROR_MESSAGE);
 							return;
 						}
 					}
@@ -155,6 +168,10 @@ public class NwbClientConnect extends JFrame {
 			TableColumn column = table.getColumnModel().getColumn(i);
 			column.setCellEditor(readOnlyEditor);
 		}
+		
+		//List<Romm> rooms = server.getRooms(clientId);
+		//for(Room rm : rooms)
+		
 
 		Object[] row = new Object[columnNames.length];
 		row[0] = 1001;
@@ -179,7 +196,8 @@ public class NwbClientConnect extends JFrame {
 					} else {
 						int boardID = Integer.parseInt(table.getValueAt(
 								table.getSelectedRow(), 0).toString());
-
+						//server.join(clientID, roomID);
+						
 					}
 					setVisible(false);
 				}

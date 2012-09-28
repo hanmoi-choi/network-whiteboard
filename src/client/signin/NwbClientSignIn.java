@@ -7,12 +7,21 @@ import java.net.InetAddress;
 
 import javax.swing.*;
 
+import client.model.NwbRemoteModel;
+import client.model.NwbRemoteModelConnector;
+import client.model.NwbRemoteModelObserver;
+import client.model.NwbRemoteModelObserverImpl;
+
+import server.NwbRemoteModelServer;
+
 public class NwbClientSignIn extends JFrame {
 
 	private JLabel jLabel = null;
 	private JTextField userField = null;
 	private JLabel jLabel1 = null;
 	private JTextField IPField = null;
+	private JLabel jLabel2 = null;
+	private JTextField portField = null;
 	private JButton connectButton = null;
 	private static String userStr;
 	private NwbClientSignInPanel signinPanel = null;
@@ -30,9 +39,11 @@ public class NwbClientSignIn extends JFrame {
 	private NwbClientSignInPanel getLoginPanel() {
 		if (signinPanel == null) {
 			jLabel = new JLabel("Username");
-			jLabel.setBounds(new Rectangle(120, 50, 100, 18));
+			jLabel.setBounds(new Rectangle(110, 50, 100, 18));
 			jLabel1 = new JLabel("Server IP address");
-			jLabel1.setBounds(new Rectangle(120, 100, 150, 18));
+			jLabel1.setBounds(new Rectangle(110, 110, 150, 18));
+			jLabel2 = new JLabel("Port");
+			jLabel2.setBounds(new Rectangle(270, 110, 150, 18));
 
 			signinPanel = new NwbClientSignInPanel();
 			signinPanel.setLayout(null);
@@ -41,6 +52,8 @@ public class NwbClientSignIn extends JFrame {
 			signinPanel.add(getUserField(), null);
 			signinPanel.add(jLabel1, null);
 			signinPanel.add(getIPField(), null);
+			signinPanel.add(jLabel2, null);
+			signinPanel.add(getPortField(), null);
 			signinPanel.add(getConnectButton(), null);
 		}
 		return signinPanel;
@@ -49,7 +62,7 @@ public class NwbClientSignIn extends JFrame {
 	private JTextField getUserField() {
 		if (userField == null) {
 			userField = new JTextField();
-			userField.setBounds(new Rectangle(120, 70, 200, 28));
+			userField.setBounds(new Rectangle(110, 70, 220, 28));
 		}
 		return userField;
 	}
@@ -57,21 +70,23 @@ public class NwbClientSignIn extends JFrame {
 	private JTextField getIPField() {
 		if (IPField == null) {
 			IPField = new JTextField();
-			IPField.setBounds(new Rectangle(120, 120, 200, 28));
-			IPField.addKeyListener(new KeyAdapter() {
-				public void keyTyped(KeyEvent e) {
-					if (e.getKeyChar() == '\n')
-						connectButton.doClick();
-				}
-			});
+			IPField.setBounds(new Rectangle(110, 130, 150, 28));
 		}
 		return IPField;
+	}
+	
+	private JTextField getPortField() {
+		if (portField == null) {
+			portField = new JTextField();
+			portField.setBounds(new Rectangle(270, 130, 60, 28));
+		}
+		return portField;
 	}
 
 	private JButton getConnectButton() {
 		if (connectButton == null) {
 			connectButton = new JButton("Connect");
-			connectButton.setBounds(new Rectangle(175, 166, 90, 25));
+			connectButton.setBounds(new Rectangle(175, 176, 90, 25));
 			connectButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -91,8 +106,25 @@ public class NwbClientSignIn extends JFrame {
 											JOptionPane.ERROR_MESSAGE);
 							return;
 						}
+						if (portField.getText().equals("")) {
+							JOptionPane
+									.showMessageDialog(
+											NwbClientSignIn.this,
+											"Error: Server port number cannot cannot be null",
+											"No port",
+											JOptionPane.ERROR_MESSAGE);
+							return;
+						}
 						InetAddress aHost = InetAddress.getByName(IPField
 								.getText());
+						String hostname = IPField.getText()+":"+portField.getText();
+						System.out.println(hostname);
+						NwbRemoteModelServer server = (NwbRemoteModelServer)NwbRemoteModelConnector.connectModel(hostname);
+						NwbRemoteModel newClient = new NwbRemoteModel(userStr, server);
+						//NwbRemoteModelObserver observer = new NwbRemoteModelObserverImpl(newClient);
+						//server.connect(userStr, observer);
+						NwbClientConnect connectDialog = new NwbClientConnect(server);
+						connectDialog.setVisible(true);
 
 					} catch (IOException e1) {
 						JOptionPane.showMessageDialog(NwbClientSignIn.this,

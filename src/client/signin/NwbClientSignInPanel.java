@@ -7,7 +7,7 @@ public class NwbClientSignInPanel extends JPanel{
 	private Image img;
 	public NwbClientSignInPanel(){
 		super();
-		URL url = getClass().getResource("/resource/cavans.jpg");
+		URL url = getClass().getResource("resource/cavans.jpg");
 		img = new ImageIcon(url).getImage();
 	}
 	protected void paintComponent(Graphics g){
