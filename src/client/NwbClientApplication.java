@@ -1,12 +1,10 @@
 package client;
 
 import client.controller.NwbDrawingCanvasController;
-import client.controller.NwbHorToolbarActionController;
+import client.controller.NwbDrawingTypeToolbarController;
 import client.controller.NwbMenuActionController;
 import client.controller.NwbVerToolbarActionController;
 import client.model.NwbClientModel;
-import client.model.NwbRemoteModel;
-import client.model.NwbRemoteModelConnector;
 import client.view.NwbClientViewFrame;
 import client.view.ui.controller.NwbCanvasUIHandler;
 import client.view.ui.controller.NwbUIComponentMediator;
@@ -40,20 +38,21 @@ public class NwbClientApplication extends Application {
         //Controller
         NwbDrawingCanvasController drawingCanvasController = new NwbDrawingCanvasController();
         NwbMenuActionController menuActionController = new NwbMenuActionController();
-        NwbHorToolbarActionController horToolbarActionController = new NwbHorToolbarActionController();
+        NwbDrawingTypeToolbarController drawingTypeToolbarController = new NwbDrawingTypeToolbarController();
         NwbVerToolbarActionController verToolbarActionController = new NwbVerToolbarActionController();
 
         NwbMenuFactory.setActionMap(menuActionController);
-        NwbHorToolBarFactory.setActionMap(horToolbarActionController);
+        NwbHorToolBarFactory.setActionMap(drawingTypeToolbarController);
         NwbHorToolBarFactory.setUIMediator(mediator);
         NwbVerToolBarFactory.setActionMap(verToolbarActionController);
         NwbVerToolBarFactory.setUIMediator(mediator);
+
         //View
         NwbCanvasUIHandler mouseAdapter = new NwbCanvasUIHandler(drawingCanvasController);
         NwbClientViewFrame view = new NwbClientViewFrame(mouseAdapter);
         drawingCanvasController.setCanvasDrawble(mouseAdapter);
         menuActionController.setCanvasDrawble(mouseAdapter);
-        horToolbarActionController.setCanvasDrawble(mouseAdapter);
+        drawingTypeToolbarController.setCanvasDrawble(mouseAdapter);
         verToolbarActionController.setCanvasDrawble(mouseAdapter);
 
         //Model
@@ -68,7 +67,7 @@ public class NwbClientApplication extends Application {
 		*/
         drawingCanvasController.setModel(model);
         menuActionController.setModel(model);
-        horToolbarActionController.setModel(model);
+        drawingTypeToolbarController.setModel(model);
         verToolbarActionController.setModel(model);
 
         view.showView();

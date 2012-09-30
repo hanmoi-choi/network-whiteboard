@@ -12,7 +12,8 @@ import java.awt.*;
 
 
 public class NwbClientViewFrame {
-
+    private static final int CANVAS_WIDTH = 640;
+    private static final int CANVAS_HEIGHT = 480;
     private JFrame frame;
     private JMenuItem jmiNew;
     private JMenu jmFile;
@@ -28,10 +29,6 @@ public class NwbClientViewFrame {
     private JSplitPane upperSplitPane;
     private JToolBar verToolBar;
 
-
-    /**
-     * Create the application.
-     */
     public NwbClientViewFrame(NwbCanvasUIHandler uiHandler) {
         this.uiHandler = uiHandler;
         initialize();
@@ -112,10 +109,10 @@ public class NwbClientViewFrame {
     private void initDrawingCanvas() {
 
         canvas = new NwbCanvas();
-        canvas.setPreferredSize(new Dimension(640, 480));
-        canvas.setBounds(0, 0, 640, 480);
+        canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
+        canvas.setBounds(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.WHITE);
-        canvas.setSize(640,480);
+        canvas.setSize(CANVAS_WIDTH,CANVAS_HEIGHT);
         canvas.addMouseListener(uiHandler);
         canvas.addMouseMotionListener(uiHandler);
         upperSplitPane.setLeftComponent(canvas);

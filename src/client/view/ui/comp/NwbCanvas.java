@@ -17,7 +17,9 @@ public class NwbCanvas extends Canvas {
 
 
     public enum CanvasMode {Halt, Draw}
-    public enum ShapeType {Rectangle, Line, Text, Erase, Oval, RoundedRectangle, Sketch, OpenImage}
+    public enum ShapeType {Rectangle, Line, Text, Erase, Oval,
+                            RoundedRectangle, Sketch, OpenImage,
+                            FillWithFGColor, FillWithBGColor}
     public enum StrokeNFillMode {FillOnly, StrokeOnly, FillNStroke}
 
     private NwbDrawingInfo drawingInfo;
@@ -41,6 +43,9 @@ public class NwbCanvas extends Canvas {
         strategyMap.put(ShapeType.Erase, new NwbEraseStrategy());
         strategyMap.put(ShapeType.Sketch, new NwbSketchStrategy());
         strategyMap.put(ShapeType.OpenImage, new NwbOpenImageStrategy());
+        strategyMap.put(ShapeType.FillWithFGColor, new NwbFillCanvasWithFGColorStrategy());
+        strategyMap.put(ShapeType.FillWithBGColor, new NwbFillCanvasWithBGColorStrategy());
+
     }
 
     public void setBgColor(Color bgColor) {

@@ -1,6 +1,6 @@
 package client.view.ui.factory;
 
-import client.controller.NwbHorToolbarActionController;
+import client.controller.NwbDrawingTypeToolbarController;
 import client.view.ui.comp.NwbJToggleButton;
 import client.view.ui.controller.NwbUIComponentMediator;
 import org.jdesktop.application.Application;
@@ -18,10 +18,10 @@ public class NwbHorToolBarFactory {
     private static ActionMap actionMap;
     private static NwbUIComponentMediator nwbUIComponentMediator;
 
-    public static void setActionMap(NwbHorToolbarActionController controller){
+    public static void setActionMap(NwbDrawingTypeToolbarController controller){
         actionMap = Application.getInstance()
                                .getContext()
-                               .getActionMap(NwbHorToolbarActionController.class, controller);
+                               .getActionMap(NwbDrawingTypeToolbarController.class, controller);
     }
 
     public static void setUIMediator(NwbUIComponentMediator mediator){
@@ -53,6 +53,12 @@ public class NwbHorToolBarFactory {
 
         NwbJToggleButton btnText =  createToggleButton("doText");
         toolBar.add(btnText);
+
+        NwbJToggleButton btnFillWithFG =  createToggleButton("doFillWithFGColor");
+        toolBar.add(btnFillWithFG);
+
+        NwbJToggleButton btnFillWithBG =  createToggleButton("doFillWithBGColor");
+        toolBar.add(btnFillWithBG);
 
         toolBar.setFloatable(false);
         return toolBar;

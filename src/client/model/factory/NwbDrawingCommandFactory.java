@@ -52,6 +52,14 @@ public class NwbDrawingCommandFactory {
 
             command.setDrawingStrategy(new NwbOpenImageStrategy());
         }
+        else if(type == ShapeType.FillWithFGColor){
+
+            command.setDrawingStrategy(new NwbFillCanvasWithFGColorStrategy());
+        }
+        else if(type == ShapeType.FillWithBGColor){
+
+            command.setDrawingStrategy(new NwbFillCanvasWithBGColorStrategy());
+        }
         return command;
     }
 }

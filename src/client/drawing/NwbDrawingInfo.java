@@ -22,6 +22,8 @@ public class NwbDrawingInfo implements Cloneable, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 3155855877520331685L;
+
+    private Point canvasSize;
     private Color bgColor = Color.WHITE;
     private Color fgColor = Color.BLACK;
 
@@ -107,6 +109,7 @@ public class NwbDrawingInfo implements Cloneable, Serializable {
         text = null;
         font = new Font("Arial",Font.PLAIN, 12);
         imageFile = null;
+        canvasSize = null;
         bgColor = Color.WHITE;
         fgColor = Color.BLACK;
         strokeSize = 1;
@@ -165,6 +168,14 @@ public class NwbDrawingInfo implements Cloneable, Serializable {
         return this.sketchPointList;
     }
 
+    public Point getCanvasSize() {
+        return canvasSize;
+    }
+
+    public void setCanvasSize(Point canvasSize) {
+        this.canvasSize = canvasSize;
+    }
+
     @Override
     protected Object clone() throws CloneNotSupportedException {
         NwbDrawingInfo info = new NwbDrawingInfo();
@@ -178,6 +189,7 @@ public class NwbDrawingInfo implements Cloneable, Serializable {
         info.isImageStale = true;
         info.strokeSize = this.strokeSize;
         info.fillNStrokeMode = this.fillNStrokeMode;
+        info.canvasSize = this.canvasSize;
 
         Iterator<Point> erasorIterator = this.erasorPointList.iterator();
         while(erasorIterator.hasNext()){

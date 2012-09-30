@@ -37,6 +37,7 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
 
     public NwbCanvasUIHandler(NwbDrawingCanvasController controller) {
         this.controller = controller;
+
         drawingInfo = new NwbDrawingInfo();
         drawingInfo.setBgColor(bgColor);
         drawingInfo.setFgColor(fgColor);
@@ -89,6 +90,7 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
     @Override
     public void newCanvas() {
         drawingInfo.clearInfo();
+
         canvas.setDrawingInfo(drawingInfo);
     }
 
@@ -134,6 +136,7 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
 
     public void setCanvas(NwbCanvas canvas){
         this.canvas = canvas;
+        drawingInfo.setCanvasSize(new Point(canvas.getWidth(), canvas.getHeight()));
         canvas.setDrawingInfo(drawingInfo);
     }
 
@@ -206,6 +209,7 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
         drawingInfo.setBgColor(bgColor);
         drawingInfo.setFgColor(fgColor);
         drawingInfo.setStrokeNFillMode(fillNStrokeMode);
+        drawingInfo.setCanvasSize(new Point(canvas.getWidth(), canvas.getHeight()));
 
         if (shapeType == ShapeType.Erase){
             addDrawingInfoForErase(e);

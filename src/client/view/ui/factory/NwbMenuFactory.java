@@ -16,6 +16,9 @@ public final class NwbMenuFactory{
 
 	public static JMenu createFileMenu() {
 
+        JLabel label = new JLabel();
+        JButton button = new JButton();
+
         JMenu jmFile = new JMenu("File");
 
 		JMenuItem jmiNew = new JMenuItem("New");
@@ -25,10 +28,6 @@ public final class NwbMenuFactory{
 		JMenuItem jmiOpen = new JMenuItem("Open");
         jmiOpen.setAction(actionMap.get("doOpen"));
 		jmFile.add(jmiOpen);
-
-		JMenu jmiOpenRecent = new JMenu("Open Recent");
-        jmiOpenRecent.setAction(actionMap.get("doOpenRecent"));
-		jmFile.add(jmiOpenRecent);
 
 		JSeparator sprFileFirst = new JSeparator();
 		jmFile.add(sprFileFirst);

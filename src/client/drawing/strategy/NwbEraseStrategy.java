@@ -16,8 +16,8 @@ public class NwbEraseStrategy extends NwbDrawingStrategy {
     @Override
     public void drawShape(Graphics2D g2D) {
         beforeDrawing(g2D);
-
         switchColorBtwBgNFg(g2D);
+
         if (drawingInfo != null) {
             for (Point point : drawingInfo.getErasorPointList()) {
 

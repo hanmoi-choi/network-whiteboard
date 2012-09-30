@@ -16,13 +16,13 @@ import java.util.Properties;
  * Time: 9:56 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbHorToolbarActionController {
+public class NwbDrawingTypeToolbarController {
 
     private CanvasDrawble drawble;
     private NwbClientModel model;
     private Properties fileActionProperty;
 
-    public NwbHorToolbarActionController(){
+    public NwbDrawingTypeToolbarController(){
 
     }
 
@@ -74,6 +74,17 @@ public class NwbHorToolbarActionController {
         drawble.setShapeType(NwbCanvas.ShapeType.Text);
     }
 
+    @Action
+    public void doFillWithBGColor(ActionEvent evt){
+        notifyToToggleMediator(evt);
+        drawble.setShapeType(NwbCanvas.ShapeType.FillWithBGColor);
+    }
+
+    @Action
+    public void doFillWithFGColor(ActionEvent evt){
+        notifyToToggleMediator(evt);
+        drawble.setShapeType(NwbCanvas.ShapeType.FillWithFGColor);
+    }
     private void notifyToToggleMediator(ActionEvent evt) {
         NwbJToggleButton button = (NwbJToggleButton)evt.getSource();
         button.notifyToMediator();
