@@ -1,10 +1,10 @@
 package client.view;
 
 import client.view.ui.comp.NwbCanvas;
-import client.view.ui.controller.NwbCanvasUIHandler;
+import client.view.ui.controller.NwbCanvasMouseEventHandler;
+import client.view.ui.factory.NwbDrawingOptionFactory;
 import client.view.ui.factory.NwbHorToolBarFactory;
 import client.view.ui.factory.NwbMenuFactory;
-import client.view.ui.factory.NwbVerToolBarFactory;
 import org.jdesktop.application.ApplicationContext;
 
 import javax.swing.*;
@@ -22,15 +22,14 @@ public class NwbClientViewFrame {
     private JToolBar horToolBar;
     private NwbCanvas canvas;
     private ApplicationContext ctx;
-    private NwbCanvasUIHandler uiHandler;
+    private NwbCanvasMouseEventHandler mouseEventHandler;
     private Container contentPane;
     private JSplitPane verticlaSplitPane;
-    private JSplitPane upperRightSplitPane;
     private JSplitPane upperSplitPane;
-    private JToolBar verToolBar;
+    private JPanel drawingOptionPanel;
 
-    public NwbClientViewFrame(NwbCanvasUIHandler uiHandler) {
-        this.uiHandler = uiHandler;
+    public NwbClientViewFrame(NwbCanvasMouseEventHandler mouseEventHandler) {
+        this.mouseEventHandler = mouseEventHandler;
         initialize();
     }
 
@@ -101,9 +100,9 @@ public class NwbClientViewFrame {
 
     private void initToolbar() {
         horToolBar = NwbHorToolBarFactory.getToolBar();
-        verToolBar = NwbVerToolBarFactory.getToolBar();
+        drawingOptionPanel = NwbDrawingOptionFactory.getToolBar();
         frame.getContentPane().add(horToolBar, BorderLayout.NORTH);
-        frame.getContentPane().add(verToolBar, BorderLayout.WEST);
+        frame.getContentPane().add(drawingOptionPanel, BorderLayout.WEST);
     }
 
     private void initDrawingCanvas() {
@@ -113,10 +112,10 @@ public class NwbClientViewFrame {
         canvas.setBounds(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.WHITE);
         canvas.setSize(CANVAS_WIDTH,CANVAS_HEIGHT);
-        canvas.addMouseListener(uiHandler);
-        canvas.addMouseMotionListener(uiHandler);
+        canvas.addMouseListener(mouseEventHandler);
+        canvas.addMouseMotionListener(mouseEventHandler);
         upperSplitPane.setLeftComponent(canvas);
-        uiHandler.setCanvas(canvas);
+        mouseEventHandler.setCanvas(canvas);
     }
 
     public JFrame getFrame() {

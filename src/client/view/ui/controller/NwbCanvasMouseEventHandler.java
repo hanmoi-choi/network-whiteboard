@@ -20,7 +20,7 @@ import static client.view.ui.comp.NwbCanvas.ShapeType;
 import static client.view.ui.comp.NwbCanvas.StrokeNFillMode;
 import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.*;
 
-public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
+public class NwbCanvasMouseEventHandler extends MouseAdapter implements CanvasDrawble {
     private boolean isMousePressed = false;
     private boolean isTextSelected = false;
 
@@ -30,12 +30,12 @@ public class NwbCanvasUIHandler extends MouseAdapter implements CanvasDrawble {
     private NwbDrawingCanvasController controller;
     private BufferedImage canvasScreenShot;
 
-    private int strokeSize = 1;
+    private int strokeSize = 5;
     private Color bgColor = Color.WHITE;
     private Color fgColor = Color.BLACK;
     private StrokeNFillMode fillNStrokeMode = StrokeOnly;
 
-    public NwbCanvasUIHandler(NwbDrawingCanvasController controller) {
+    public NwbCanvasMouseEventHandler(NwbDrawingCanvasController controller) {
         this.controller = controller;
 
         drawingInfo = new NwbDrawingInfo();

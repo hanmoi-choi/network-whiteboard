@@ -9,6 +9,8 @@ import org.jdesktop.application.Action;
 import java.awt.event.ActionEvent;
 import java.util.Properties;
 
+
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.*;
 /**
  * Created with IntelliJ IDEA.
  * User: hanmoi
@@ -38,6 +40,7 @@ public class NwbDrawingTypeToolbarController {
     public void doSketch(ActionEvent evt){
         notifyToToggleMediator(evt);
         drawble.setShapeType(NwbCanvas.ShapeType.Sketch);
+
     }
 
     @Action
@@ -50,16 +53,19 @@ public class NwbDrawingTypeToolbarController {
     public void doRect(ActionEvent evt){
         notifyToToggleMediator(evt);
         drawble.setShapeType(NwbCanvas.ShapeType.Rectangle);
+        drawble.setStrokeNFillMode(StrokeOnly);
     }
     @Action
     public void doRoundedRect(ActionEvent evt){
         notifyToToggleMediator(evt);
         drawble.setShapeType(NwbCanvas.ShapeType.RoundedRectangle);
+        drawble.setStrokeNFillMode(StrokeOnly);
     }
     @Action
     public void doOval(ActionEvent evt){
         notifyToToggleMediator(evt);
         drawble.setShapeType(NwbCanvas.ShapeType.Oval);
+        drawble.setStrokeNFillMode(StrokeOnly);
     }
 
     @Action

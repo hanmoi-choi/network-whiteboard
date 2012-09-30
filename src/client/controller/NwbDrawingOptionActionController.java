@@ -2,7 +2,6 @@ package client.controller;
 
 import client.model.NwbClientModel;
 import client.view.CanvasDrawble;
-import client.view.ui.comp.NwbCanvas;
 import client.view.ui.comp.NwbColorControllButton;
 import client.view.ui.comp.NwbJToggleButton;
 import org.jdesktop.application.Action;
@@ -12,6 +11,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Properties;
 
+import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: hanmoi
@@ -19,13 +20,13 @@ import java.util.Properties;
  * Time: 9:56 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbVerToolbarActionController {
+public class NwbDrawingOptionActionController {
 
     private CanvasDrawble drawble;
     private NwbClientModel model;
     private Properties fileActionProperty;
 
-    public NwbVerToolbarActionController(){
+    public NwbDrawingOptionActionController(){
 
     }
 
@@ -39,8 +40,8 @@ public class NwbVerToolbarActionController {
 
     @Action
     public void doAdjustStroke(ActionEvent evt){
-        JComboBox<Integer> comboBox = (JComboBox<Integer>)evt.getSource();
-        int strokeSize = comboBox.getItemAt(comboBox.getSelectedIndex()).intValue();
+        JSlider slider = (JSlider) evt.getSource();
+        int strokeSize =  slider.getValue();
         drawble.setStroke(strokeSize);
     }
 
@@ -72,19 +73,19 @@ public class NwbVerToolbarActionController {
 
     @Action
     public void doSelectStrokeOnly(ActionEvent evt){
-        drawble.setStrokeNFillMode(NwbCanvas.StrokeNFillMode.StrokeOnly);
+        drawble.setStrokeNFillMode(StrokeOnly);
         notifyToToggleMediator(evt);
     }
 
     @Action
     public void doSelectFillOnly(ActionEvent evt){
-        drawble.setStrokeNFillMode(NwbCanvas.StrokeNFillMode.FillOnly);
+        drawble.setStrokeNFillMode(FillOnly);
         notifyToToggleMediator(evt);
     }
 
     @Action
     public void doSelectStrokeFill(ActionEvent evt){
-        drawble.setStrokeNFillMode(NwbCanvas.StrokeNFillMode.FillNStroke);
+        drawble.setStrokeNFillMode(FillNStroke);
         notifyToToggleMediator(evt);
     }
 

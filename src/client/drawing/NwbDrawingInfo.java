@@ -40,7 +40,7 @@ public class NwbDrawingInfo implements Cloneable, Serializable {
 
     private StrokeNFillMode fillNStrokeMode;
 
-    private int strokeSize = 1;
+    private int strokeSize = 5;
 
 
     public NwbDrawingInfo(){
@@ -112,7 +112,7 @@ public class NwbDrawingInfo implements Cloneable, Serializable {
         canvasSize = null;
         bgColor = Color.WHITE;
         fgColor = Color.BLACK;
-        strokeSize = 1;
+        strokeSize = 5;
         fillNStrokeMode = StrokeOnly;
         erasorPointList.clear();
         sketchPointList.clear();

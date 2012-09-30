@@ -36,11 +36,12 @@ public class NwbOvalStrategy extends NwbDrawingStrategy {
                         height);
             }
             else if(drawingInfo.getFillNStrokeMode() == FillNStroke){
+                switchColorBtwBgNFg(g2D);
                 g2D.fillOval(x,
                         y,
                         width,
                         height);
-
+                switchColorBtwBgNFg(g2D);
                 g2D.drawOval(x,
                         y,
                         width,

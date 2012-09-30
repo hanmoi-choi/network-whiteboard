@@ -51,12 +51,14 @@ public class NwbRoundedRectangleStrategy extends NwbDrawingStrategy {
                         ARC_HEIGHT);
             }
             else if(drawingInfo.getFillNStrokeMode() == FillNStroke){
+                switchColorBtwBgNFg(g2D);
                 g2D.fillRoundRect(x,
                         y,
                         width,
                         height,
                         ARC_WIDTH,
                         ARC_HEIGHT);
+                switchColorBtwBgNFg(g2D);
                 g2D.drawRoundRect(x,
                         y,
                         width,

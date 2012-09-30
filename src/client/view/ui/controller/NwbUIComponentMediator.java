@@ -43,6 +43,7 @@ public class NwbUIComponentMediator {
 
         for(NwbJToggleButton button : toolbarToggleButtonList){
             if(button != buttonPressed) button.setSelected(false);
+            if(button == buttonPressed) button.setSelected(true);
         }
     }
 
@@ -50,6 +51,7 @@ public class NwbUIComponentMediator {
 
         for(NwbJToggleButton button : fillModeToggleButtonList){
             if(button != buttonPressed) button.setSelected(false);
+            if(button == buttonPressed) button.setSelected(true);
         }
     }
 
