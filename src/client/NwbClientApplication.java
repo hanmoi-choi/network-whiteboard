@@ -5,6 +5,8 @@ import client.controller.NwbHorToolbarActionController;
 import client.controller.NwbMenuActionController;
 import client.controller.NwbVerToolbarActionController;
 import client.model.NwbClientModel;
+import client.model.NwbRemoteModel;
+import client.model.NwbRemoteModelConnector;
 import client.view.NwbClientViewFrame;
 import client.view.ui.controller.NwbCanvasUIHandler;
 import client.view.ui.controller.NwbUIComponentMediator;
@@ -21,6 +23,15 @@ import org.jdesktop.application.Application;
  * To change this template use File | Settings | File Templates.
  */
 public class NwbClientApplication extends Application {
+	
+	// Test line for make a unique username
+	String user="test";
+	protected void initialize(String[] args)
+	{
+		if(args.length != 0)
+			user=args[0];
+	}
+	
     @Override
     protected void startup() {
         //UI Component Mediator
@@ -47,6 +58,14 @@ public class NwbClientApplication extends Application {
 
         //Model
         NwbClientModel model = new NwbClientModel();
+		
+		/* RemoteModel test.. Don't need it later		
+        NwbClientModel model = new NwbRemoteModel(user, 
+        		NwbRemoteModelConnector.connectModel(
+        				"localhost:30010"
+        				//"holly.csse.unimelb.edu.au:30010"
+        				));
+		*/
         drawingCanvasController.setModel(model);
         menuActionController.setModel(model);
         horToolbarActionController.setModel(model);

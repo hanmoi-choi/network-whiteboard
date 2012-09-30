@@ -2,6 +2,7 @@ package client.drawing;
 
 import java.awt.*;
 import java.io.File;
+import java.io.Serializable;
 import java.util.*;
 import java.util.List;
 
@@ -15,8 +16,12 @@ import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.*;
  * Time: 6:25 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbDrawingInfo implements Cloneable{
+public class NwbDrawingInfo implements Cloneable, Serializable {
 
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3155855877520331685L;
     private Color bgColor = Color.WHITE;
     private Color fgColor = Color.BLACK;
 
