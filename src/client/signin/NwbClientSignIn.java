@@ -8,11 +8,10 @@ import java.net.InetAddress;
 import javax.swing.*;
 
 import client.model.NwbRemoteModel;
-import client.model.NwbRemoteModelConnector;
-import client.model.NwbRemoteModelObserver;
+import client.model.room.NwbClientConnector;
 import client.model.NwbRemoteModelObserverImpl;
 
-import server.NwbRemoteModelServer;
+import server.NwbServerGate;
 
 public class NwbClientSignIn extends JFrame {
 
@@ -119,8 +118,8 @@ public class NwbClientSignIn extends JFrame {
 								.getText());
 						String hostname = IPField.getText()+":"+portField.getText();
 						System.out.println(hostname);
-						NwbRemoteModelServer server = (NwbRemoteModelServer)NwbRemoteModelConnector.connectModel(hostname);
-						NwbRemoteModel newClient = new NwbRemoteModel(userStr, server);
+						NwbServerGate server = (NwbServerGate)NwbClientConnector.connectServer(hostname);
+						//NwbRemoteModel newClient = new NwbRemoteModel(userStr, server);
 						
 						NwbClientConnect connectDialog = new NwbClientConnect(server);
 						connectDialog.setVisible(true);

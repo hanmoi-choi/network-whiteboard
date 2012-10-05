@@ -5,7 +5,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Stack;
 
-import server.NwbRemoteModelServer;
+import server.NwbUserData;
+import server.NwbUserDataSecure;
+import server.room.NwbServerRemoteModel;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,43 +17,47 @@ import server.NwbRemoteModelServer;
  * To change this template use File | Settings | File Templates.
  */
 public class NwbRemoteModel extends NwbClientModel {
-	private String user;
 	private Stack<Integer> commandIdStack;
-	private Stack<String> commandUserStack;
+	private Stack<NwbUserData> commandUserStack;	// who is in charge of the command.
 	
-	private NwbRemoteModelServer server;
-    NwbRemoteModelObserverImpl adaptor;
+	private NwbUserDataSecure user;
+	
+	private NwbServerRemoteModel server;
+    NwbRemoteModelObserverImpl observer;
 
-    public NwbRemoteModel(String username, NwbRemoteModelServer server) 
+    public NwbRemoteModel() 
     {
         super();
         
-        user=username;
-        commandUserStack = new Stack<String>();
+        commandUserStack = new Stack<NwbUserData>();
         commandIdStack = new Stack<Integer>();
-        
+    }
+    
+    public void startRemoteMode(NwbUserDataSecure user, NwbServerRemoteModel server)
+    {
+        this.user = new NwbUserDataSecure(user);
         this.server = server;
         
 		try {
-			adaptor = new NwbRemoteModelObserverImpl(this);
-	        server.connect(user, adaptor);
+			observer = new NwbRemoteModelObserverImpl(this);
+	        server.bindObserver(user, observer);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
     
-    public void disconnect()
+    public void stop()
     {
     	try {
-			server.disconnect(this.user);
+			server.removeClient(this.user);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
     	try {
-			UnicastRemoteObject.unexportObject(this.adaptor, true);
+			UnicastRemoteObject.unexportObject(this.observer, true);
 		} catch (NoSuchObjectException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -115,7 +121,7 @@ public class NwbRemoteModel extends NwbClientModel {
     	return ret;
     }
     
-    public NwbDrawingCommand removeCommandFromClient(String user)
+    public NwbDrawingCommand removeCommandFromClient(NwbUserData user)
     {
     	int index = commandUserStack.lastIndexOf(user);
     	
@@ -135,7 +141,7 @@ public class NwbRemoteModel extends NwbClientModel {
     	return ret;
     }
     
-    public void addCommandFromServer(int commandId, String user, NwbDrawingCommand command)
+    public void addCommandFromServer(int commandId, NwbUserData user, NwbDrawingCommand command)
     {
     	addCommand(commandId, user, command);
     	super.updateSubscribers();
@@ -149,7 +155,7 @@ public class NwbRemoteModel extends NwbClientModel {
     
 
     // Internal methods
-    private synchronized void addCommand(int commandId, String user, NwbDrawingCommand command)
+    private synchronized void addCommand(int commandId, NwbUserData user, NwbDrawingCommand command)
     {
     	synchronized(commandStack)
     	{
@@ -173,7 +179,7 @@ public class NwbRemoteModel extends NwbClientModel {
         return ret;
     }
     
-    private synchronized void addCommandInternal(int commandId, String user, NwbDrawingCommand command)
+    private synchronized void addCommandInternal(int commandId, NwbUserData user, NwbDrawingCommand command)
     {
     	commandIdStack.push(commandId);
     	commandUserStack.push(user);

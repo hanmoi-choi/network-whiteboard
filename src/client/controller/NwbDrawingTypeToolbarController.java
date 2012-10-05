@@ -18,7 +18,7 @@ import static client.view.ui.comp.NwbCanvas.StrokeNFillMode.*;
  * Time: 9:56 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbDrawingTypeToolbarController {
+public class NwbDrawingTypeToolbarController implements NwbController {
 
     private CanvasDrawble drawble;
     private NwbClientModel model;

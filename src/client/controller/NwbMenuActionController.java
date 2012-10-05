@@ -18,7 +18,7 @@ import java.io.File;
  * Time: 9:56 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbMenuActionController {
+public class NwbMenuActionController implements NwbController {
 
     private CanvasDrawble drawble;
     private NwbClientModel model;

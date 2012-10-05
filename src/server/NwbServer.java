@@ -5,7 +5,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 
 public class NwbServer {
-	public static final String NWB_SERVICE_MODEL_NAME = "NwbServiceModel";
+	public static final String NWB_SERVICE_NAME = "NwbService";
 	
 	public void startModelService(String hostname)
 	{
@@ -14,8 +14,9 @@ public class NwbServer {
 		System.out.println(this.getClass().getProtectionDomain().getCodeSource().getLocation().toString());
 		
 		try {
-			NwbRemoteModelServer serverModel = new NwbRemoteModelServerImpl();
-			Naming.rebind("rmi://"+hostname+"/"+NWB_SERVICE_MODEL_NAME, serverModel);
+			NwbServerGate server = new NwbServerGateImpl();
+			//NwbRemoteModelServer server = new NwbRemoteModelServerImpl();
+			Naming.rebind("rmi://"+hostname+"/"+NWB_SERVICE_NAME, server);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

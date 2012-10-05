@@ -14,5 +14,7 @@
 	<classpathentry kind="lib" path="libs/mockito-all-1.9.0.jar"/>
 	<classpathentry kind="lib" path="libs/testng-6.7.jar"/>
 	<classpathentry kind="lib" path="libs/testng.jar"/>
+	<classpathentry kind="lib" path="libs/jfontchooser-1.0.5.jar"/>
+	<classpathentry kind="lib" path="libs/swing-worker-1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

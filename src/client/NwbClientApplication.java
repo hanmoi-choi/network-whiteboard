@@ -1,10 +1,12 @@
 package client;
 
+import client.controller.NwbControllerFactory;
 import client.controller.NwbDrawingCanvasController;
 import client.controller.NwbDrawingOptionActionController;
 import client.controller.NwbDrawingTypeToolbarController;
 import client.controller.NwbMenuActionController;
 import client.model.NwbClientModel;
+import client.model.factory.NwbClientModelFactory;
 import client.view.NwbClientViewFrame;
 import client.view.ui.controller.NwbCanvasMouseEventHandler;
 import client.view.ui.controller.NwbUIComponentMediator;
@@ -23,11 +25,11 @@ import org.jdesktop.application.Application;
 public class NwbClientApplication extends Application {
 	
 	// Test line for make a unique username
-	String user="test";
+	String username="test";
 	protected void initialize(String[] args)
 	{
 		if(args.length != 0)
-			user=args[0];
+			username=args[0];
 	}
 	
     @Override
@@ -36,10 +38,25 @@ public class NwbClientApplication extends Application {
         NwbUIComponentMediator mediator = new NwbUIComponentMediator();
 
         //Controller
+        /*
         NwbDrawingCanvasController drawingCanvasController = new NwbDrawingCanvasController();
         NwbMenuActionController menuActionController = new NwbMenuActionController();
         NwbDrawingTypeToolbarController drawingTypeToolbarController = new NwbDrawingTypeToolbarController();
         NwbDrawingOptionActionController drawingOptionActionController = new NwbDrawingOptionActionController();
+		*/
+        
+        NwbDrawingCanvasController drawingCanvasController =
+        		(NwbDrawingCanvasController) NwbControllerFactory.createController(
+        				NwbControllerFactory.ControllerType.DrawingConvas);
+        NwbMenuActionController menuActionController = 
+        		(NwbMenuActionController) NwbControllerFactory.createController(
+        				NwbControllerFactory.ControllerType.MenuAction);
+        NwbDrawingTypeToolbarController drawingTypeToolbarController = 
+        		(NwbDrawingTypeToolbarController) NwbControllerFactory.createController(
+        				NwbControllerFactory.ControllerType.DrawingTypeToolbar);
+        NwbDrawingOptionActionController drawingOptionActionController = 
+        		(NwbDrawingOptionActionController) NwbControllerFactory.createController(
+        				NwbControllerFactory.ControllerType.DrawingOptionAction);
 
         NwbMenuFactory.setActionMap(menuActionController);
         NwbHorToolBarFactory.setActionMap(drawingTypeToolbarController);
@@ -56,22 +73,19 @@ public class NwbClientApplication extends Application {
         drawingOptionActionController.setCanvasDrawble(mouseAdapter);
 
         //Model
-        NwbClientModel model = new NwbClientModel();
-		
-		/* RemoteModel test.. Don't need it later		
-        NwbClientModel model = new NwbRemoteModel(user, 
-        		NwbRemoteModelConnector.connectModel(
-        				"localhost:30010"
-        				//"holly.csse.unimelb.edu.au:30010"
-        				));
-		*/
+        NwbClientModel model = NwbClientModelFactory.createModelFactory(false);
+        NwbControllerFactory.setModel(model);
+        /*
         drawingCanvasController.setModel(model);
         menuActionController.setModel(model);
         drawingTypeToolbarController.setModel(model);
         drawingOptionActionController.setModel(model);
+        */
 
         view.showView();
 
+        // Remote mode test!
+        //NwbClientTest.startTest(username);
     }
 
     /**

@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import server.NwbRemoteModelServer;
+import server.NwbServerGate;
 
 import client.signin.setting.NwbClientCanvasSize;
 
@@ -23,9 +23,9 @@ public class NwbClientConnect extends JFrame {
 	private JButton createButton = null;
 	private JButton joinButton = null;
 	private JComboBox canvasSize = new JComboBox(new NwbClientCanvasSize());
-	private NwbRemoteModelServer server;
+	private NwbServerGate server;
 
-	public NwbClientConnect(NwbRemoteModelServer server) {
+	public NwbClientConnect(NwbServerGate server) {
 		super();
 		
 		this.server = server;

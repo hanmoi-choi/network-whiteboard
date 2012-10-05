@@ -14,7 +14,7 @@ import java.util.Properties;
  * Time: 9:56 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NwbDrawingCanvasController {
+public class NwbDrawingCanvasController implements NwbController {
 
     private CanvasDrawble drawble;
     private NwbClientModel model;
