@@ -32,4 +32,11 @@ public class NwbClientRoomObserverImpl
 	{
 		this.client.manageJoinRequest(joinUser);
 	}
+
+	@Override
+	public void notifyKicked() throws RemoteException {
+		// TODO Auto-generated method stub
+		System.out.println("Oops, I'm kicked out by manager..");
+		
+	}
 }

@@ -57,5 +57,7 @@ public class NwbClientModel {
 
     public void register(NwbDrawingCanvasController subscriber) {
         this.subscriber = subscriber;
+        
+        updateSubscribers();
     }
 }

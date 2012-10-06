@@ -3,10 +3,12 @@ package client.model;
 import java.rmi.NoSuchObjectException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 import java.util.Stack;
 
 import server.NwbUserData;
 import server.NwbUserDataSecure;
+import server.room.NwbDrawingCommandData;
 import server.room.NwbServerRemoteModel;
 
 /**
@@ -41,6 +43,14 @@ public class NwbRemoteModel extends NwbClientModel {
 		try {
 			observer = new NwbRemoteModelObserverImpl(this);
 	        server.bindObserver(user, observer);
+	        
+	        List<NwbDrawingCommandData> initData = server.getAllCommands(user);
+	        
+	        for(NwbDrawingCommandData data:initData)
+	        {
+	        	addCommand(data.getId(),data.getCreatedUser(),data.getCommand());
+	        }
+	        
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,7 +103,7 @@ public class NwbRemoteModel extends NwbClientModel {
     	
     	while(removeCommandFromClient(this.user) != null);    	
         redoStack.clear();
-        super.clearCanvas();
+        super.updateSubscribers();
     }
 
     // Remote model specific methods

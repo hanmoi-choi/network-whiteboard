@@ -40,7 +40,7 @@ public class NwbClientTest
 
 	public NwbUserDataSecure testLogin()
 	{
-		NwbServerGate server = (NwbServerGate)NwbClientConnector.connectServer(this.hostname);
+		NwbServerGate server = NwbClientConnector.connectServer(this.hostname);
 		
         // Sign in to server
 		NwbUserDataSecure user = null;
@@ -56,7 +56,7 @@ public class NwbClientTest
 
 	public NwbClientRoom testCreateRoom(NwbUserDataSecure user)
 	{
-		NwbServerGate server = (NwbServerGate)NwbClientConnector.connectServer(this.hostname);
+		NwbServerGate server = NwbClientConnector.connectServer(this.hostname);
 		
         // create room on server side
 		NwbServerRoom roomServer = null;
@@ -85,7 +85,7 @@ public class NwbClientTest
 	
 	public List<NwbRoomData> testGetRoomList(NwbUserDataSecure user)
 	{
-		NwbServerGate server = (NwbServerGate)NwbClientConnector.connectServer(this.hostname);
+		NwbServerGate server = NwbClientConnector.connectServer(this.hostname);
 		
 		// get room list
 		List<NwbRoomData> rooms = null;
@@ -106,7 +106,7 @@ public class NwbClientTest
 	
 	public void testJoinRoomRequest(NwbUserDataSecure user, NwbRoomData r)
 	{
-		NwbServerGate server = (NwbServerGate)NwbClientConnector.connectServer(this.hostname);
+		NwbServerGate server = NwbClientConnector.connectServer(this.hostname);
 		
 		try {
 			server.joinRoomRequest(user, r);
@@ -124,8 +124,8 @@ public class NwbClientTest
 			System.out.println("notifyJoin: accepted!");
 			NwbClientRoom room = NwbClientModelFactory.createRoomFactory(user, roomServer);
 			NwbClientModel newModel = this.testCreateModel(user, room.getServerRemoteModel());
-	        this.setModel(newModel);			
-		}
+	        this.setModel(newModel);
+	    }
 		else
 		{
 			// Not accepted to join the room

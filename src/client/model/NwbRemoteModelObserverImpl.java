@@ -3,7 +3,7 @@ package client.model;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import server.NwbUserData;
+import server.room.NwbDrawingCommandData;
 import server.room.NwbServerRemoteModelObserver;
 
 public class NwbRemoteModelObserverImpl
@@ -22,9 +22,9 @@ public class NwbRemoteModelObserverImpl
 		this.client = client;
 	}
 	
-	public void addCommand(int commandId, NwbUserData user, NwbDrawingCommand command) throws RemoteException
+	public void addCommand(NwbDrawingCommandData com) throws RemoteException
 	{
-		client.addCommandFromServer(commandId, user, command);
+		client.addCommandFromServer(com.getId(), com.getCreatedUser(), com.getCommand());
 	}
 	
 	public void removeCommand(int commandId) throws RemoteException
