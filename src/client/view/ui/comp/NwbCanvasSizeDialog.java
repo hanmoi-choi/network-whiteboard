@@ -88,8 +88,7 @@ public class NwbCanvasSizeDialog extends JDialog{
     class ComboBoxActionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            //JComboBox<String> comboBox = (JComboBox<String>)e.getSource();
-            JComboBox comboBox = (JComboBox)e.getSource();
+            JComboBox<String> comboBox = (JComboBox<String>)e.getSource();
 
             String selectedItem = (String) comboBox.getSelectedItem();
             selectedItem = selectedItem.trim();
