@@ -6,6 +6,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import server.NwbUserData;
 import server.NwbUserDataSecure;
@@ -24,12 +26,16 @@ public class NwbServerRemoteModelImpl
 	private ArrayList<NwbDrawingCommandData> modelData;
 	private HashMap<NwbUserDataSecure, NwbServerRemoteModelObserver> clientObservers;
 	private Integer commandId = 0;
+	
+	private final ExecutorService pool;
 
-	public NwbServerRemoteModelImpl() throws RemoteException {
+	public NwbServerRemoteModelImpl(int poolSize) throws RemoteException {
 		super();
 		
 		clientObservers = new HashMap<NwbUserDataSecure, NwbServerRemoteModelObserver>();
 		modelData = new ArrayList<NwbDrawingCommandData>();
+		
+		pool = Executors.newFixedThreadPool(poolSize);
 	}
 	
 	public void addClient(NwbUserDataSecure user)  
@@ -56,17 +62,17 @@ public class NwbServerRemoteModelImpl
     	{
 	    	id = commandId;
 	    	commandId++;
+	    	
+	    	synchronized(modelData)
+	    	{
+		    	modelData.add(new NwbDrawingCommandData (id, user, command));
+	    	}
     	}
     	
-    	synchronized(modelData)
-    	{
-	    	modelData.add(new NwbDrawingCommandData (id, user, command));
-    	}
-    	
-    	notifyAddCommand(id, user, command);
+    	//notifyAddCommand(id, user, command);
+    	pool.execute(new NotifyAddCommandHandler(this, id, user, command));
     	return id;
 	}
-    
     @Override
     public void removeCommand(NwbUserDataSecure requestUser, int commandId)
     {
@@ -103,9 +109,6 @@ public class NwbServerRemoteModelImpl
 	    		try {
 	    			NwbServerRemoteModelObserver observer = clientObservers.get(user);
 					observer.addCommand(new NwbDrawingCommandData(id, requestUser, command));
-				} catch (ConnectException ce) {
-					removeClient(user);
-					ce.printStackTrace();
 				} catch (RemoteException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -140,4 +143,25 @@ public class NwbServerRemoteModelImpl
 		return modelData;
 	}
 
+    
+    class NotifyAddCommandHandler implements Runnable
+    {
+    	NwbServerRemoteModelImpl o;
+    	int id;
+    	NwbUserDataSecure reqUser;
+    	NwbDrawingCommand command;
+    	
+    	NotifyAddCommandHandler(NwbServerRemoteModelImpl o, 
+    			int id, NwbUserDataSecure reqUser, NwbDrawingCommand command) {
+    		this.o = o;
+    		this.id = id;
+    		this.reqUser = reqUser;
+    		this.command = command;
+		}
+
+		@Override
+		public void run() {
+			o.notifyAddCommand(id, reqUser, command);
+		}
+    }
 }

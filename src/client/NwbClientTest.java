@@ -169,6 +169,11 @@ public class NwbClientTest
 	        test.testJoinRoomRequest(user, rooms.get(0));
         }
 	}
+
+	@Override
+	public boolean alive() throws RemoteException {
+		return true;
+	}
 	
 	
 }

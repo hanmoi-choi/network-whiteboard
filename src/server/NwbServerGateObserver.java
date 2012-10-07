@@ -11,4 +11,6 @@ public interface NwbServerGateObserver
 			extends Serializable, Remote
 {
 	void notifyJoin(NwbRoomData room, boolean isAccepted, NwbServerRoom roomServer) throws RemoteException;
+	
+	boolean alive() throws RemoteException;
 }

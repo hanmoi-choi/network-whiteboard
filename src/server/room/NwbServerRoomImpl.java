@@ -18,6 +18,8 @@ public class NwbServerRoomImpl
 	 * 
 	 */
 	private static final long serialVersionUID = -7375101647398791502L;
+	private static final int POOL_SIZE = 10;
+	
 	private NwbRoomDataInternal roomdata = null;
 	private NwbUserDataSecure manager = null;
 	private NwbServerGateImpl gate = null;
@@ -34,7 +36,7 @@ public class NwbServerRoomImpl
 		
 		this.gate = gate;
 		
-		this.modelServer = new NwbServerRemoteModelImpl();
+		this.modelServer = new NwbServerRemoteModelImpl(POOL_SIZE);
 	}
 	
 	public void requestJoin(NwbUserDataSecure user)
@@ -97,6 +99,20 @@ public class NwbServerRoomImpl
 			}
 		}
 	}
+	
+	private void notifyTerminateRoom()
+	{
+		for(NwbServerRoomObserver o: clientObservers.values())
+		{
+			try {
+				o.notifyTerminateRoom();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
     @Override
     public boolean bindObserver(NwbUserDataSecure user, NwbServerRoomObserver observer) throws RemoteException 
 	{
@@ -119,8 +135,14 @@ public class NwbServerRoomImpl
     	clientObservers.remove(user);
     	modelServer.removeClient(user);
     	
-    	if(clientObservers.size() < 0 || user.equals(this.manager))
+    	if(clientObservers.size() <= 0)
     		gate.deleteRoom(this.roomdata);
+    	else if(user.equals(this.manager))
+    	{
+    		//manager has exited from the room. notify to clients and delete room
+    		notifyTerminateRoom();
+    		gate.deleteRoom(this.roomdata);
+    	}
 	}
 
 	@Override

@@ -25,7 +25,7 @@ import org.jdesktop.application.Application;
 public class NwbClientApplication extends Application {
 	
 	// Test line for make a unique username
-	String username="test";
+	String username=null;
 	protected void initialize(String[] args)
 	{
 		if(args.length != 0)
@@ -85,7 +85,8 @@ public class NwbClientApplication extends Application {
         view.showView();
 
         // Remote mode test!
-        //NwbClientTest.startTest(username);
+        if(this.username != null)
+        	NwbClientTest.startTest(username);
     }
 
     /**
