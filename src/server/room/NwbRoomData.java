@@ -1,50 +1,36 @@
 package server.room;
 
+import java.util.List;
+
 import server.NwbUserData;
 
-public class NwbRoomData implements java.io.Serializable {
+public class NwbRoomData
+		extends NwbRoomDataInternal {
+	private List<NwbUserData> users;
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8942151395426907988L;
-	private int roomid;
-	private String roomname;
-	private NwbUserData manager;
-	private int maxusers;		// maximum users joinable
+	private static final long serialVersionUID = 6141243065118394156L;
+
+	public NwbRoomData(NwbRoomDataInternal room, List<NwbUserData> users) {
+		super(room);
+		this.users = users;
+	}
 	
-	public NwbRoomData(int roomid, String roomname, NwbUserData manager, int maxusers)
+	public List<NwbUserData> getUserList()
 	{
-		this.roomid = roomid;
-		this.roomname = roomname;
-		this.manager = manager;
-		this.maxusers =maxusers;
+		return users;
 	}
-	public NwbRoomData(NwbRoomData room)
+	
+	public int getNumusers()
 	{
-		this(room.roomid, room.roomname, room.manager, room.maxusers);
-	}
-
-	public int getRoomid() {
-		return roomid;
-	}
-
-	public String getRoomname() {
-		return roomname;
-	}
-
-	public NwbUserData getManager() {
-		return manager;
-	}
-
-	public int getMaxusers() {
-		return maxusers;
+		return users.size();
 	}
 	
 	public String toString()
 	{
-		return "NwbRoomData: id " + roomid +
-				", name " + roomname +
-				", manager " + manager +
-				", max " + maxusers;
+		return "NwbRoomData: (Room=" +super.toString()
+				+"), (users=" +this.users + ")";
 	}
 }

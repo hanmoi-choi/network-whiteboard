@@ -11,6 +11,8 @@ public interface NwbServerRoomObserver
 {
 	public void refresh() throws RemoteException;
 
+	public void notifyKicked() throws RemoteException;
+
 	// Only for managers
 	public void manageJoinRequest(NwbUserData user) throws RemoteException;
 

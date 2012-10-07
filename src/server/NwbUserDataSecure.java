@@ -37,4 +37,9 @@ public class NwbUserDataSecure extends NwbUserData {
 	{
 		return "NwbUserDataSecure: ("+super.toString()+ "), Key=" + this.key;
 	}
+	public NwbUserData getUserData()
+	{
+		NwbUserData ret = new NwbUserData(this.getUsername(),this.getSessionid());
+		return ret;
+	}
 }

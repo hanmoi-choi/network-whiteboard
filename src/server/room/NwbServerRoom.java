@@ -11,7 +11,8 @@ public interface NwbServerRoom extends Remote {
 	public void exitRoom(NwbUserDataSecure user) throws RemoteException;
 	
 	public NwbRoomData getRoomData() throws RemoteException;
-	
 	public NwbServerRemoteModel getServerRemoteModel(NwbUserDataSecure user) throws RemoteException;
-	public void manageJoinResponse(NwbUserDataSecure manager, NwbUserData joinUser, boolean isAccepted)throws RemoteException;
+
+	public void manageJoinResponse(NwbUserDataSecure manager, NwbUserData joinUser, boolean isAccepted) throws RemoteException;
+	public void manageKick(NwbUserDataSecure manager, NwbUserData kickUser) throws RemoteException;
 }
