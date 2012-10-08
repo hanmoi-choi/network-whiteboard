@@ -190,9 +190,18 @@ public class NwbServerGateImpl
 		
 		return ret;
 	}
-	
-	public void joinRoomRequest(NwbUserDataSecure user, NwbRoomData room)
+	private NwbRoomDataInternal getRoom(int roomId)
 	{
+		for(NwbRoomDataInternal rm:roomServers.keySet())
+		{
+			if(rm.getRoomid() == roomId)
+				return rm;
+		}
+		return null;
+	}
+	public void joinRoomRequest(NwbUserDataSecure user, int roomId)
+	{
+		NwbRoomDataInternal room = getRoom(roomId);
 		System.out.println("joinRoomRequest : user="+user+", room=" + room);
 		NwbServerRoomImpl roomserver = roomServers.get(room);
 		if(roomserver == null)

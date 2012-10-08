@@ -3,12 +3,20 @@ package client.signin;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import server.NwbServerGate;
+import server.NwbServerGateObserver;
+import server.NwbUserDataSecure;
+import server.room.NwbRoomData;
+import server.room.NwbServerRoom;
 
 import client.signin.setting.NwbClientCanvasSize;
 
@@ -23,12 +31,16 @@ public class NwbClientConnect extends JFrame {
 	private JButton createButton = null;
 	private JButton joinButton = null;
 	private JComboBox canvasSize = new JComboBox(new NwbClientCanvasSize());
-	private NwbServerGate server;
 
-	public NwbClientConnect(NwbServerGate server) {
+	
+	private NwbServerGate server;
+	private NwbUserDataSecure user;
+	
+	public NwbClientConnect(NwbServerGate server, NwbUserDataSecure user) {
 		super();
 		
 		this.server = server;
+		this.user = user;
 		
 		getContentPane().setFocusCycleRoot(true);
 		setTitle("Network");
@@ -131,8 +143,13 @@ public class NwbClientConnect extends JFrame {
 								return;
 							} 
 							
-							//server.createRoom(roominfo);
-							//
+							try {
+								NwbServerRoom newRoom = server.createRoom(user, nameField.getText(), Integer.parseInt(maxField.getText()));
+								enterRoom(newRoom);
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 						} catch (NumberFormatException e1) {
 							JOptionPane.showMessageDialog(
 									NwbClientConnect.this,
@@ -169,16 +186,26 @@ public class NwbClientConnect extends JFrame {
 			column.setCellEditor(readOnlyEditor);
 		}
 		
-		//List<Romm> rooms = server.getRooms(clientId);
-		//for(Room rm : rooms)
+		List<NwbRoomData> rooms = null;
+		try {
+			rooms = server.getRoomList(user);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(NwbRoomData rm : rooms)
+		{
+			Object[] row = new Object[columnNames.length];
+			row[0] = rm.getRoomid();
+			row[1] = rm.getRoomname();
+			row[2] = rm.getManager().getUsername();
+			row[3] = rm.getNumusers()+"/"+rm.getMaxusers();
+			tableModel.addRow(row);
+		}
 		
 
-		Object[] row = new Object[columnNames.length];
-		row[0] = 1001;
-		row[1] = "Let's rock!";
-		row[2] = "Jane";
-		row[3] = "3/10";
-		tableModel.addRow(row);
+		
+		
 
 	}
 
@@ -196,13 +223,27 @@ public class NwbClientConnect extends JFrame {
 					} else {
 						int boardID = Integer.parseInt(table.getValueAt(
 								table.getSelectedRow(), 0).toString());
-						//server.join(clientID, roomID);
-						
+						try {
+							server.joinRoomRequest(user, boardID);
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 					setVisible(false);
 				}
 			});
 		}
 		return joinButton;
+	}
+
+	public void enterRoom(NwbServerRoom roomServer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void drawPopup(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

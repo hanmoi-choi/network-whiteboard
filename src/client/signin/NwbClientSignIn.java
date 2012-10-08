@@ -12,6 +12,8 @@ import client.model.room.NwbClientConnector;
 import client.model.NwbRemoteModelObserverImpl;
 
 import server.NwbServerGate;
+import server.NwbServerGateObserver;
+import server.NwbUserDataSecure;
 
 public class NwbClientSignIn extends JFrame {
 
@@ -26,6 +28,7 @@ public class NwbClientSignIn extends JFrame {
 	private NwbClientSignInPanel signinPanel = null;
 	private int width;
 	private int height;
+	private NwbUserDataSecure user;
 
 	public NwbClientSignIn() {
 		try {
@@ -118,10 +121,13 @@ public class NwbClientSignIn extends JFrame {
 								.getText());
 						String hostname = IPField.getText()+":"+portField.getText();
 						System.out.println(hostname);
-						NwbServerGate server = (NwbServerGate)NwbClientConnector.connectServer(hostname);
-						//NwbRemoteModel newClient = new NwbRemoteModel(userStr, server);
 						
-						NwbClientConnect connectDialog = new NwbClientConnect(server);
+						NwbServerGate server = NwbClientConnector.connectServer(hostname);
+						NwbClientSignInObserver observer = new NwbClientSignInObserver();
+						user = server.signIn(userStr, observer);
+						
+						NwbClientConnect connectDialog = new NwbClientConnect(server, user);
+						observer.setClientConnect(connectDialog);
 						connectDialog.setVisible(true);
 
 					} catch (IOException e1) {

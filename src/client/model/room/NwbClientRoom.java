@@ -1,6 +1,8 @@
 package client.model.room;
 
 import java.rmi.RemoteException;
+import java.util.List;
+
 import server.NwbUserData;
 import server.NwbUserDataSecure;
 import server.room.NwbRoomData;
@@ -92,6 +94,11 @@ public class NwbClientRoom {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public List<NwbUserData> getUserList()
+	{
+		return this.room.getUserList();
 	}
     
 }

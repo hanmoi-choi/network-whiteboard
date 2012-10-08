@@ -109,7 +109,7 @@ public class NwbClientTest
 		NwbServerGate server = NwbClientConnector.connectServer(this.hostname);
 		
 		try {
-			server.joinRoomRequest(user, r);
+			server.joinRoomRequest(user, r.getRoomid());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
