@@ -18,6 +18,10 @@ import server.NwbUserDataSecure;
 import server.room.NwbRoomData;
 import server.room.NwbServerRoom;
 
+import client.controller.NwbControllerFactory;
+import client.model.NwbClientModel;
+import client.model.factory.NwbClientModelFactory;
+import client.model.room.NwbClientRoom;
 import client.signin.setting.NwbClientCanvasSize;
 
 public class NwbClientConnect extends JFrame {
@@ -238,8 +242,11 @@ public class NwbClientConnect extends JFrame {
 	}
 
 	public void enterRoom(NwbServerRoom roomServer) {
-		// TODO Auto-generated method stub
+		NwbClientRoom room = NwbClientModelFactory.createRoomFactory(user, roomServer);
+		NwbClientModel newModel = NwbClientModelFactory.createRemoteModel(user, room.getServerRemoteModel());
+		NwbControllerFactory.setModel(newModel);
 		
+		// Create a list of users and show it on the window here.
 	}
 
 	public void drawPopup(String string) {

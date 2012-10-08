@@ -47,8 +47,10 @@ public class NwbServerGateImpl
 	
 	private void checkAlive()
 	{
-		HashMap<String, NwbUserDataSecure> cs = new HashMap<String, NwbUserDataSecure>(clients);
-		for(NwbUserDataSecure u:cs.values())
+		ArrayList<NwbUserDataSecure> cs = 
+				new ArrayList<NwbUserDataSecure>(clients.values());
+		
+		for(NwbUserDataSecure u:cs)
 		{
 			try {
 				NwbServerGateObserver o = clientObservers.get(u);
@@ -139,7 +141,10 @@ public class NwbServerGateImpl
 		clientObservers.remove(user);
 		clients.remove(user.getUsername());
 		
-		for(NwbServerRoomImpl rs: roomServers.values())
+		ArrayList<NwbServerRoomImpl> servers = 
+				new ArrayList<NwbServerRoomImpl>(roomServers.values());
+		
+		for(NwbServerRoomImpl rs: servers)
 		{
 			try {
 				rs.exitRoom(user);

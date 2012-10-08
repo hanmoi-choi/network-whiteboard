@@ -52,37 +52,7 @@ public class NwbClientTest
 		}
 		return user;
 	}
-	
 
-	public NwbClientRoom testCreateRoom(NwbUserDataSecure user)
-	{
-		NwbServerGate server = NwbClientConnector.connectServer(this.hostname);
-		
-        // create room on server side
-		NwbServerRoom roomServer = null;
-		try {
-			roomServer = server.createRoom(user, "Test Room", 10);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		NwbClientRoom room = NwbClientModelFactory.createRoomFactory(user, roomServer);
-		return room;
-	}
-
-	public NwbClientModel testCreateModel(NwbUserDataSecure user, NwbServerRemoteModel modelServer)
-	{
-		NwbClientModel model=null;
-		
-		// Make model
-		model = NwbClientModelFactory.createModelFactory(true);
-		((NwbRemoteModel)model).startRemoteMode(user, modelServer);
-		
-		return model;
-		
-	}
-	
 	public List<NwbRoomData> testGetRoomList(NwbUserDataSecure user)
 	{
 		NwbServerGate server = NwbClientConnector.connectServer(this.hostname);
@@ -122,9 +92,7 @@ public class NwbClientTest
 		if(isAccepted)
 		{
 			System.out.println("notifyJoin: accepted!");
-			NwbClientRoom room = NwbClientModelFactory.createRoomFactory(user, roomServer);
-			NwbClientModel newModel = this.testCreateModel(user, room.getServerRemoteModel());
-	        this.setModel(newModel);
+			enterRoom(user, roomServer);
 	    }
 		else
 		{
@@ -133,6 +101,29 @@ public class NwbClientTest
 			System.out.println("notifyJoin: denied - "+ roomData);
 		}
 		
+	}
+	
+	public NwbServerRoom testCreateRoom(NwbUserDataSecure user)
+	{
+		NwbServerGate server = NwbClientConnector.connectServer(this.hostname);
+		
+        // create room on server side
+		NwbServerRoom roomServer = null;
+		try {
+			roomServer = server.createRoom(user, "Test Room", 10);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return roomServer;
+	}
+	
+	public void enterRoom(NwbUserDataSecure user, NwbServerRoom roomServer)
+	{
+		NwbClientRoom room = NwbClientModelFactory.createRoomFactory(user, roomServer);
+		NwbClientModel newModel = NwbClientModelFactory.createRemoteModel(user, room.getServerRemoteModel());
+        this.setModel(newModel);
+
 	}
 
 	public void setModel(NwbClientModel model)
@@ -158,9 +149,8 @@ public class NwbClientTest
         if(username.equals("user0"))
         {
             //*/// Create Room --------------------------------------------------
-	        NwbClientRoom room = test.testCreateRoom(user);
-			NwbClientModel newModel = test.testCreateModel(user, room.getServerRemoteModel());
-	        test.setModel(newModel);
+        	NwbServerRoom roomServer = test.testCreateRoom(user);
+	        test.enterRoom(user, roomServer);
         }
         else
         {

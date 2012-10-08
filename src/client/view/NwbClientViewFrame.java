@@ -18,6 +18,8 @@ public class NwbClientViewFrame {
     private JMenuItem jmiNew;
     private JMenu jmFile;
     private JMenu jmEdit;
+    private JMenu jmMode;
+
     private JMenuBar menuBar;
     private JToolBar horToolBar;
     private NwbCanvas canvas;
@@ -93,9 +95,11 @@ public class NwbClientViewFrame {
 
         jmFile = NwbMenuFactory.createFileMenu();
         jmEdit = NwbMenuFactory.createEditMenu();
+        jmMode = NwbMenuFactory.createModeMenu();
 
         menuBar.add(jmFile);
         menuBar.add(jmEdit);
+        menuBar.add(jmMode);
     }
 
     private void initToolbar() {

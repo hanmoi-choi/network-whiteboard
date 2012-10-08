@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.rmi.RemoteException;
 
 import javax.swing.*;
 
@@ -28,7 +29,6 @@ public class NwbClientSignIn extends JFrame {
 	private NwbClientSignInPanel signinPanel = null;
 	private int width;
 	private int height;
-	private NwbUserDataSecure user;
 
 	public NwbClientSignIn() {
 		try {
@@ -117,19 +117,16 @@ public class NwbClientSignIn extends JFrame {
 											JOptionPane.ERROR_MESSAGE);
 							return;
 						}
-						InetAddress aHost = InetAddress.getByName(IPField
-								.getText());
+						InetAddress.getByName(IPField.getText());
+						
 						String hostname = IPField.getText()+":"+portField.getText();
 						System.out.println(hostname);
 						
-						NwbServerGate server = NwbClientConnector.connectServer(hostname);
-						NwbClientSignInObserver observer = new NwbClientSignInObserver();
-						user = server.signIn(userStr, observer);
+						if(connectServer(hostname, userStr) == false)
+						{
+							return;
+						}
 						
-						NwbClientConnect connectDialog = new NwbClientConnect(server, user);
-						observer.setClientConnect(connectDialog);
-						connectDialog.setVisible(true);
-
 					} catch (IOException e1) {
 						JOptionPane.showMessageDialog(NwbClientSignIn.this,
 								"Error: Incorrect IP address format.",
@@ -147,6 +144,50 @@ public class NwbClientSignIn extends JFrame {
 		return connectButton;
 	}
 
+	private boolean connectServer(String hostname, String username)
+	{
+		NwbServerGate server = NwbClientConnector.connectServer(hostname);
+		if(server == null)
+		{
+			JOptionPane.showMessageDialog(NwbClientSignIn.this,
+					"Error: Server is invalid. Try another server or port",
+					"Error",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
+		NwbClientSignInObserver observer = null;
+		try {
+			observer = new NwbClientSignInObserver();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		NwbUserDataSecure user = null;
+		
+		try {
+			user = server.signIn(username, observer);
+			
+			if(user == null)
+			{
+				JOptionPane.showMessageDialog(NwbClientSignIn.this,
+						"Error: Username is duplicated, try another name",
+						"Error",
+						JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		NwbClientConnect connectDialog = new NwbClientConnect(server, user);
+		observer.setClientConnect(connectDialog);
+		connectDialog.setVisible(true);
+		
+		return true;
+	}
+	
 	private void initialize() {
 		Dimension size = getToolkit().getScreenSize();
 		this.width = 458;
@@ -157,7 +198,7 @@ public class NwbClientSignIn extends JFrame {
 		this.setTitle("Sign in");
 		this.setResizable(false);
 		setContentPane(getLoginPanel());
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	}
 
 }

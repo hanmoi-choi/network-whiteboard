@@ -1,6 +1,7 @@
 package client.controller;
 
 import client.model.NwbClientModel;
+import client.signin.NwbClientSignIn;
 import client.view.CanvasDrawble;
 import org.jdesktop.application.Action;
 
@@ -152,4 +153,16 @@ public class NwbMenuActionController implements NwbController {
         return file;
     }
 
+    // Network, Local mode
+    @Action
+    public void doNetwork(ActionEvent evt){
+        System.out.println("Change to network mode...");
+		NwbClientSignIn signIn = new NwbClientSignIn();
+		signIn.setVisible(true);
+    }
+    @Action
+    public void doLocal(ActionEvent evt){
+        System.out.println("Change to local mode...");
+        
+    }
 }

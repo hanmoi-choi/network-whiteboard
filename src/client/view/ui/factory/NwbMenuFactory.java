@@ -68,4 +68,19 @@ public final class NwbMenuFactory{
 
 		return jmEdit;
 	}
+
+	public static JMenu createModeMenu() {
+        JMenu jmMode = new JMenu("Mode");
+
+		JMenuItem jmiNetwork = new JMenuItem("Network Mode");
+		jmiNetwork.setAction(actionMap.get("doNetwork"));
+		jmMode.add(jmiNetwork);
+
+		JMenuItem jmiLocal = new JMenuItem("Local Mode");
+		jmiLocal.setAction(actionMap.get("doLocal"));
+        jmMode.add(jmiLocal);
+
+        return jmMode;
+	}
+
 }

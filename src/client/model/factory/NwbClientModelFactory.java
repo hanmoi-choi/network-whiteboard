@@ -9,7 +9,8 @@ import client.model.NwbRemoteModel;
 import client.model.room.NwbClientRoom;
 
 public class NwbClientModelFactory {
-	public static NwbClientModel createModelFactory(boolean isRemote)
+	
+	private static NwbClientModel createModelFactory(boolean isRemote)
 	{
 		NwbClientModel model = null;
 		if(isRemote)
@@ -20,6 +21,21 @@ public class NwbClientModelFactory {
 		{
 			model = new NwbClientModel();
 		}
+		return model;
+	}
+	public static NwbClientModel createLocalModel()
+	{
+		return createModelFactory(false);
+	}
+	
+	public static NwbClientModel createRemoteModel(NwbUserDataSecure user, NwbServerRemoteModel modelServer)
+	{
+		NwbClientModel model=null;
+		
+		// Make model
+		model = NwbClientModelFactory.createModelFactory(true);
+		((NwbRemoteModel)model).startRemoteMode(user, modelServer);
+		
 		return model;
 	}
 	

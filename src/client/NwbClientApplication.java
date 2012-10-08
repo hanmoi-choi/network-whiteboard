@@ -73,7 +73,7 @@ public class NwbClientApplication extends Application {
         drawingOptionActionController.setCanvasDrawble(mouseAdapter);
 
         //Model
-        NwbClientModel model = NwbClientModelFactory.createModelFactory(false);
+        NwbClientModel model = NwbClientModelFactory.createLocalModel();
         NwbControllerFactory.setModel(model);
         /*
         drawingCanvasController.setModel(model);
