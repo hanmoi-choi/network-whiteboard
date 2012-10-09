@@ -3,6 +3,11 @@ package client.model.room;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import client.signin.NwbClientConnect;
+import client.view.ui.factory.NwbRemoteOptionFactory;
+
 import server.NwbUserData;
 import server.NwbUserDataSecure;
 import server.room.NwbRoomData;
@@ -60,6 +65,8 @@ public class NwbClientRoom {
 	public void refresh() {
 		try {
 			updateRoomdata();
+			NwbRemoteOptionFactory.updateMemberList(server);
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,10 +76,20 @@ public class NwbClientRoom {
 	public void manageJoinRequest(NwbUserData joinUser) {
 		//TODO notify to user
 		// Pop-up and ask accepting for the user.
+		int option = JOptionPane.showConfirmDialog(null,
+				joinUser.getUsername()+" wants to join. Do you want to accept join?",
+				"Join request", JOptionPane.YES_NO_OPTION);
 		System.out.println("manageJoinRequested: Do you want to accept join?" + joinUser);
 		
-		// Only for test
-		manageJoinResponse(joinUser, true);
+		
+		boolean opt = (option == JOptionPane.YES_OPTION) ? true : false;
+		System.out.println("option"+opt);
+		if(opt)
+		{
+			NwbRemoteOptionFactory.addMembertoList(joinUser.getUsername());
+		}
+		
+		manageJoinResponse(joinUser, opt);
 	}
 	
 	private void manageJoinResponse(NwbUserData joinUser, boolean isAccepted)

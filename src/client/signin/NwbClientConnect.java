@@ -23,6 +23,7 @@ import client.model.NwbClientModel;
 import client.model.factory.NwbClientModelFactory;
 import client.model.room.NwbClientRoom;
 import client.signin.setting.NwbClientCanvasSize;
+import client.view.ui.factory.NwbRemoteOptionFactory;
 
 public class NwbClientConnect extends JFrame {
 
@@ -150,6 +151,7 @@ public class NwbClientConnect extends JFrame {
 							try {
 								NwbServerRoom newRoom = server.createRoom(user, nameField.getText(), Integer.parseInt(maxField.getText()));
 								enterRoom(newRoom);
+								NwbRemoteOptionFactory.showKickButton(user,newRoom);
 							} catch (RemoteException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
@@ -206,11 +208,6 @@ public class NwbClientConnect extends JFrame {
 			row[3] = rm.getNumusers()+"/"+rm.getMaxusers();
 			tableModel.addRow(row);
 		}
-		
-
-		
-		
-
 	}
 
 	private JButton getJoinButton() {
@@ -222,7 +219,7 @@ public class NwbClientConnect extends JFrame {
 					if (table.getSelectedRow() == -1) {
 						JOptionPane.showMessageDialog(NwbClientConnect.this,
 								"Please select a white board.",
-								"No selecte board", JOptionPane.ERROR_MESSAGE);
+								"No selected board", JOptionPane.ERROR_MESSAGE);
 						return;
 					} else {
 						int boardID = Integer.parseInt(table.getValueAt(
@@ -245,12 +242,17 @@ public class NwbClientConnect extends JFrame {
 		NwbClientRoom room = NwbClientModelFactory.createRoomFactory(user, roomServer);
 		NwbClientModel newModel = NwbClientModelFactory.createRemoteModel(user, room.getServerRemoteModel());
 		NwbControllerFactory.setModel(newModel);
-		
+		//roomServer.getRoomData().getManager();
 		// Create a list of users and show it on the window here.
-	}
-
-	public void drawPopup(String string) {
-		// TODO Auto-generated method stub
 		
+	}
+	
+
+	public void drawPopup() {
+		// TODO Auto-generated method stub
+		System.out.println("Join is not allowed!");
+//		JOptionPane.showMessageDialog(NwbClientConnect.this,
+//				"Join is not allowed!",
+//				"Request rejected", JOptionPane.ERROR_MESSAGE);
 	}
 }

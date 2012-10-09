@@ -3,6 +3,8 @@ package client.signin;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import javax.swing.JOptionPane;
+
 import server.NwbServerGateObserver;
 import server.room.NwbRoomData;
 import server.room.NwbServerRoom;
@@ -32,7 +34,7 @@ implements NwbServerGateObserver
 		else
 		{
 			// popup to say denied the joining
-			connectDialog.drawPopup("Join is not allowed!");
+			connectDialog.drawPopup();
 		}
 		
 	}

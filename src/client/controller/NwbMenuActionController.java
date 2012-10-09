@@ -3,6 +3,8 @@ package client.controller;
 import client.model.NwbClientModel;
 import client.signin.NwbClientSignIn;
 import client.view.CanvasDrawble;
+import client.view.ui.controller.NwbUIComponentMediator;
+
 import org.jdesktop.application.Action;
 
 import javax.imageio.ImageIO;
@@ -24,8 +26,10 @@ public class NwbMenuActionController implements NwbController {
     private CanvasDrawble drawble;
     private NwbClientModel model;
     private File imageFile;
+    private NwbUIComponentMediator mediator;
 
-    public NwbMenuActionController(){
+    public NwbMenuActionController(NwbUIComponentMediator mediator){
+    	this.mediator = mediator;
     }
 
     public void setCanvasDrawble(CanvasDrawble drawble){
@@ -157,12 +161,14 @@ public class NwbMenuActionController implements NwbController {
     @Action
     public void doNetwork(ActionEvent evt){
         System.out.println("Change to network mode...");
+        mediator.modeChanged("network");
 		NwbClientSignIn signIn = new NwbClientSignIn();
 		signIn.setVisible(true);
     }
     @Action
     public void doLocal(ActionEvent evt){
         System.out.println("Change to local mode...");
+        mediator.modeChanged("local");
         
     }
 }

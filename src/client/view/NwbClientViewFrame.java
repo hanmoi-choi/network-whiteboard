@@ -5,10 +5,20 @@ import client.view.ui.controller.NwbCanvasMouseEventHandler;
 import client.view.ui.factory.NwbDrawingOptionFactory;
 import client.view.ui.factory.NwbHorToolBarFactory;
 import client.view.ui.factory.NwbMenuFactory;
+import client.view.ui.factory.NwbRemoteOptionFactory;
+
 import org.jdesktop.application.ApplicationContext;
 
+import server.room.NwbRoomData;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
 import java.awt.*;
+import java.rmi.RemoteException;
+import java.util.List;
 
 
 public class NwbClientViewFrame {
@@ -29,6 +39,7 @@ public class NwbClientViewFrame {
     private JSplitPane verticlaSplitPane;
     private JSplitPane upperSplitPane;
     private JPanel drawingOptionPanel;
+   
 
     public NwbClientViewFrame(NwbCanvasMouseEventHandler mouseEventHandler) {
         this.mouseEventHandler = mouseEventHandler;
@@ -78,7 +89,8 @@ public class NwbClientViewFrame {
         contentPane.add(verticlaSplitPane, BorderLayout.CENTER);
 
         JPanel messageInputPanel = new JPanel();
-        JPanel chattingDisplayPanel = new JPanel();
+        JPanel chattingDisplayPanel = NwbRemoteOptionFactory.getDisplayPanel();
+       
 
         verticlaSplitPane.setResizeWeight(1.0);
         verticlaSplitPane.setLeftComponent(upperSplitPane);
@@ -125,4 +137,5 @@ public class NwbClientViewFrame {
     public JFrame getFrame() {
         return this.frame;
     }
+
 }

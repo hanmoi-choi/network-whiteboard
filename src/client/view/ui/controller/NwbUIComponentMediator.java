@@ -4,6 +4,7 @@ import client.view.ui.comp.NwbColorControllButton;
 import client.view.ui.comp.NwbJToggleButton;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -20,6 +21,7 @@ public class NwbUIComponentMediator {
     private List<NwbJToggleButton> toolbarToggleButtonList;
     private List<NwbJToggleButton> fillModeToggleButtonList;
     private JPanel fillNStrokePanel;
+    private JScrollPane scrollPanel;
     private List<NwbColorControllButton> colorControlButtonList;
     private Map<String, JTextField> textFieldMap;
 
@@ -47,7 +49,7 @@ public class NwbUIComponentMediator {
         }
     }
 
-  public void fillModeButtonClicked(NwbJToggleButton buttonPressed){
+    public void fillModeButtonClicked(NwbJToggleButton buttonPressed){
 
         for(NwbJToggleButton button : fillModeToggleButtonList){
             if(button != buttonPressed) button.setSelected(false);
@@ -63,7 +65,16 @@ public class NwbUIComponentMediator {
             fillNStrokePanel.setVisible(false);
         }
     }
-
+    
+    public void modeChanged(String mode) {
+    	if(mode.equalsIgnoreCase("network")){
+    		scrollPanel.setVisible(true);
+    	}
+    	else {
+    		scrollPanel.setVisible(false);
+    	}
+    }
+    
     private boolean isStrategyWithFillingMode(NwbJToggleButton buttonPressed) {
         return buttonPressed.getActionCommand().equals("doRect")
                || buttonPressed.getActionCommand().equals("doRoundedRect")
@@ -74,6 +85,10 @@ public class NwbUIComponentMediator {
         this.fillNStrokePanel = fillNStrokePanel;
     }
 
+    public void addMemberScrollPanel(JScrollPane scrollPanel) {
+        this.scrollPanel = scrollPanel;
+    }
+    
     public void registerColorButton(NwbColorControllButton nwbColorControllButton) {
         colorControlButtonList.add(nwbColorControllButton);
     }

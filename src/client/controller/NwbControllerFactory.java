@@ -3,6 +3,7 @@ package client.controller;
 import java.util.ArrayList;
 
 import client.model.NwbClientModel;
+import client.view.ui.controller.NwbUIComponentMediator;
 
 public class NwbControllerFactory {
 	
@@ -16,7 +17,7 @@ public class NwbControllerFactory {
 		MenuAction
 	}
 
-	public static NwbController createController(ControllerType type)
+	public static NwbController createController(ControllerType type,NwbUIComponentMediator mediator)
 	{
 		NwbController controller = null;
 		switch(type)
@@ -31,7 +32,7 @@ public class NwbControllerFactory {
 			controller = new NwbDrawingTypeToolbarController();
 			break;
 		case MenuAction:
-			controller = new NwbMenuActionController();
+			controller = new NwbMenuActionController(mediator);
 			break;
 		default:
 			break;

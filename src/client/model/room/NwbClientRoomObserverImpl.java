@@ -3,6 +3,10 @@ package client.model.room;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import javax.swing.JOptionPane;
+
+import client.signin.NwbClientConnect;
+
 import server.NwbUserData;
 import server.room.NwbServerRoomObserver;
 
@@ -37,6 +41,10 @@ public class NwbClientRoomObserverImpl
 	public void notifyKicked() throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("Oops, I'm kicked out by manager..");
+		JOptionPane.showMessageDialog(null,
+				"Oops, I'm kicked out by manager..",
+				"being kicked out", JOptionPane.ERROR_MESSAGE);
+		return;
 		
 	}
 
