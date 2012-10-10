@@ -5,8 +5,6 @@ import java.rmi.server.UnicastRemoteObject;
 
 import javax.swing.JOptionPane;
 
-import client.signin.NwbClientConnect;
-
 import server.NwbUserData;
 import server.room.NwbServerRoomObserver;
 
