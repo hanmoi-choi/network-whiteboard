@@ -37,19 +37,11 @@ public class NwbClientRoomObserverImpl
 
 	@Override
 	public void notifyKicked() throws RemoteException {
-		// TODO Auto-generated method stub
-		System.out.println("Oops, I'm kicked out by manager..");
-		JOptionPane.showMessageDialog(null,
-				"Oops, I'm kicked out by manager..",
-				"being kicked out", JOptionPane.ERROR_MESSAGE);
-		return;
-		
+		this.client.notifyKicked();
 	}
 
 	@Override
 	public void notifyTerminateRoom() throws RemoteException {
-		// TODO Auto-generated method stub
-		System.out.println("Oops, room is terminated");
-		
+		this.client.notifyTerminate();
 	}
 }

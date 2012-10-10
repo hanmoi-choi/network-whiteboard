@@ -66,8 +66,8 @@ public class NwbUIComponentMediator {
         }
     }
     
-    public void modeChanged(String mode) {
-    	if(mode.equalsIgnoreCase("network")){
+    public void modeChanged(boolean isNetwork) {
+    	if(isNetwork){
     		scrollPanel.setVisible(true);
     	}
     	else {

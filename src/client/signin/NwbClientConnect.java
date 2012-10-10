@@ -20,9 +20,11 @@ import server.room.NwbServerRoom;
 
 import client.controller.NwbControllerFactory;
 import client.model.NwbClientModel;
+import client.model.NwbRemoteModel;
 import client.model.factory.NwbClientModelFactory;
 import client.model.room.NwbClientRoom;
 import client.signin.setting.NwbClientCanvasSize;
+import client.view.ui.factory.NwbMenuFactory;
 import client.view.ui.factory.NwbRemoteOptionFactory;
 
 public class NwbClientConnect extends JFrame {
@@ -40,8 +42,9 @@ public class NwbClientConnect extends JFrame {
 	
 	private NwbServerGate server;
 	private NwbUserDataSecure user;
+	private NwbClientRoom roomModel;
 	
-	public NwbClientConnect(NwbServerGate server, NwbUserDataSecure user) {
+	public NwbClientConnect(NwbServerGate server, NwbUserDataSecure user, NwbClientRoom roomModel) {
 		super();
 		
 		this.server = server;
@@ -71,6 +74,8 @@ public class NwbClientConnect extends JFrame {
 
 		setupTabJoin();
 		setupTabCreate();
+		
+		this.roomModel = roomModel;
 	}
 
 	private void setupTabJoin() {
@@ -231,9 +236,8 @@ public class NwbClientConnect extends JFrame {
 								JOptionPane.showMessageDialog(NwbClientConnect.this,
 										"Room is full. Select another room or create one",
 										"Error", JOptionPane.ERROR_MESSAGE);
-								return;
-								
 							}
+							return;
 						} catch (RemoteException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -245,22 +249,32 @@ public class NwbClientConnect extends JFrame {
 		}
 		return joinButton;
 	}
+	
+	public void joinResponse(boolean isAccepted, NwbServerRoom roomServer)
+	{
+		if(isAccepted)
+		{
+			//make a room and open new window
+			enterRoom(roomServer);
+			setVisible(false);
+		}
+		else
+		{
+			// popup to say denied the joining
+			JOptionPane.showMessageDialog(NwbClientConnect.this,
+					"Join is not allowed!",
+					"Request rejected", JOptionPane.ERROR_MESSAGE);		}
+	}
 
 	public void enterRoom(NwbServerRoom roomServer) {
-		NwbClientRoom room = NwbClientModelFactory.createRoomFactory(user, roomServer);
-		NwbClientModel newModel = NwbClientModelFactory.createRemoteModel(user, room.getServerRemoteModel());
-		NwbControllerFactory.setModel(newModel);
+		roomModel.enterRoom(user, roomServer);
+		NwbRemoteModel remoteModel = (NwbRemoteModel)NwbClientModelFactory.createRemoteModel(user, roomModel.getServerRemoteModel());
+		
+		NwbControllerFactory.setModel(remoteModel);
+		NwbMenuFactory.toggleFileMenu(true, roomModel.getManager().equals(this.user));
+
 		//roomServer.getRoomData().getManager();
 		// Create a list of users and show it on the window here.
 		
-	}
-	
-
-	public void drawPopup() {
-		// TODO Auto-generated method stub
-		System.out.println("Join is not allowed!");
-//		JOptionPane.showMessageDialog(NwbClientConnect.this,
-//				"Join is not allowed!",
-//				"Request rejected", JOptionPane.ERROR_MESSAGE);
 	}
 }

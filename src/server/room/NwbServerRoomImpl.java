@@ -20,7 +20,7 @@ public class NwbServerRoomImpl
 	 * 
 	 */
 	private static final long serialVersionUID = -7375101647398791502L;
-	private static final int POOL_SIZE = 10;
+	public static final int POOL_SIZE = 10;
 	
 	private NwbRoomDataInternal roomdata = null;
 	private NwbUserDataSecure manager = null;
@@ -48,10 +48,10 @@ public class NwbServerRoomImpl
 	
 	public void requestJoin(NwbUserDataSecure user)
 	{
-    	pool.execute(new NotifyRequestJoinHandler(this, user));
+    	pool.execute(new ManageJoinRequestHandler(this, user));
 	}
 	
-	private void notifyRequestJoin(NwbUserDataSecure user)
+	private void manageJoinRequest(NwbUserDataSecure user)
 	{
 		NwbUserData requestedUser = new NwbUserData(user.getUsername(), user.getSessionid());
 		
@@ -85,8 +85,21 @@ public class NwbServerRoomImpl
     		System.err.println("manageJoinResponse: Manager is invalid. " +manager);
     		return;
     	}
-    	
-    	gate.manageJoinResponse(this, joinUser, isAccepted );
+
+		NwbUserDataSecure joinUserSecure = gate.getUserDataSecure(joinUser);
+		
+		if(joinUserSecure.getSessionid() != joinUser.getSessionid()) {
+			//the user is not valid anymore
+			System.err.println("manageJoinResponse: user is not valid. Maybe exit the program!");
+			return;
+		}
+		
+		if(isAccepted)
+		{
+			addClient(joinUserSecure);
+		}
+
+    	gate.notifyJoinResponse(this, joinUser, isAccepted );
     }
     
 	public void addClient(NwbUserDataSecure user)
@@ -103,13 +116,11 @@ public class NwbServerRoomImpl
 	}
 	private ArrayList<NwbUserData> getUserList()
 	{
-		
 		ArrayList<NwbUserData> ret = new ArrayList<NwbUserData>();
 		for(NwbUserDataSecure u: users())
 			ret.add(u.getUserData());
 		return ret;
 	}
-
 	private void notifyRefresh()
 	{
 		for(NwbServerRoomObserver o: clientObservers.values())
@@ -154,11 +165,16 @@ public class NwbServerRoomImpl
 		
 		return ret;
 	}
-    
-    private void terminateRoom()
+    private void stop()
     {
 		//manager has exited from the room. notify to clients and delete room
 		notifyTerminateRoom();
+		
+		clientObservers.clear();
+		roomdata = null;
+		manager = null;
+		modelServer.stop();
+		
 		gate.deleteRoom(this.roomdata);    	
     }
 
@@ -170,7 +186,7 @@ public class NwbServerRoomImpl
     	if(clientObservers.size() <= 0
     			|| user.equals(this.manager))
     	{
-    		terminateRoom();
+    		stop();
     	}
     	else
     	{
@@ -239,18 +255,18 @@ public class NwbServerRoomImpl
 			}
 		}
     }
-    class NotifyRequestJoinHandler implements Runnable
+    class ManageJoinRequestHandler implements Runnable
     {
     	// Send to the manager to ask for joining 
     	NwbServerRoomImpl o;
     	NwbUserDataSecure user;
-    	NotifyRequestJoinHandler(NwbServerRoomImpl o, NwbUserDataSecure user) {
+    	ManageJoinRequestHandler(NwbServerRoomImpl o, NwbUserDataSecure user) {
     		this.o=o;
     		this.user = user;
 		}
 		@Override
 		public void run() {
-			o.notifyRequestJoin(user);
+			o.manageJoinRequest(user);
 		}
     }
 

@@ -32,6 +32,7 @@ public class NwbServerGateImpl
 	
 	private final ExecutorService keepAlivePool;
 	private static final int KEEP_ALIVE_POOL_SIZE = 1;
+	private final ExecutorService pool;
 	
 	public NwbServerGateImpl() throws RemoteException {
 		super();
@@ -43,6 +44,8 @@ public class NwbServerGateImpl
 
 		keepAlivePool = Executors.newFixedThreadPool(KEEP_ALIVE_POOL_SIZE);
 		keepAlivePool.execute(new KeepAliveChecker(this));
+
+		pool = Executors.newFixedThreadPool(NwbServerRoomImpl.POOL_SIZE);
 	}
 	
 	private void checkAlive()
@@ -66,29 +69,6 @@ public class NwbServerGateImpl
 			deleteUser(u);
 		}
 	}
-	class KeepAliveChecker implements Runnable
-	{
-		NwbServerGateImpl gate;
-		static final int SLEEP_TIME = 1000;
-		KeepAliveChecker(NwbServerGateImpl gate)
-		{
-			this.gate = gate;
-		}
-		@Override
-		public void run() {
-			for(;;)
-			{
-				try {
-					Thread.sleep(SLEEP_TIME);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				gate.checkAlive();
-			}
-		}
-	}
-	
 	public NwbUserDataSecure getUserDataSecure(NwbUserData user)
 	{
 		NwbUserDataSecure ret = clients.get(user.getUsername());
@@ -226,28 +206,75 @@ public class NwbServerGateImpl
 		return true;
 	}
 
-	public void manageJoinResponse(NwbServerRoomImpl nwbServerRoomImpl,
+	public void notifyJoinResponse(NwbServerRoomImpl server,
 			NwbUserData joinUser, boolean isAccepted) 
 	{
 		NwbUserDataSecure joinUserSecure = clients.get(joinUser.getUsername());
+		
 		if(joinUserSecure.getSessionid() != joinUser.getSessionid()) {
 			//the user is not valid anymore
-			System.err.println("manageJoinResponse: user is not valid!");
+			System.err.println("manageJoinResponse: user is not valid. Maybe exit the program!");
 			return;
 		}
 
 		NwbServerGateObserver observer = clientObservers.get(joinUserSecure);
-		
-		nwbServerRoomImpl.addClient(joinUserSecure);
-		
-		NwbServerRoom argServer = isAccepted ? nwbServerRoomImpl : null;
-		
+		NwbServerRoom argServer = isAccepted ? server : null;
+
 		try {
-			observer.notifyJoin(nwbServerRoomImpl.getRoomData(), isAccepted, argServer);
+			pool.execute(new NotifyJoinResponseHandler(observer, server.getRoomData(), isAccepted, argServer));
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
+	
+    class NotifyJoinResponseHandler implements Runnable
+    {
+    	// Send to the manager to ask for joining 
+    	NwbServerGateObserver o;
+    	NwbRoomData roomData;
+    	boolean isAccepted;
+    	NwbServerRoom argServer;
+    	NotifyJoinResponseHandler(NwbServerGateObserver o, NwbRoomData roomData,
+    			boolean isAccepted, NwbServerRoom argServer) {
+    		this.o=o;
+    		this.roomData = roomData;
+    		this.isAccepted = isAccepted;
+    		this.argServer = argServer;    		
+		}
+		@Override
+		public void run() {
+			try {
+				o.notifyJoin(roomData, isAccepted, argServer);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    }
+    
+	class KeepAliveChecker implements Runnable
+	{
+		NwbServerGateImpl gate;
+		static final int SLEEP_TIME = 1000;
+		KeepAliveChecker(NwbServerGateImpl gate)
+		{
+			this.gate = gate;
+		}
+		@Override
+		public void run() {
+			for(;;)
+			{
+				try {
+					Thread.sleep(SLEEP_TIME);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				gate.checkAlive();
+			}
+		}
+	}
+	
+
 }

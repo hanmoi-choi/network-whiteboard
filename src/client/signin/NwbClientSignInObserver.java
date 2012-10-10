@@ -26,17 +26,7 @@ implements NwbServerGateObserver
 	@Override
 	public void notifyJoin(NwbRoomData room, boolean isAccepted,
 			NwbServerRoom roomServer) throws RemoteException {
-		if(isAccepted)
-		{
-			//make a room and open new window
-			connectDialog.enterRoom(roomServer);
-		}
-		else
-		{
-			// popup to say denied the joining
-			connectDialog.drawPopup();
-		}
-		
+		connectDialog.joinResponse(isAccepted, roomServer);
 	}
 
 	@Override

@@ -28,7 +28,12 @@ public class NwbClientRoom {
 	private NwbServerRoom server;
 	private NwbServerRoomObserver observer;
 	
-    public NwbClientRoom(NwbUserDataSecure user, NwbServerRoom server) 
+	public NwbClientRoom()
+	{
+		
+	}
+	
+    public void enterRoom(NwbUserDataSecure user, NwbServerRoom server) 
     {
         this.server = server;
         this.user = user;
@@ -56,6 +61,18 @@ public class NwbClientRoom {
 		}
     }
     
+	public void exitRoom()
+	{
+		try {
+			server.exitRoom(this.user);
+			java.rmi.server.UnicastRemoteObject.unexportObject(observer, true);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	   
     private void updateRoomdata() throws RemoteException
     {
         this.room = server.getRoomData();
@@ -111,5 +128,32 @@ public class NwbClientRoom {
 	{
 		return this.room.getUserList();
 	}
-    
+	
+	public NwbRoomData getRoomData()
+	{
+		return this.room;
+	}
+	public NwbUserData getManager()
+	{
+		return this.room.getManager();
+	}
+	
+
+	public void notifyKicked()
+	{
+		JOptionPane.showMessageDialog(null,
+				"Oops, I'm kicked out by manager..",
+				"being kicked out", JOptionPane.ERROR_MESSAGE);
+		
+		exitRoom();
+	}
+	
+	public void notifyTerminate()
+	{
+		JOptionPane.showMessageDialog(null,
+				"OMG, this room is terminated!",
+				"terminate", JOptionPane.ERROR_MESSAGE);
+
+		exitRoom();
+	}
 }

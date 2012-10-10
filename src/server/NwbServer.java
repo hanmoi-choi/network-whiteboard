@@ -11,13 +11,15 @@ public class NwbServer {
 	{
 		System.setProperty("java.rmi.server.codebase", 
 				this.getClass().getProtectionDomain().getCodeSource().getLocation().toString());
-		System.out.println(this.getClass().getProtectionDomain().getCodeSource().getLocation().toString());
-		
 		try {
 			NwbServerGate server = new NwbServerGateImpl();
 			Registry registry = LocateRegistry.createRegistry(port);
 			registry.rebind(NWB_SERVICE_NAME, server);
-		} catch (RemoteException e) {
+		} catch(java.rmi.server.ExportException e) {
+			System.err.println("Cannot bind a server to RMI service. Port may be in use:"+port);
+			System.exit(0);
+		}
+		catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		System.out.println("RMI Server is running...");
@@ -25,7 +27,7 @@ public class NwbServer {
 	}
 	public static void main(String[] args) {
 		
-		// Test
+		// Default setting is localhost:30010
 		String host = "localhost";
 		int port = 30010;
 		

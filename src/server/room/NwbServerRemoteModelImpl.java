@@ -173,4 +173,12 @@ public class NwbServerRemoteModelImpl
 			o.notifyAddCommand(id, reqUser, command);
 		}
     }
+
+
+	public void stop() {
+		modelData.clear();
+		clientObservers.clear();
+		commandId = 0;
+		pool.shutdown();		
+	}
 }

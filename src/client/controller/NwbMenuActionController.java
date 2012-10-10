@@ -1,9 +1,12 @@
 package client.controller;
 
 import client.model.NwbClientModel;
+import client.model.factory.NwbClientModelFactory;
+import client.model.room.NwbClientRoom;
 import client.signin.NwbClientSignIn;
 import client.view.CanvasDrawble;
 import client.view.ui.controller.NwbUIComponentMediator;
+import client.view.ui.factory.NwbMenuFactory;
 
 import org.jdesktop.application.Action;
 
@@ -157,18 +160,35 @@ public class NwbMenuActionController implements NwbController {
         return file;
     }
 
+    private NwbClientRoom roomModel = null;
+    
     // Network, Local mode
     @Action
     public void doNetwork(ActionEvent evt){
         System.out.println("Change to network mode...");
-        mediator.modeChanged("network");
-		NwbClientSignIn signIn = new NwbClientSignIn();
+        if(roomModel != null)
+        {
+        	roomModel.exitRoom();
+        	roomModel = null;
+        }
+        roomModel = new NwbClientRoom();
+        mediator.modeChanged(true);
+    	NwbMenuFactory.toggleModeMenu(true);
+        
+		NwbClientSignIn signIn = new NwbClientSignIn(roomModel);
 		signIn.setVisible(true);
     }
+    
     @Action
     public void doLocal(ActionEvent evt){
         System.out.println("Change to local mode...");
-        mediator.modeChanged("local");
-        
+        if(roomModel != null)
+        {
+        	roomModel.exitRoom();
+        	roomModel = null;
+        }
+        NwbControllerFactory.setModel(NwbClientModelFactory.createLocalModel());
+        mediator.modeChanged(false);
+    	NwbMenuFactory.toggleModeMenu(false);
     }
 }
