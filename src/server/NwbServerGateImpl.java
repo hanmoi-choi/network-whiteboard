@@ -204,18 +204,26 @@ public class NwbServerGateImpl
 		}
 		return null;
 	}
-	public void joinRoomRequest(NwbUserDataSecure user, int roomId)
+	public boolean joinRoomRequest(NwbUserDataSecure user, int roomId)
 	{
 		NwbRoomDataInternal room = getRoom(roomId);
-		System.out.println("joinRoomRequest : user="+user+", room=" + room);
+		System.out.println("joinRoomRequest : user="+user+", room=" + room);		
 		NwbServerRoomImpl roomserver = roomServers.get(room);
+		
 		if(roomserver == null)
 		{
 			System.err.println("joinRoomRequest: no room server!");
-			return;
+			return false;
+		}
+		if(roomserver.isJoinable() == false)
+		{
+			System.err.println("joinRoomRequest: user cannot join the room. maybe exceeds num users!");
+			return false;
 		}
 		
 		roomserver.requestJoin(user);
+		
+		return true;
 	}
 
 	public void manageJoinResponse(NwbServerRoomImpl nwbServerRoomImpl,

@@ -52,6 +52,18 @@ public class NwbServerRoomImpl
 		}
 		
 	}
+	public int getNumUsers()
+	{
+		return clientObservers.size();
+	}
+	public boolean isJoinable()
+	{
+		boolean ret = true;
+		if(getNumUsers() >= roomdata.getMaxusers())
+			ret = false;
+		
+		return ret;
+	}
 	
     @Override
     public void manageJoinResponse(NwbUserDataSecure manager, NwbUserData joinUser, boolean isAccepted) throws RemoteException

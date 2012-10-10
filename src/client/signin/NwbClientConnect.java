@@ -225,7 +225,15 @@ public class NwbClientConnect extends JFrame {
 						int boardID = Integer.parseInt(table.getValueAt(
 								table.getSelectedRow(), 0).toString());
 						try {
-							server.joinRoomRequest(user, boardID);
+							if(server.joinRoomRequest(user, boardID) != true)
+							{
+								//Popup and try again
+								JOptionPane.showMessageDialog(NwbClientConnect.this,
+										"Room is full. Select another room or create one",
+										"Error", JOptionPane.ERROR_MESSAGE);
+								return;
+								
+							}
 						} catch (RemoteException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

@@ -25,13 +25,8 @@ import org.jdesktop.application.Application;
  * To change this template use File | Settings | File Templates.
  */
 public class NwbClientApplication extends Application {
-	
-	// Test line for make a unique username
-	String username=null;
 	protected void initialize(String[] args)
 	{
-		if(args.length != 0)
-			username=args[0];
 	}
 	
     @Override
@@ -87,9 +82,6 @@ public class NwbClientApplication extends Application {
 
         view.showView();
 
-        // Remote mode test!
-        if(this.username != null)
-        	NwbClientTest.startTest(username);
     }
 
     /**
