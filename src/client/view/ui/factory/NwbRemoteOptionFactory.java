@@ -44,12 +44,18 @@ public class NwbRemoteOptionFactory {
 		if (displayPanel == null) {
 			displayPanel = new JPanel();
 			displayPanel.setLayout(new BorderLayout());
+<<<<<<< HEAD
 			displayPanel.setPreferredSize(new Dimension(120,300));
+=======
+>>>>>>> baa76583014c8408abc750c72fd7440f47c0e83d
 
 			initTable();
 			JScrollPane scrollPanel = new JScrollPane(memberListTable);
 			nwbUIComponentMediator.addMemberScrollPanel(scrollPanel);
+<<<<<<< HEAD
 			nwbUIComponentMediator.addMemberListTable(memberListTable);
+=======
+>>>>>>> baa76583014c8408abc750c72fd7440f47c0e83d
 			scrollPanel.setBounds(0, 0, 120, 300);
 			scrollPanel.setPreferredSize(new Dimension(120, 300));
 			displayPanel.add(scrollPanel,BorderLayout.SOUTH);

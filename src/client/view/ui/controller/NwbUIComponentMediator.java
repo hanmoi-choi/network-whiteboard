@@ -4,7 +4,10 @@ import client.view.ui.comp.NwbColorControllButton;
 import client.view.ui.comp.NwbJToggleButton;
 
 import javax.swing.*;
+<<<<<<< HEAD
 import javax.swing.table.DefaultTableModel;
+=======
+>>>>>>> baa76583014c8408abc750c72fd7440f47c0e83d
 
 import java.awt.*;
 import java.util.*;
@@ -23,7 +26,10 @@ public class NwbUIComponentMediator {
     private List<NwbJToggleButton> fillModeToggleButtonList;
     private JPanel fillNStrokePanel;
     private JScrollPane scrollPanel;
+<<<<<<< HEAD
     private JTable memberListTable;
+=======
+>>>>>>> baa76583014c8408abc750c72fd7440f47c0e83d
     private List<NwbColorControllButton> colorControlButtonList;
     private Map<String, JTextField> textFieldMap;
 
@@ -74,12 +80,15 @@ public class NwbUIComponentMediator {
     	}
     	else {
     		scrollPanel.setVisible(false);
+<<<<<<< HEAD
     		DefaultTableModel tableModel = (DefaultTableModel) memberListTable.getModel();
     		int rowCount = tableModel.getRowCount();
     		for(int i = 0; i < rowCount; i++)
     		{
     			tableModel.removeRow(0);
     		}
+=======
+>>>>>>> baa76583014c8408abc750c72fd7440f47c0e83d
     	}
     }
     
@@ -97,11 +106,14 @@ public class NwbUIComponentMediator {
         this.scrollPanel = scrollPanel;
     }
     
+<<<<<<< HEAD
     public void addMemberListTable(JTable table)
     {
     	this.memberListTable = table;
     }
     
+=======
+>>>>>>> baa76583014c8408abc750c72fd7440f47c0e83d
     public void registerColorButton(NwbColorControllButton nwbColorControllButton) {
         colorControlButtonList.add(nwbColorControllButton);
     }
