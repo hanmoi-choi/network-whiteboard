@@ -18,8 +18,10 @@ public class NwbClientConnector {
 		NwbServerGate sv = null;
 		try {
 			sv = (NwbServerGate)Naming.lookup("rmi://"+hostname+"/"+server.NwbServer.NWB_SERVICE_NAME);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
+		} catch (java.rmi.ConnectException e) {
+			//Do nothing. just return null
+		}
+		catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

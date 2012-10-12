@@ -20,9 +20,12 @@ import server.room.NwbServerRoom;
 
 import client.controller.NwbControllerFactory;
 import client.model.NwbClientModel;
+import client.model.NwbRemoteModel;
 import client.model.factory.NwbClientModelFactory;
 import client.model.room.NwbClientRoom;
 import client.signin.setting.NwbClientCanvasSize;
+import client.view.ui.factory.NwbMenuFactory;
+import client.view.ui.factory.NwbRemoteOptionFactory;
 
 public class NwbClientConnect extends JFrame {
 
@@ -35,12 +38,13 @@ public class NwbClientConnect extends JFrame {
 	private JButton createButton = null;
 	private JButton joinButton = null;
 	private JComboBox canvasSize = new JComboBox(new NwbClientCanvasSize());
-
+	private ProcessingDialog pDialog = null;
 	
 	private NwbServerGate server;
 	private NwbUserDataSecure user;
+	private NwbClientRoom roomModel;
 	
-	public NwbClientConnect(NwbServerGate server, NwbUserDataSecure user) {
+	public NwbClientConnect(NwbServerGate server, NwbUserDataSecure user, NwbClientRoom roomModel) {
 		super();
 		
 		this.server = server;
@@ -49,7 +53,7 @@ public class NwbClientConnect extends JFrame {
 		getContentPane().setFocusCycleRoot(true);
 		setTitle("Network");
 		setBounds(100, 100, 500, 375);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -70,6 +74,8 @@ public class NwbClientConnect extends JFrame {
 
 		setupTabJoin();
 		setupTabCreate();
+		
+		this.roomModel = roomModel;
 	}
 
 	private void setupTabJoin() {
@@ -150,6 +156,7 @@ public class NwbClientConnect extends JFrame {
 							try {
 								NwbServerRoom newRoom = server.createRoom(user, nameField.getText(), Integer.parseInt(maxField.getText()));
 								enterRoom(newRoom);
+								NwbRemoteOptionFactory.showKickButton(user,newRoom);
 							} catch (RemoteException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
@@ -206,11 +213,6 @@ public class NwbClientConnect extends JFrame {
 			row[3] = rm.getNumusers()+"/"+rm.getMaxusers();
 			tableModel.addRow(row);
 		}
-		
-
-		
-		
-
 	}
 
 	private JButton getJoinButton() {
@@ -222,13 +224,22 @@ public class NwbClientConnect extends JFrame {
 					if (table.getSelectedRow() == -1) {
 						JOptionPane.showMessageDialog(NwbClientConnect.this,
 								"Please select a white board.",
-								"No selecte board", JOptionPane.ERROR_MESSAGE);
+								"No selected board", JOptionPane.ERROR_MESSAGE);
 						return;
 					} else {
 						int boardID = Integer.parseInt(table.getValueAt(
 								table.getSelectedRow(), 0).toString());
+						pDialog = new ProcessingDialog();
+						pDialog.setVisible(true);
 						try {
-							server.joinRoomRequest(user, boardID);
+							if(server.joinRoomRequest(user, boardID) != true)
+							{
+								//Popup and try again
+								JOptionPane.showMessageDialog(NwbClientConnect.this,
+										"Room is full. Select another room or create one",
+										"Error", JOptionPane.ERROR_MESSAGE);
+							}
+							return;
 						} catch (RemoteException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -240,17 +251,50 @@ public class NwbClientConnect extends JFrame {
 		}
 		return joinButton;
 	}
-
-	public void enterRoom(NwbServerRoom roomServer) {
-		NwbClientRoom room = NwbClientModelFactory.createRoomFactory(user, roomServer);
-		NwbClientModel newModel = NwbClientModelFactory.createRemoteModel(user, room.getServerRemoteModel());
-		NwbControllerFactory.setModel(newModel);
-		
-		// Create a list of users and show it on the window here.
+	
+	public void joinResponse(boolean isAccepted, NwbServerRoom roomServer)
+	{
+		if(isAccepted)
+		{
+			//make a room and open new window
+			enterRoom(roomServer);
+			pDialog.setVisible(false);
+			setVisible(false);
+		}
+		else
+		{
+			pDialog.setVisible(false);
+			// popup to say denied the joining
+			JOptionPane.showMessageDialog(NwbClientConnect.this,
+					"Join is not allowed by the manager!",
+					"Request rejected", JOptionPane.ERROR_MESSAGE);		}
 	}
 
-	public void drawPopup(String string) {
-		// TODO Auto-generated method stub
+	public void enterRoom(NwbServerRoom roomServer) {
+		roomModel.enterRoom(user, roomServer);
+		NwbRemoteModel remoteModel = (NwbRemoteModel)NwbClientModelFactory.createRemoteModel(user, roomModel.getServerRemoteModel());
 		
+		NwbControllerFactory.setModel(remoteModel);
+		NwbMenuFactory.toggleFileMenu(true, roomModel.getManager().equals(this.user));
+
+		//roomServer.getRoomData().getManager();
+		// Create a list of users and show it on the window here.
+		
+	}
+	class ProcessingDialog extends JFrame {
+		public ProcessingDialog()
+		{
+			this.setTitle("Processing request");
+			Container container = getContentPane();
+			container.setLayout(null);
+			this.setBounds(300,200,450,100);
+			this.setResizable(false);
+			JLabel label = new JLabel();
+			label.setText("Your request is being sent to the manager. Please wait...");
+			label.setFont(new java.awt.Font("Calibri",   Font.PLAIN,   15));
+			label.setBounds(20, 10, 400, 50);
+			container.add(label);	
+			this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		}
 	}
 }

@@ -47,6 +47,9 @@ public final class NwbMenuFactory{
         jmiQuit.setAction(actionMap.get("doQuit"));
 		jmFile.add(jmiQuit);
 
+		gjmiNew=jmiNew;
+		gjmiOpen=jmiOpen;
+		
 		return jmFile;
 	}
 
@@ -72,15 +75,60 @@ public final class NwbMenuFactory{
 	public static JMenu createModeMenu() {
         JMenu jmMode = new JMenu("Mode");
 
-		JMenuItem jmiNetwork = new JMenuItem("Network Mode");
-		jmiNetwork.setAction(actionMap.get("doNetwork"));
-		jmMode.add(jmiNetwork);
-
-		JMenuItem jmiLocal = new JMenuItem("Local Mode");
+        JMenuItem jmiLocal = new JRadioButtonMenuItem("Local Mode", true);
 		jmiLocal.setAction(actionMap.get("doLocal"));
+		jmiLocal.setEnabled(false);
         jmMode.add(jmiLocal);
 
+        JMenuItem jmiNetwork = new JRadioButtonMenuItem("Network Mode", false);
+		jmiNetwork.setAction(actionMap.get("doNetwork"));
+		jmMode.add(jmiNetwork);
+		
+		gjmiLocal = jmiLocal;
+		gjmiNetwork = jmiNetwork;
+		
         return jmMode;
+	}
+	
+	private static JMenuItem gjmiLocal;
+	private static JMenuItem gjmiNetwork;
+	public static void toggleModeMenu(boolean isNetwork)
+	{
+		if(isNetwork)
+		{
+			gjmiNetwork.setSelected(true);
+			gjmiNetwork.setEnabled(false);
+			
+			gjmiLocal.setSelected(false);
+			gjmiLocal.setEnabled(true);
+		}
+		else
+		{
+			gjmiLocal.setSelected(true);
+			gjmiLocal.setEnabled(false);
+			
+			gjmiNetwork.setSelected(false);
+			gjmiNetwork.setEnabled(true);
+		}
+			
+	}
+	private static JMenuItem gjmiNew;
+	private static JMenuItem gjmiOpen;
+	
+	public static void toggleFileMenu(boolean isNetwork, boolean isManager)
+	{
+		if(isNetwork && !isManager)
+		{
+			gjmiNew.setEnabled(false);
+			gjmiOpen.setEnabled(false);
+		}
+		else
+		{
+			gjmiNew.setEnabled(true);
+			gjmiOpen.setEnabled(true);
+		}
+			
+		
 	}
 
 }

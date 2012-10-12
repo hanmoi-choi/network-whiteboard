@@ -15,6 +15,6 @@ public interface NwbServerGate extends Remote {
 	public void signOut(NwbUserDataSecure user) throws RemoteException;
 	
 	public NwbServerRoom createRoom(NwbUserDataSecure user, String roomname, int maxusers) throws RemoteException;
-	public void joinRoomRequest(NwbUserDataSecure user, int roomId) throws RemoteException;
+	public boolean joinRoomRequest(NwbUserDataSecure user, int roomId) throws RemoteException;
 	public List<NwbRoomData> getRoomList(NwbUserDataSecure user) throws RemoteException;
 }

@@ -13,6 +13,8 @@ import client.view.ui.controller.NwbUIComponentMediator;
 import client.view.ui.factory.NwbDrawingOptionFactory;
 import client.view.ui.factory.NwbHorToolBarFactory;
 import client.view.ui.factory.NwbMenuFactory;
+import client.view.ui.factory.NwbRemoteOptionFactory;
+
 import org.jdesktop.application.Application;
 
 /**
@@ -23,13 +25,8 @@ import org.jdesktop.application.Application;
  * To change this template use File | Settings | File Templates.
  */
 public class NwbClientApplication extends Application {
-	
-	// Test line for make a unique username
-	String username=null;
 	protected void initialize(String[] args)
 	{
-		if(args.length != 0)
-			username=args[0];
 	}
 	
     @Override
@@ -47,22 +44,23 @@ public class NwbClientApplication extends Application {
         
         NwbDrawingCanvasController drawingCanvasController =
         		(NwbDrawingCanvasController) NwbControllerFactory.createController(
-        				NwbControllerFactory.ControllerType.DrawingConvas);
+        				NwbControllerFactory.ControllerType.DrawingConvas,mediator);
         NwbMenuActionController menuActionController = 
         		(NwbMenuActionController) NwbControllerFactory.createController(
-        				NwbControllerFactory.ControllerType.MenuAction);
+        				NwbControllerFactory.ControllerType.MenuAction,mediator);
         NwbDrawingTypeToolbarController drawingTypeToolbarController = 
         		(NwbDrawingTypeToolbarController) NwbControllerFactory.createController(
-        				NwbControllerFactory.ControllerType.DrawingTypeToolbar);
+        				NwbControllerFactory.ControllerType.DrawingTypeToolbar,mediator);
         NwbDrawingOptionActionController drawingOptionActionController = 
         		(NwbDrawingOptionActionController) NwbControllerFactory.createController(
-        				NwbControllerFactory.ControllerType.DrawingOptionAction);
+        				NwbControllerFactory.ControllerType.DrawingOptionAction,mediator);
 
         NwbMenuFactory.setActionMap(menuActionController);
         NwbHorToolBarFactory.setActionMap(drawingTypeToolbarController);
         NwbHorToolBarFactory.setUIMediator(mediator);
         NwbDrawingOptionFactory.setActionMap(drawingOptionActionController);
         NwbDrawingOptionFactory.setUIMediator(mediator);
+        NwbRemoteOptionFactory.setUIMediator(mediator);
 
         //View
         NwbCanvasMouseEventHandler mouseAdapter = new NwbCanvasMouseEventHandler(drawingCanvasController);
@@ -84,9 +82,6 @@ public class NwbClientApplication extends Application {
 
         view.showView();
 
-        // Remote mode test!
-        if(this.username != null)
-        	NwbClientTest.startTest(username);
     }
 
     /**

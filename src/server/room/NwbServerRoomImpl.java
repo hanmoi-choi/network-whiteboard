@@ -5,6 +5,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import server.NwbServerGateImpl;
 import server.NwbUserData;
@@ -18,7 +20,7 @@ public class NwbServerRoomImpl
 	 * 
 	 */
 	private static final long serialVersionUID = -7375101647398791502L;
-	private static final int POOL_SIZE = 10;
+	public static final int POOL_SIZE = 10;
 	
 	private NwbRoomDataInternal roomdata = null;
 	private NwbUserDataSecure manager = null;
@@ -27,7 +29,10 @@ public class NwbServerRoomImpl
 	
 	private NwbServerRemoteModelImpl modelServer=null;
 	
-	public NwbServerRoomImpl(NwbRoomDataInternal roomdata, NwbUserDataSecure manager, NwbServerGateImpl gate) throws RemoteException {
+	private final ExecutorService pool;
+	
+	public NwbServerRoomImpl(NwbRoomDataInternal roomdata, NwbUserDataSecure manager, 
+			NwbServerGateImpl gate) throws RemoteException {
 		super();
 		
 		this.roomdata = roomdata;
@@ -37,9 +42,16 @@ public class NwbServerRoomImpl
 		this.gate = gate;
 		
 		this.modelServer = new NwbServerRemoteModelImpl(POOL_SIZE);
+		
+		pool = Executors.newFixedThreadPool(POOL_SIZE);
 	}
 	
 	public void requestJoin(NwbUserDataSecure user)
+	{
+    	pool.execute(new ManageJoinRequestHandler(this, user));
+	}
+	
+	private void manageJoinRequest(NwbUserDataSecure user)
 	{
 		NwbUserData requestedUser = new NwbUserData(user.getUsername(), user.getSessionid());
 		
@@ -49,8 +61,19 @@ public class NwbServerRoomImpl
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}		
+	}
+	public int getNumUsers()
+	{
+		return clientObservers.size();
+	}
+	public boolean isJoinable()
+	{
+		boolean ret = true;
+		if(getNumUsers() >= roomdata.getMaxusers())
+			ret = false;
 		
+		return ret;
 	}
 	
     @Override
@@ -62,8 +85,21 @@ public class NwbServerRoomImpl
     		System.err.println("manageJoinResponse: Manager is invalid. " +manager);
     		return;
     	}
-    	
-    	gate.manageJoinResponse(this, joinUser, isAccepted );
+
+		NwbUserDataSecure joinUserSecure = gate.getUserDataSecure(joinUser);
+		
+		if(joinUserSecure.getSessionid() != joinUser.getSessionid()) {
+			//the user is not valid anymore
+			System.err.println("manageJoinResponse: user is not valid. Maybe exit the program!");
+			return;
+		}
+		
+		if(isAccepted)
+		{
+			addClient(joinUserSecure);
+		}
+
+    	gate.notifyJoinResponse(this, joinUser, isAccepted );
     }
     
 	public void addClient(NwbUserDataSecure user)
@@ -80,13 +116,11 @@ public class NwbServerRoomImpl
 	}
 	private ArrayList<NwbUserData> getUserList()
 	{
-		
 		ArrayList<NwbUserData> ret = new ArrayList<NwbUserData>();
 		for(NwbUserDataSecure u: users())
 			ret.add(u.getUserData());
 		return ret;
 	}
-
 	private void notifyRefresh()
 	{
 		for(NwbServerRoomObserver o: clientObservers.values())
@@ -125,24 +159,40 @@ public class NwbServerRoomImpl
 		System.out.println("Room.bindObserver:user="+user+", ret="+ret);
 		
 		// Joining process is DONE. Notify to all clients about this.
-		notifyRefresh();
+		//notifyRefresh();
+    	pool.execute(new NotifyRefreshHandler(this));
+
 		
 		return ret;
 	}
+    private void stop()
+    {
+		//manager has exited from the room. notify to clients and delete room
+		notifyTerminateRoom();
+		
+		clientObservers.clear();
+		roomdata = null;
+		manager = null;
+		modelServer.stop();
+		
+		gate.deleteRoom(this.roomdata);    	
+    }
 
     @Override
     public void exitRoom(NwbUserDataSecure user) throws RemoteException {
     	clientObservers.remove(user);
     	modelServer.removeClient(user);
     	
-    	if(clientObservers.size() <= 0)
-    		gate.deleteRoom(this.roomdata);
-    	else if(user.equals(this.manager))
+    	if(clientObservers.size() <= 0
+    			|| user.equals(this.manager))
     	{
-    		//manager has exited from the room. notify to clients and delete room
-    		notifyTerminateRoom();
-    		gate.deleteRoom(this.roomdata);
+    		stop();
     	}
+    	else
+    	{
+    		pool.execute(new NotifyRefreshHandler(this));
+    	}
+    	
 	}
 
 	@Override
@@ -169,12 +219,55 @@ public class NwbServerRoomImpl
     	
     	NwbUserDataSecure kickUserSecure = gate.getUserDataSecure(kickUser);
     	NwbServerRoomObserver observer = clientObservers.get(kickUser);
-    	
+
     	// force exit the user from the room
     	exitRoom(kickUserSecure);
     	
     	// notify to the user that he is kicked out
-    	observer.notifyKicked();
-		
+    	pool.execute(new NotifyKickedHandler(observer));		
 	}
+
+    class NotifyRefreshHandler implements Runnable
+    {
+    	NwbServerRoomImpl o;
+    	NotifyRefreshHandler(NwbServerRoomImpl o) {
+    		this.o=o;
+		}
+		@Override
+		public void run() {
+			o.notifyRefresh();
+		}
+    }
+
+    class NotifyKickedHandler implements Runnable
+    {
+    	NwbServerRoomObserver observer;
+    	NotifyKickedHandler(NwbServerRoomObserver observer) {
+    		this.observer=observer;
+		}
+		@Override
+		public void run() {
+	    	try {
+				observer.notifyKicked();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    }
+    class ManageJoinRequestHandler implements Runnable
+    {
+    	// Send to the manager to ask for joining 
+    	NwbServerRoomImpl o;
+    	NwbUserDataSecure user;
+    	ManageJoinRequestHandler(NwbServerRoomImpl o, NwbUserDataSecure user) {
+    		this.o=o;
+    		this.user = user;
+		}
+		@Override
+		public void run() {
+			o.manageJoinRequest(user);
+		}
+    }
+
 }

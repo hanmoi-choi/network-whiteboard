@@ -56,6 +56,11 @@ public class NwbServerRemoteModelImpl
     
     @Override
     public int addCommand(NwbUserDataSecure user, NwbDrawingCommand command) {
+    	if(!clientObservers.containsKey(user))
+    	{
+    		return -1;
+    	}
+    	
     	int id = 0;
     	synchronized(commandId)
     	{
@@ -75,6 +80,11 @@ public class NwbServerRemoteModelImpl
     @Override
     public void removeCommand(NwbUserDataSecure requestUser, int commandId)
     {
+    	if(!clientObservers.containsKey(requestUser))
+    	{
+    		return;
+    	}
+    	
     	synchronized(modelData)
     	{
     		int index = findCommand(commandId);
@@ -163,4 +173,12 @@ public class NwbServerRemoteModelImpl
 			o.notifyAddCommand(id, reqUser, command);
 		}
     }
+
+
+	public void stop() {
+		modelData.clear();
+		clientObservers.clear();
+		commandId = 0;
+		pool.shutdown();		
+	}
 }

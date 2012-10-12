@@ -3,6 +3,10 @@ package client.model.room;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import client.view.ui.factory.NwbRemoteOptionFactory;
+
 import server.NwbUserData;
 import server.NwbUserDataSecure;
 import server.room.NwbRoomData;
@@ -24,7 +28,12 @@ public class NwbClientRoom {
 	private NwbServerRoom server;
 	private NwbServerRoomObserver observer;
 	
-    public NwbClientRoom(NwbUserDataSecure user, NwbServerRoom server) 
+	public NwbClientRoom()
+	{
+		
+	}
+	
+    public void enterRoom(NwbUserDataSecure user, NwbServerRoom server) 
     {
         this.server = server;
         this.user = user;
@@ -52,6 +61,18 @@ public class NwbClientRoom {
 		}
     }
     
+	public void exitRoom()
+	{
+		try {
+			server.exitRoom(this.user);
+			java.rmi.server.UnicastRemoteObject.unexportObject(observer, true);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	   
     private void updateRoomdata() throws RemoteException
     {
         this.room = server.getRoomData();
@@ -60,6 +81,8 @@ public class NwbClientRoom {
 	public void refresh() {
 		try {
 			updateRoomdata();
+			NwbRemoteOptionFactory.updateMemberList(server);
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,12 +90,17 @@ public class NwbClientRoom {
 	}
 
 	public void manageJoinRequest(NwbUserData joinUser) {
-		//TODO notify to user
 		// Pop-up and ask accepting for the user.
+		int option = JOptionPane.showConfirmDialog(null,
+				joinUser.getUsername()+" wants to join. Do you want to accept join?",
+				"Join request", JOptionPane.YES_NO_OPTION);
+		
 		System.out.println("manageJoinRequested: Do you want to accept join?" + joinUser);
 		
-		// Only for test
-		manageJoinResponse(joinUser, true);
+		boolean opt = (option == JOptionPane.YES_OPTION) ? true : false;
+		System.out.println("option"+opt);
+		
+		manageJoinResponse(joinUser, opt);
 	}
 	
 	private void manageJoinResponse(NwbUserData joinUser, boolean isAccepted)
@@ -100,5 +128,32 @@ public class NwbClientRoom {
 	{
 		return this.room.getUserList();
 	}
-    
+	
+	public NwbRoomData getRoomData()
+	{
+		return this.room;
+	}
+	public NwbUserData getManager()
+	{
+		return this.room.getManager();
+	}
+	
+
+	public void notifyKicked()
+	{
+		JOptionPane.showMessageDialog(null,
+				"Oops, I'm kicked out by manager..",
+				"being kicked out", JOptionPane.ERROR_MESSAGE);
+		
+		exitRoom();
+	}
+	
+	public void notifyTerminate()
+	{
+		JOptionPane.showMessageDialog(null,
+				"OMG, this room is terminated!",
+				"terminate", JOptionPane.ERROR_MESSAGE);
+
+		exitRoom();
+	}
 }

@@ -10,6 +10,7 @@ import javax.swing.*;
 
 import client.model.NwbRemoteModel;
 import client.model.room.NwbClientConnector;
+import client.model.room.NwbClientRoom;
 import client.model.NwbRemoteModelObserverImpl;
 
 import server.NwbServerGate;
@@ -29,8 +30,11 @@ public class NwbClientSignIn extends JFrame {
 	private NwbClientSignInPanel signinPanel = null;
 	private int width;
 	private int height;
+	
+	private NwbClientRoom roomModel;
 
-	public NwbClientSignIn() {
+	public NwbClientSignIn(NwbClientRoom roomModel) {
+		this.roomModel = roomModel;
 		try {
 			initialize();
 		} catch (Exception e) {
@@ -181,7 +185,7 @@ public class NwbClientSignIn extends JFrame {
 			e.printStackTrace();
 		}
 		
-		NwbClientConnect connectDialog = new NwbClientConnect(server, user);
+		NwbClientConnect connectDialog = new NwbClientConnect(server, user, roomModel);
 		observer.setClientConnect(connectDialog);
 		connectDialog.setVisible(true);
 		
@@ -198,6 +202,7 @@ public class NwbClientSignIn extends JFrame {
 		this.setTitle("Sign in");
 		this.setResizable(false);
 		setContentPane(getLoginPanel());
+		//this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	}
 

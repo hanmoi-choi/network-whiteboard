@@ -4,6 +4,8 @@ import client.view.ui.comp.NwbColorControllButton;
 import client.view.ui.comp.NwbJToggleButton;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -20,6 +22,8 @@ public class NwbUIComponentMediator {
     private List<NwbJToggleButton> toolbarToggleButtonList;
     private List<NwbJToggleButton> fillModeToggleButtonList;
     private JPanel fillNStrokePanel;
+    private JScrollPane scrollPanel;
+    private JTable memberListTable;
     private List<NwbColorControllButton> colorControlButtonList;
     private Map<String, JTextField> textFieldMap;
 
@@ -47,7 +51,7 @@ public class NwbUIComponentMediator {
         }
     }
 
-  public void fillModeButtonClicked(NwbJToggleButton buttonPressed){
+    public void fillModeButtonClicked(NwbJToggleButton buttonPressed){
 
         for(NwbJToggleButton button : fillModeToggleButtonList){
             if(button != buttonPressed) button.setSelected(false);
@@ -63,7 +67,22 @@ public class NwbUIComponentMediator {
             fillNStrokePanel.setVisible(false);
         }
     }
-
+    
+    public void modeChanged(boolean isNetwork) {
+    	if(isNetwork){
+    		scrollPanel.setVisible(true);
+    	}
+    	else {
+    		scrollPanel.setVisible(false);
+    		DefaultTableModel tableModel = (DefaultTableModel) memberListTable.getModel();
+    		int rowCount = tableModel.getRowCount();
+    		for(int i = 0; i < rowCount; i++)
+    		{
+    			tableModel.removeRow(0);
+    		}
+    	}
+    }
+    
     private boolean isStrategyWithFillingMode(NwbJToggleButton buttonPressed) {
         return buttonPressed.getActionCommand().equals("doRect")
                || buttonPressed.getActionCommand().equals("doRoundedRect")
@@ -74,6 +93,15 @@ public class NwbUIComponentMediator {
         this.fillNStrokePanel = fillNStrokePanel;
     }
 
+    public void addMemberScrollPanel(JScrollPane scrollPanel) {
+        this.scrollPanel = scrollPanel;
+    }
+    
+    public void addMemberListTable(JTable table)
+    {
+    	this.memberListTable = table;
+    }
+    
     public void registerColorButton(NwbColorControllButton nwbColorControllButton) {
         colorControlButtonList.add(nwbColorControllButton);
     }

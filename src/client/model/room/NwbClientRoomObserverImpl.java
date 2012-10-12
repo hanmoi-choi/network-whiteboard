@@ -3,6 +3,8 @@ package client.model.room;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import javax.swing.JOptionPane;
+
 import server.NwbUserData;
 import server.room.NwbServerRoomObserver;
 
@@ -35,15 +37,11 @@ public class NwbClientRoomObserverImpl
 
 	@Override
 	public void notifyKicked() throws RemoteException {
-		// TODO Auto-generated method stub
-		System.out.println("Oops, I'm kicked out by manager..");
-		
+		this.client.notifyKicked();
 	}
 
 	@Override
 	public void notifyTerminateRoom() throws RemoteException {
-		// TODO Auto-generated method stub
-		System.out.println("Oops, room is terminated");
-		
+		this.client.notifyTerminate();
 	}
 }

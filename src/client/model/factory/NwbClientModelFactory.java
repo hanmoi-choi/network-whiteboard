@@ -38,12 +38,4 @@ public class NwbClientModelFactory {
 		
 		return model;
 	}
-	
-	public static NwbClientRoom createRoomFactory(NwbUserDataSecure user, NwbServerRoom server)
-	{
-		NwbClientRoom roomClient = new NwbClientRoom(user, server);
-		
-		return roomClient;
- 
-	}
 }
