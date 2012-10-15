@@ -37,6 +37,7 @@ public class NwbClientConnect extends JFrame {
 	private JTextField maxField = null;
 	private JButton createButton = null;
 	private JButton joinButton = null;
+	private JButton refreshButton = null;
 	private JComboBox canvasSize = new JComboBox(new NwbClientCanvasSize());
 	private ProcessingDialog pDialog = null;
 	
@@ -89,6 +90,7 @@ public class NwbClientConnect extends JFrame {
 		tabJoin.add(title);
 		tabJoin.add(scrollPanel);
 		tabJoin.add(getJoinButton());
+		tabJoin.add(getRefreshButton());
 
 		tabbedPane.addTab("Join", tabJoin);
 	}
@@ -215,6 +217,40 @@ public class NwbClientConnect extends JFrame {
 		}
 	}
 
+	private JButton getRefreshButton() {
+		if (refreshButton == null) {
+			refreshButton = new JButton("Refresh");
+			refreshButton.setBounds(new Rectangle(180, 280, 100, 25));
+			refreshButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					int rowCount = table.getRowCount();
+					for(int i = 0; i < rowCount; i++)
+					{
+						tableModel.removeRow(0);
+					}
+					List<NwbRoomData> rooms = null;
+					try {
+						rooms = server.getRoomList(user);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					for(NwbRoomData rm : rooms)
+					{
+						Object[] row = new Object[4];
+						row[0] = rm.getRoomid();
+						row[1] = rm.getRoomname();
+						row[2] = rm.getManager().getUsername();
+						row[3] = rm.getNumusers()+"/"+rm.getMaxusers();
+						tableModel.addRow(row);
+					}
+				}
+			});
+		}
+		return refreshButton;
+	}
+	
 	private JButton getJoinButton() {
 		if (joinButton == null) {
 			joinButton = new JButton("Join");
