@@ -6,6 +6,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import java.util.Stack;
 
+import javax.swing.JOptionPane;
+
+import client.signin.NwbClientConnect;
+import client.view.ui.factory.NwbMenuFactory;
+
 import server.NwbUserData;
 import server.NwbUserDataSecure;
 import server.room.NwbDrawingCommandData;
@@ -106,6 +111,14 @@ public class NwbRemoteModel extends NwbClientModel {
         super.updateSubscribers();
     }
 
+    private void handleServerException()
+    {
+		JOptionPane.showMessageDialog(null,
+				"Cannot connect to the remote room! The room is banged!",
+				"Server Error", JOptionPane.ERROR_MESSAGE);	
+		NwbMenuFactory.forceChangeLocalMode();
+    }
+    
     // Remote model specific methods
     public void addCommandFromClient(NwbDrawingCommand command)
     {
@@ -113,8 +126,7 @@ public class NwbRemoteModel extends NwbClientModel {
 		try {
 			id = server.addCommand(this.user, command);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			handleServerException();
 		}
     	addCommand(id, this.user, command);
     }
@@ -124,8 +136,7 @@ public class NwbRemoteModel extends NwbClientModel {
     	try {
 			server.removeCommand(this.user, commandId);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			handleServerException();
 		}
     	
     	return ret;
@@ -144,8 +155,7 @@ public class NwbRemoteModel extends NwbClientModel {
     	try {
 			server.removeCommand(this.user, id);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			handleServerException();
 		}
     	
     	return ret;

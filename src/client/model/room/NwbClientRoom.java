@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import client.view.ui.factory.NwbMenuFactory;
 import client.view.ui.factory.NwbRemoteOptionFactory;
 
 import server.NwbUserData;
@@ -68,15 +69,26 @@ public class NwbClientRoom {
 	{
 		if(isExited)
 			return;
+
 		try {
 			if(server != null)
 				server.exitRoom(this.user);
-			
-			if(observer != null)
-				java.rmi.server.UnicastRemoteObject.unexportObject(observer, true);
+			server = null;
+		} catch (java.rmi.ConnectException e) {
+			server = null;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		try {
+			if(observer != null)
+				java.rmi.server.UnicastRemoteObject.unexportObject(observer, true);
+			observer = null;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
 		}
 		isExited = true;
 		
@@ -155,6 +167,7 @@ public class NwbClientRoom {
 				"being kicked out", JOptionPane.ERROR_MESSAGE);
 		
 		exitRoom();
+		NwbMenuFactory.forceChangeLocalMode();
 	}
 	
 	public void notifyTerminate()
@@ -164,5 +177,6 @@ public class NwbClientRoom {
 				"terminate", JOptionPane.ERROR_MESSAGE);
 
 		exitRoom();
+		NwbMenuFactory.forceChangeLocalMode();
 	}
 }

@@ -127,8 +127,11 @@ public final class NwbMenuFactory{
 			gjmiNew.setEnabled(true);
 			gjmiOpen.setEnabled(true);
 		}
-			
-		
+	}
+	
+	public static void forceChangeLocalMode()
+	{
+		actionMap.get("doLocal").actionPerformed(null);
 	}
 
 }

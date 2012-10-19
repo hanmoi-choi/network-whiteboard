@@ -5,9 +5,14 @@ import java.rmi.server.UnicastRemoteObject;
 
 import javax.swing.JOptionPane;
 
+import server.NwbServerGate;
+import server.NwbServerGateImpl;
 import server.NwbServerGateObserver;
+import server.NwbUserDataSecure;
 import server.room.NwbRoomData;
+import server.room.NwbRoomDataInternal;
 import server.room.NwbServerRoom;
+import server.room.NwbServerRoomImpl;
 
 public class NwbClientSignInObserver extends UnicastRemoteObject
 implements NwbServerGateObserver
@@ -37,6 +42,21 @@ implements NwbServerGateObserver
 	public void setClientConnect(NwbClientConnect connectDialog) {
 		this.connectDialog = connectDialog;
 		
+	}
+
+	@Override
+	public NwbServerRoomImpl createServerRoom(NwbRoomDataInternal roomData,
+			NwbUserDataSecure user, NwbServerGate nwbServerGateImpl)
+			throws RemoteException {
+		NwbServerRoomImpl room = null;
+		try {
+			room = new NwbServerRoomImpl(roomData, user, nwbServerGateImpl);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		room.addClient(user);
+		return room;
 	}
 	
 }
