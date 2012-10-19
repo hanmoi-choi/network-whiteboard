@@ -171,11 +171,11 @@ public class NwbServerRoomImpl
 		notifyTerminateRoom();
 		
 		clientObservers.clear();
+		modelServer.stop();
+		gate.deleteRoom(this.roomdata);    	
+
 		roomdata = null;
 		manager = null;
-		modelServer.stop();
-		
-		gate.deleteRoom(this.roomdata);    	
     }
 
     @Override

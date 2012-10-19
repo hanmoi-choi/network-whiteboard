@@ -32,6 +32,8 @@ public class NwbClientSignIn extends JFrame {
 	private int height;
 	
 	private NwbClientRoom roomModel;
+	private NwbServerGate server;
+	private NwbUserDataSecure user;
 
 	public NwbClientSignIn(NwbClientRoom roomModel) {
 		this.roomModel = roomModel;
@@ -150,7 +152,7 @@ public class NwbClientSignIn extends JFrame {
 
 	private boolean connectServer(String hostname, String username)
 	{
-		NwbServerGate server = NwbClientConnector.connectServer(hostname);
+		server = NwbClientConnector.connectServer(hostname);
 		if(server == null)
 		{
 			JOptionPane.showMessageDialog(NwbClientSignIn.this,
@@ -167,7 +169,7 @@ public class NwbClientSignIn extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		NwbUserDataSecure user = null;
+		user = null;
 		
 		try {
 			user = server.signIn(username, observer);
@@ -204,6 +206,17 @@ public class NwbClientSignIn extends JFrame {
 		setContentPane(getLoginPanel());
 		//this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+	}
+	
+	public void signOut()
+	{
+		try {
+			if(server != null && user != null)
+				server.signOut(user);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

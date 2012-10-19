@@ -161,6 +161,7 @@ public class NwbMenuActionController implements NwbController {
     }
 
     private NwbClientRoom roomModel = null;
+    private NwbClientSignIn signIn = null;
     
     // Network, Local mode
     @Action
@@ -175,7 +176,7 @@ public class NwbMenuActionController implements NwbController {
         mediator.modeChanged(true);
     	NwbMenuFactory.toggleModeMenu(true);
         
-		NwbClientSignIn signIn = new NwbClientSignIn(roomModel);
+		signIn = new NwbClientSignIn(roomModel);
 		signIn.setVisible(true);
     }
     
@@ -187,6 +188,15 @@ public class NwbMenuActionController implements NwbController {
         	roomModel.exitRoom();
         	roomModel = null;
         }
+        
+        if(signIn != null)
+        {
+        	signIn.signOut();
+        	signIn = null;
+        }
+        
+		NwbMenuFactory.toggleFileMenu(false, false);
+        
         NwbControllerFactory.setModel(NwbClientModelFactory.createLocalModel());
         mediator.modeChanged(false);
     	NwbMenuFactory.toggleModeMenu(false);

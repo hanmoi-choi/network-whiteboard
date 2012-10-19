@@ -59,17 +59,26 @@ public class NwbClientRoom {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+        isExited = false;
     }
+    
+    private boolean isExited = false;
     
 	public void exitRoom()
 	{
+		if(isExited)
+			return;
 		try {
-			server.exitRoom(this.user);
-			java.rmi.server.UnicastRemoteObject.unexportObject(observer, true);
+			if(server != null)
+				server.exitRoom(this.user);
+			
+			if(observer != null)
+				java.rmi.server.UnicastRemoteObject.unexportObject(observer, true);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		isExited = true;
 		
 	}
 	   
