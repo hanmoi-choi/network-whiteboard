@@ -19,7 +19,7 @@ public class NwbUserDataSecure extends NwbUserData {
 		this.key = key;
 	}
 
-	public boolean equals(Object o)
+	public boolean equalsSecure(Object o)
 	{
 		if(o instanceof NwbUserDataSecure) {
 			NwbUserDataSecure user = (NwbUserDataSecure)o;

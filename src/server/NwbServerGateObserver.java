@@ -5,7 +5,9 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import server.room.NwbRoomData;
+import server.room.NwbRoomDataInternal;
 import server.room.NwbServerRoom;
+import server.room.NwbServerRoomImpl;
 
 public interface NwbServerGateObserver
 			extends Serializable, Remote
@@ -13,4 +15,9 @@ public interface NwbServerGateObserver
 	void notifyJoin(NwbRoomData room, boolean isAccepted, NwbServerRoom roomServer) throws RemoteException;
 	
 	boolean alive() throws RemoteException;
+
+	NwbServerRoom createServerRoom(NwbRoomDataInternal roomData, NwbUserDataSecure user,
+			NwbServerGate nwbServerGateImpl) throws RemoteException;
+	
+	
 }

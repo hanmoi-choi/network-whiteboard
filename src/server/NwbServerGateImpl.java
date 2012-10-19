@@ -23,7 +23,7 @@ public class NwbServerGateImpl
 	 */
 	private static final long serialVersionUID = 7901561451479560109L;
 	
-	private HashMap<NwbRoomDataInternal, NwbServerRoomImpl> roomServers;
+	private HashMap<NwbRoomDataInternal, NwbServerRoom> roomServers;
 	
 	private HashMap<String, NwbUserDataSecure> clients;
 	private HashMap<NwbUserDataSecure, NwbServerGateObserver> clientObservers;
@@ -37,7 +37,7 @@ public class NwbServerGateImpl
 	public NwbServerGateImpl() throws RemoteException {
 		super();
 		
-		roomServers = new HashMap<NwbRoomDataInternal, NwbServerRoomImpl>();
+		roomServers = new HashMap<NwbRoomDataInternal, NwbServerRoom>();
 		
 		clients = new HashMap<String, NwbUserDataSecure>();
 		clientObservers = new HashMap<NwbUserDataSecure, NwbServerGateObserver>();
@@ -121,16 +121,14 @@ public class NwbServerGateImpl
 		clientObservers.remove(user);
 		clients.remove(user.getUsername());
 		
-		ArrayList<NwbServerRoomImpl> servers = 
-				new ArrayList<NwbServerRoomImpl>(roomServers.values());
-		
-		for(NwbServerRoomImpl rs: servers)
+		for(NwbRoomDataInternal r: roomServers.keySet())
 		{
+			NwbServerRoom rs = roomServers.get(r);
 			try {
 				rs.exitRoom(user);
 			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				// Room is not existing. delete room.
+				deleteRoom(r);
 			}
 		}   	
     }
@@ -140,9 +138,14 @@ public class NwbServerGateImpl
     	deleteUser(user);
 	}
 
+    private final boolean isRoomOnClient = true;
+    
     @Override
 	public NwbServerRoom createRoom(NwbUserDataSecure user, String roomname, int maxusers)
 	{
+    	if(isRoomOnClient)
+    		return createRoomOnClient(user, roomname, maxusers);
+    	
 		NwbRoomDataInternal roomData = new NwbRoomDataInternal(generateRoomId(), roomname, user, maxusers);
 		NwbServerRoomImpl room = null;
 		try {
@@ -157,7 +160,24 @@ public class NwbServerGateImpl
 		
 		return room;
 	}
-    
+
+	private NwbServerRoom createRoomOnClient(NwbUserDataSecure user, String roomname, int maxusers)
+	{
+		NwbRoomDataInternal roomData = new NwbRoomDataInternal(generateRoomId(), roomname, user, maxusers);
+		NwbServerRoom room = null;
+		try {
+			NwbServerGateObserver observer = clientObservers.get(user);
+			room = observer.createServerRoom(roomData, user, this);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		roomServers.put(roomData, room);
+		
+		return room;
+	}
+
 	public void deleteRoom(NwbRoomDataInternal room)
 	{
 	   	System.out.println("deleteRoom: "+room);
@@ -168,7 +188,7 @@ public class NwbServerGateImpl
 	{
 		List<NwbRoomData> ret = new ArrayList<NwbRoomData>();
 		
-		for(NwbServerRoomImpl room:roomServers.values())
+		for(NwbServerRoom room:roomServers.values())
 		{
 			ret.add(room.getRoomData());
 		}
@@ -184,11 +204,11 @@ public class NwbServerGateImpl
 		}
 		return null;
 	}
-	public boolean joinRoomRequest(NwbUserDataSecure user, int roomId)
+	public boolean joinRoomRequest(NwbUserDataSecure user, int roomId) throws RemoteException
 	{
 		NwbRoomDataInternal room = getRoom(roomId);
 		System.out.println("joinRoomRequest : user="+user+", room=" + room);		
-		NwbServerRoomImpl roomserver = roomServers.get(room);
+		NwbServerRoom roomserver = roomServers.get(room);
 		
 		if(roomserver == null)
 		{
@@ -206,8 +226,8 @@ public class NwbServerGateImpl
 		return true;
 	}
 
-	public void notifyJoinResponse(NwbServerRoomImpl server,
-			NwbUserData joinUser, boolean isAccepted) 
+	public void notifyJoinResponse(NwbServerRoom server,
+			NwbUserData joinUser, Boolean isAccepted) throws RemoteException
 	{
 		NwbUserDataSecure joinUserSecure = clients.get(joinUser.getUsername());
 		

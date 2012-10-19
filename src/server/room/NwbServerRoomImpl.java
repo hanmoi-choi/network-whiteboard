@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import server.NwbServerGate;
 import server.NwbServerGateImpl;
 import server.NwbUserData;
 import server.NwbUserDataSecure;
@@ -24,7 +25,7 @@ public class NwbServerRoomImpl
 	
 	private NwbRoomDataInternal roomdata = null;
 	private NwbUserDataSecure manager = null;
-	private NwbServerGateImpl gate = null;
+	private NwbServerGate gate = null;
 	private HashMap<NwbUserDataSecure, NwbServerRoomObserver> clientObservers;
 	
 	private NwbServerRemoteModelImpl modelServer=null;
@@ -32,7 +33,7 @@ public class NwbServerRoomImpl
 	private final ExecutorService pool;
 	
 	public NwbServerRoomImpl(NwbRoomDataInternal roomdata, NwbUserDataSecure manager, 
-			NwbServerGateImpl gate) throws RemoteException {
+			NwbServerGate gate) throws RemoteException {
 		super();
 		
 		this.roomdata = roomdata;
@@ -51,9 +52,16 @@ public class NwbServerRoomImpl
     	pool.execute(new ManageJoinRequestHandler(this, user));
 	}
 	
+	ArrayList<NwbUserDataSecure> candidateMembers = new ArrayList<NwbUserDataSecure>();
+	private int findCandidateMember(NwbUserData user)
+	{
+		return candidateMembers.indexOf(user);
+	}
+	
 	private void manageJoinRequest(NwbUserDataSecure user)
 	{
 		NwbUserData requestedUser = new NwbUserData(user.getUsername(), user.getSessionid());
+		candidateMembers.add(user);
 		
 		NwbServerRoomObserver managerObserver = this.clientObservers.get(manager);
 		try {
@@ -79,14 +87,16 @@ public class NwbServerRoomImpl
     @Override
     public void manageJoinResponse(NwbUserDataSecure manager, NwbUserData joinUser, boolean isAccepted) throws RemoteException
     {
-    	if(!this.manager.equals(manager))
+    	if(!this.manager.equalsSecure(manager))
     	{
     		// Attack?
     		System.err.println("manageJoinResponse: Manager is invalid. " +manager);
     		return;
     	}
 
-		NwbUserDataSecure joinUserSecure = gate.getUserDataSecure(joinUser);
+    	int index = this.findCandidateMember(joinUser);
+		NwbUserDataSecure joinUserSecure = candidateMembers.get(index);
+		candidateMembers.remove(index);
 		
 		if(joinUserSecure.getSessionid() != joinUser.getSessionid()) {
 			//the user is not valid anymore
@@ -113,6 +123,15 @@ public class NwbServerRoomImpl
 	private Set<NwbUserDataSecure> users()
 	{
 		return clientObservers.keySet();
+	}
+	
+	private NwbUserDataSecure findUser(NwbUserData user)
+	{
+		for(NwbUserDataSecure u:users())
+			if(u.equals(user))
+				return u;
+		return null;
+		
 	}
 	private ArrayList<NwbUserData> getUserList()
 	{
@@ -172,7 +191,12 @@ public class NwbServerRoomImpl
 		
 		clientObservers.clear();
 		modelServer.stop();
-		gate.deleteRoom(this.roomdata);    	
+		try {
+			gate.deleteRoom(this.roomdata);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    	
 
 		roomdata = null;
 		manager = null;
@@ -184,7 +208,7 @@ public class NwbServerRoomImpl
     	modelServer.removeClient(user);
     	
     	if(clientObservers.size() <= 0
-    			|| user.equals(this.manager))
+    			|| user.equalsSecure(this.manager))
     	{
     		stop();
     	}
@@ -210,14 +234,14 @@ public class NwbServerRoomImpl
 	@Override
 	public void manageKick(NwbUserDataSecure manager, NwbUserData kickUser) throws RemoteException
 	{
-    	if(!this.manager.equals(manager))
+    	if(!this.manager.equalsSecure(manager))
     	{
     		// Attack?
     		System.err.println("manageKick: Manager is invalid. " +manager);
     		return;
     	}
     	
-    	NwbUserDataSecure kickUserSecure = gate.getUserDataSecure(kickUser);
+    	NwbUserDataSecure kickUserSecure = findUser(kickUser);
     	NwbServerRoomObserver observer = clientObservers.get(kickUser);
 
     	// force exit the user from the room
