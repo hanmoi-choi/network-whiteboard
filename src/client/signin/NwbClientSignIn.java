@@ -166,8 +166,11 @@ public class NwbClientSignIn extends JFrame {
 		try {
 			observer = new NwbClientSignInObserver();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(NwbClientSignIn.this,
+					"Error: cannot create observer. ",
+					"Error",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
 		user = null;
 		
@@ -183,8 +186,11 @@ public class NwbClientSignIn extends JFrame {
 				return false;
 			}
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(NwbClientSignIn.this,
+					"Error: cannot connect to server. Check host and port again.",
+					"Error",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
 		
 		NwbClientConnect connectDialog = new NwbClientConnect(server, user, roomModel);
