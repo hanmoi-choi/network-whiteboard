@@ -199,11 +199,23 @@ public class NwbRemoteModel extends NwbClientModel {
         return ret;
     }
     
+    private int findCommandLocation(int newCommandId)
+    {
+    	for(int i=commandIdStack.size(); i>0; i--)
+    	{
+    		if(commandIdStack.get(i-1) < newCommandId)
+    			return i;
+    	}
+    	return 0;
+    }
+    
     private synchronized void addCommandInternal(int commandId, NwbUserData user, NwbDrawingCommand command)
     {
-    	commandIdStack.push(commandId);
-    	commandUserStack.push(user);
-        commandStack.add(command);
+    	// To ensure adding command to the right place, find the place for it
+    	int index = findCommandLocation(commandId); 
+    	commandIdStack.add(index, commandId);
+    	commandUserStack.add(index, user);
+        commandStack.add(index, command);
     }
     
     private synchronized NwbDrawingCommand removeCommandInternal(int index)
