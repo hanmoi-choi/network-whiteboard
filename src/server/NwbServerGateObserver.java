@@ -7,7 +7,6 @@ import java.rmi.RemoteException;
 import server.room.NwbRoomData;
 import server.room.NwbRoomDataInternal;
 import server.room.NwbServerRoom;
-import server.room.NwbServerRoomImpl;
 
 public interface NwbServerGateObserver
 			extends Serializable, Remote
