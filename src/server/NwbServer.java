@@ -1,18 +1,24 @@
 package server;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.RMISocketFactory;
 
 public class NwbServer {
 	public static final String NWB_SERVICE_NAME = "NwbService";
 	public static final String NWB_SECURITY_POLICY_FILE = "security.policy";
+	public static final int timeoutMillis = 2000;
 	
-	public void startService(int port)
+	public static void setRMIProperty()
 	{
 		System.setProperty("java.rmi.server.codebase", 
-				this.getClass().getProtectionDomain().getCodeSource().getLocation().toString());
+				NwbServer.class.getProtectionDomain().getCodeSource().getLocation().toString());
 		if (System.getProperty("java.security.policy") == null)
 		{
 			System.out.println("Set policy...");
@@ -23,6 +29,32 @@ public class NwbServer {
 			System.out.println("Set SecurityManager...");
 			System.setSecurityManager(new RMISecurityManager());
 		}
+
+		try {
+			RMISocketFactory.setSocketFactory( new RMISocketFactory()
+			{
+				public Socket createSocket( String host, int port )
+						throws IOException {
+					Socket socket = new Socket();
+					socket.setSoTimeout( timeoutMillis );
+					socket.setSoLinger( false, 0 );
+					socket.connect( new InetSocketAddress( host, port ), timeoutMillis );
+					return socket;
+				}
+
+				public ServerSocket createServerSocket( int port )
+						throws IOException {
+					return new ServerSocket( port );
+				}
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void startService(int port)
+	{
+		setRMIProperty();
 		
 		try {
 			NwbServerGate server = new NwbServerGateImpl();

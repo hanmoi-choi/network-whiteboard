@@ -62,9 +62,11 @@ public class NwbServerGateImpl
 					continue;
 				}
 			} catch (ConnectException ce){
-				System.err.println("checkAlive: user is not online" + u);
+				System.err.println("checkAlive: user is not online: " + u);
+				deleteUser(u);
 			} catch (RemoteException e) {
 				e.printStackTrace();
+				deleteUser(u);
 			}
 			deleteUser(u);
 		}
