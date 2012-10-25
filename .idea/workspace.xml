@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8222562f-1b55-4ffb-9294-81c3e7454188" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="8222562f-1b55-4ffb-9294-81c3e7454188" name="Default" comment="" />
     <ignored path="Network-Whiteboard.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -68,6 +66,15 @@
         <entry file="file://$PROJECT_DIR$/src/client/NwbClientApplication.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="62" column="54" selection-start="2902" selection-end="2902" vertical-scroll-proportion="0.48765433">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NwbMenuActionController.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/controller/NwbMenuActionController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="62" column="0" selection-start="1677" selection-end="1677" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -465,7 +472,7 @@
     <option name="referencePos" value="0" />
     <option name="showLabels" value="true" />
   </component>
-  <component name="RunManager" selected="Application.NwbServer">
+  <component name="RunManager" selected="Application.NwbClientApplication">
     <configuration default="false" name="NwbClientModelTest.shallMoveCommandBackToCommandStack_WhenRedoExecutes" type="TestNG" factoryName="TestNG" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -1071,11 +1078,6 @@
         <state line="57" column="62" selection-start="1378" selection-end="1378" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/controller/NwbMenuActionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="40" selection-start="2920" selection-end="2920" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/drawing/strategy/NwbOpenImageStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="0" selection-start="548" selection-end="548" vertical-scroll-proportion="0.3267776" />
@@ -1384,6 +1386,13 @@
     <entry file="file://$PROJECT_DIR$/src/server/NwbServer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="39" column="4" selection-start="1290" selection-end="1290" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/controller/NwbMenuActionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="0" selection-start="1677" selection-end="1677" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
