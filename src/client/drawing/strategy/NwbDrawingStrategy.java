@@ -39,6 +39,11 @@ public abstract class NwbDrawingStrategy implements Serializable {
         g2D.setColor(currentFgColor);
         g2D.setBackground(currentBgColor);
         g2D.setStroke(currentStroke);
+        
+        currentFgColor = null;
+        currentBgColor = null;
+        currentStroke = null;
+
     }
 
     protected void switchColorBtwBgNFg(Graphics2D g2D) {
