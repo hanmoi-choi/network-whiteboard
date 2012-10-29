@@ -17,6 +17,8 @@ import client.view.ui.factory.NwbRemoteOptionFactory;
 
 import org.jdesktop.application.Application;
 
+import server.NwbServer;
+
 /**
  * Created with IntelliJ IDEA.
  * User: hanmoi
@@ -27,6 +29,7 @@ import org.jdesktop.application.Application;
 public class NwbClientApplication extends Application {
 	protected void initialize(String[] args)
 	{
+		NwbServer.setRMIProperty();
 	}
 	
     @Override

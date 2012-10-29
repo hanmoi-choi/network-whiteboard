@@ -301,4 +301,9 @@ public class NwbServerRoomImpl extends UnicastRemoteObject implements
 		}
 	}
 
+	@Override
+	public boolean alive() throws RemoteException {
+		return true;
+	}
+
 }

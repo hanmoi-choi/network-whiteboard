@@ -8,7 +8,6 @@ import java.util.Stack;
 
 import javax.swing.JOptionPane;
 
-import client.signin.NwbClientConnect;
 import client.view.ui.factory.NwbMenuFactory;
 
 import server.NwbUserData;

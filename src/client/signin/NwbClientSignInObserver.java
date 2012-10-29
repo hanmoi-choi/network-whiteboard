@@ -3,10 +3,7 @@ package client.signin;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import javax.swing.JOptionPane;
-
 import server.NwbServerGate;
-import server.NwbServerGateImpl;
 import server.NwbServerGateObserver;
 import server.NwbUserDataSecure;
 import server.room.NwbRoomData;
