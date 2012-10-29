@@ -270,6 +270,8 @@ public class NwbClientConnect extends JFrame {
 						try {
 							if(server.joinRoomRequest(user, boardID) != true)
 							{
+								pDialog.setVisible(false);
+								
 								//Popup and try again
 								JOptionPane.showMessageDialog(NwbClientConnect.this,
 										"Room is full. Select another room or create one",

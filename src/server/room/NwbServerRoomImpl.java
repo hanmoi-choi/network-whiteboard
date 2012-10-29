@@ -40,7 +40,7 @@ public class NwbServerRoomImpl extends UnicastRemoteObject implements
 
 		this.gate = gate;
 
-		this.modelServer = new NwbServerRemoteModelImpl(POOL_SIZE);
+		this.modelServer = new NwbServerRemoteModelImpl(manager, POOL_SIZE);
 
 		pool = Executors.newFixedThreadPool(POOL_SIZE);
 	}
@@ -299,6 +299,11 @@ public class NwbServerRoomImpl extends UnicastRemoteObject implements
 		public void run() {
 			manageJoinRequest(user);
 		}
+	}
+
+	@Override
+	public boolean alive() throws RemoteException {
+		return true;
 	}
 
 }

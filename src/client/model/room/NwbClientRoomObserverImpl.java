@@ -3,8 +3,6 @@ package client.model.room;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import javax.swing.JOptionPane;
-
 import server.NwbUserData;
 import server.room.NwbServerRoomObserver;
 

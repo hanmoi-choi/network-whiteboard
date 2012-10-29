@@ -11,8 +11,6 @@ import server.NwbServerGate;
 public class NwbClientConnector {
 	public static NwbServerGate connectServer(String hostname)
 	{
-		NwbServer.setRMIProperty();
-		
 		NwbServerGate sv = null;
 		try {
 			sv = (NwbServerGate)Naming.lookup("rmi://"+hostname+"/"+NwbServer.NWB_SERVICE_NAME);

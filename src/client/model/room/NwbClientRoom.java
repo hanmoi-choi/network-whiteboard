@@ -1,7 +1,10 @@
 package client.model.room;
 
+import java.rmi.ConnectException;
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.swing.JOptionPane;
 
@@ -29,9 +32,12 @@ public class NwbClientRoom {
 	private NwbServerRoom server;
 	private NwbServerRoomObserver observer;
 	
+	private final ExecutorService keepAlivePool;
+	private static final int KEEP_ALIVE_POOL_SIZE = 1;
+
 	public NwbClientRoom()
 	{
-		
+		keepAlivePool = Executors.newFixedThreadPool(KEEP_ALIVE_POOL_SIZE);	
 	}
 	
     public void enterRoom(NwbUserDataSecure user, NwbServerRoom server) 
@@ -60,15 +66,59 @@ public class NwbClientRoom {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+        
+		keepAlivePool.execute(new KeepAliveChecker());
+        
         isExited = false;
     }
     
+	class KeepAliveChecker implements Runnable
+	{
+		static final int SLEEP_TIME = 1000;
+
+		@Override
+		public void run() {
+			for(;;)
+			{
+				try {
+					Thread.sleep(SLEEP_TIME);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				long time = System.currentTimeMillis();
+				
+				if(isExited)
+					break;
+				
+				if(checkServerAlive() == false)
+					break;
+				System.out.println("Response time from the Server(ms):" 
+					+ (System.currentTimeMillis()-time));
+			}
+		}
+	}
+	
+	private boolean checkServerAlive()
+	{
+		try {
+			if(server != null)
+				return server.alive();
+		} catch (ConnectException ce){
+			System.err.println("checkServerAlive: Server is not online");
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		handleServerException();
+		return false;
+	}	
     private boolean isExited = false;
     
 	public void exitRoom()
 	{
 		if(isExited)
 			return;
+		
+		this.keepAlivePool.shutdown();
 
 		try {
 			if(server != null)
@@ -109,6 +159,14 @@ public class NwbClientRoom {
 			e.printStackTrace();
 		}		
 	}
+	
+    private void handleServerException()
+    {
+		JOptionPane.showMessageDialog(null,
+				"Server is not online. The room would be banged!",
+				"Server Error", JOptionPane.ERROR_MESSAGE);	
+		NwbMenuFactory.forceChangeLocalMode();
+    }
 
 	public void manageJoinRequest(NwbUserData joinUser) {
 		// Pop-up and ask accepting for the user.

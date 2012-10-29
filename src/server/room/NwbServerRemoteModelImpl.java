@@ -25,16 +25,18 @@ public class NwbServerRemoteModelImpl
 	private ArrayList<NwbDrawingCommandData> modelData;
 	private HashMap<NwbUserDataSecure, NwbServerRemoteModelObserver> clientObservers;
 	private Integer commandId = 0;
+	private NwbUserDataSecure manager = null;
 	
 	private final ExecutorService pool;
 
-	public NwbServerRemoteModelImpl(int poolSize) throws RemoteException {
+	public NwbServerRemoteModelImpl(NwbUserDataSecure manager, int poolSize) throws RemoteException {
 		super();
 		
 		clientObservers = new HashMap<NwbUserDataSecure, NwbServerRemoteModelObserver>();
 		modelData = new ArrayList<NwbDrawingCommandData>();
 		
 		pool = Executors.newFixedThreadPool(poolSize);
+		this.manager = manager;
 	}
 	
 	public void addClient(NwbUserDataSecure user)  
@@ -93,9 +95,37 @@ public class NwbServerRemoteModelImpl
     		
     		modelData.remove(index);
     	}
-    	notifyRemoveCommand(requestUser, commandId);
+    	//notifyRemoveCommand(requestUser, commandId);
+    	pool.execute(new NotifyRemoveCommandHandler(commandId, requestUser));
+
     }
 
+	@Override
+	public void removeCommandAll(NwbUserDataSecure requestedUser)
+			throws RemoteException {
+		if(manager.equalsSecure(requestedUser))
+		{
+	    	synchronized(modelData)
+	    	{
+	    		modelData.clear();
+	    	}
+	    	notifyRemoveCommandAll();
+		}
+		
+	}
+
+	private void notifyRemoveCommandAll() {
+    	for(NwbUserDataSecure user: clientObservers.keySet())
+    	{
+    		try {
+    			NwbServerRemoteModelObserver observer = clientObservers.get(user);
+				observer.removeCommandAll();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}		
+	}
     private int findCommand(int commandId)
     {
     	for(int i=0; i<modelData.size(); i++)
@@ -171,6 +201,20 @@ public class NwbServerRemoteModelImpl
 		@Override
 		public void run() {
 			o.notifyAddCommand(id, reqUser, command);
+		}
+    }
+
+    class NotifyRemoveCommandHandler implements Runnable
+    {
+    	int id;     	NwbUserDataSecure reqUser;
+    	NotifyRemoveCommandHandler(int id, NwbUserDataSecure reqUser) {
+    		this.id = id;
+    		this.reqUser = reqUser;
+		}
+
+		@Override
+		public void run() {
+			notifyRemoveCommand(reqUser, id);
 		}
     }
 

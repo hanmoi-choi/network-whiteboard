@@ -17,4 +17,6 @@ public interface NwbServerRoom extends Remote {
 	public void manageKick(NwbUserDataSecure manager, NwbUserData kickUser) throws RemoteException;
 	public boolean isJoinable() throws RemoteException;
 	public void requestJoin(NwbUserDataSecure user) throws RemoteException;
+	
+	boolean alive() throws RemoteException;
 }

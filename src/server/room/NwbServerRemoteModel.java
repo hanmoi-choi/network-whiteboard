@@ -14,6 +14,7 @@ public interface NwbServerRemoteModel extends Remote {
 	
     public int addCommand(NwbUserDataSecure requestedUser, NwbDrawingCommand command) throws RemoteException;
     public void removeCommand(NwbUserDataSecure requestedUser, int commandId) throws RemoteException;
+    public void removeCommandAll(NwbUserDataSecure requestedUser) throws RemoteException;
 
     public List<NwbDrawingCommandData> getAllCommands(NwbUserDataSecure requestedUser) throws RemoteException;
 }
