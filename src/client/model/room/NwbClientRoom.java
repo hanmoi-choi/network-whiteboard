@@ -86,6 +86,10 @@ public class NwbClientRoom {
 					e.printStackTrace();
 				}
 				long time = System.currentTimeMillis();
+				
+				if(isExited)
+					break;
+				
 				if(checkServerAlive() == false)
 					break;
 				System.out.println("Response time from the Server(ms):" 
@@ -97,7 +101,8 @@ public class NwbClientRoom {
 	private boolean checkServerAlive()
 	{
 		try {
-			return server.alive();
+			if(server != null)
+				return server.alive();
 		} catch (ConnectException ce){
 			System.err.println("checkServerAlive: Server is not online");
 		} catch (RemoteException e) {
@@ -112,6 +117,8 @@ public class NwbClientRoom {
 	{
 		if(isExited)
 			return;
+		
+		this.keepAlivePool.shutdown();
 
 		try {
 			if(server != null)
@@ -156,7 +163,7 @@ public class NwbClientRoom {
     private void handleServerException()
     {
 		JOptionPane.showMessageDialog(null,
-				"Cannot connect to the remote room! The room is banged!",
+				"Server is not online. The room would be banged!",
 				"Server Error", JOptionPane.ERROR_MESSAGE);	
 		NwbMenuFactory.forceChangeLocalMode();
     }

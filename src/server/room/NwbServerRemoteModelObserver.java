@@ -9,4 +9,5 @@ public interface NwbServerRemoteModelObserver
 {
 	public void addCommand(NwbDrawingCommandData command) throws RemoteException;
 	public void removeCommand(int commandId) throws RemoteException;
+	public void removeCommandAll() throws RemoteException;
 }

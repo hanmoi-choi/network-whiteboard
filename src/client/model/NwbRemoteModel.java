@@ -108,6 +108,13 @@ public class NwbRemoteModel extends NwbClientModel {
     	while(removeCommandFromClient(this.user) != null);    	
         redoStack.clear();
         super.updateSubscribers();
+        
+        try {
+			server.removeCommandAll(user);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     private void handleServerException()
@@ -125,6 +132,7 @@ public class NwbRemoteModel extends NwbClientModel {
 		try {
 			id = server.addCommand(this.user, command);
 		} catch (RemoteException e) {
+			e.printStackTrace();
 			handleServerException();
 		}
     	addCommand(id, this.user, command);
@@ -135,6 +143,7 @@ public class NwbRemoteModel extends NwbClientModel {
     	try {
 			server.removeCommand(this.user, commandId);
 		} catch (RemoteException e) {
+			e.printStackTrace();
 			handleServerException();
 		}
     	
@@ -154,6 +163,7 @@ public class NwbRemoteModel extends NwbClientModel {
     	try {
 			server.removeCommand(this.user, id);
 		} catch (RemoteException e) {
+			e.printStackTrace();
 			handleServerException();
 		}
     	
@@ -172,6 +182,17 @@ public class NwbRemoteModel extends NwbClientModel {
     	super.updateSubscribers();
     }
     
+    public void removeCommandAllFromServer()
+    {
+    	synchronized(commandStack)
+    	{
+	    	commandIdStack.clear();
+	    	commandUserStack.clear();
+	        commandStack.clear();
+    	}
+    	redoStack.clear();
+    	super.updateSubscribers();
+    }
 
     // Internal methods
     private synchronized void addCommand(int commandId, NwbUserData user, NwbDrawingCommand command)

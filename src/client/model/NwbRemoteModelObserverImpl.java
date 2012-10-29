@@ -30,5 +30,11 @@ public class NwbRemoteModelObserverImpl
 	public void removeCommand(int commandId) throws RemoteException
 	{
 		client.removeCommandFromServer(commandId);
+	}
+
+	@Override
+	public void removeCommandAll() throws RemoteException {
+		client.removeCommandAllFromServer();
+		
 	}	
 }
